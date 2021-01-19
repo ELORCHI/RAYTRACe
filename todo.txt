@@ -1,5 +1,3 @@
-addd the embient litght to be by default so the program dosent do it for every intersection
-and if its shadow the embient is default and the defuse is not compute
 
 see how colors works
 

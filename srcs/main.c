@@ -115,6 +115,9 @@ void			render(t_world world)
 	mlx_loop(canvas.mlx_ptr);
 }
 
+// you have to transform everthing by the camera transformation
+// evrything means objects not rays because they are already generated using that camera
+
 int 			main()
 {
 	t_world	world;
