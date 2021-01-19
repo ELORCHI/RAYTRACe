@@ -1,0 +1,12 @@
+addd the embient litght to be by default so the program dosent do it for every intersection
+and if its shadow the embient is default and the defuse is not compute
+
+see how colors works
+
+
+check if th author in the ray tracer challenge multiplayed by the camera_matrix
+
+do the last one yourself and check the result
+
+think about the transpose matrxi and how to calculet it one time
+
