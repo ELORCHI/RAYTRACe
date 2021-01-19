@@ -73,6 +73,10 @@ float		reflect(t_vector in, t_vector normal, t_vector dir, t_vector hit)
 	return (dot);
 }
 
+//this function will be added as the default light cause its always computed even if its a shadow
+//intersextion
+// add it when parssing aboject
+// multiply the light by the imbient dont add it
 t_vector	embient(t_vector color)
 {
 	t_vector result;
