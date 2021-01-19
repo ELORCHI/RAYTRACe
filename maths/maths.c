@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 04:44:09 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 11:25:26 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:27:23 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ t_vector	color_multp(t_vector color1, t_vector color2)
 	result.x = color1.x * color2.x;
 	result.y = color1.y * color2.y;
 	result.z = color1.z * color2.z;
-	result.w = color1.w * color2.w;
+	print_vector(result);
 	return (result);
 }
 

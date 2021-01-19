@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/18 14:56:52 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:34:35 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ t_vector	ft_light(t_ray *ray, t_intersection inter)
 	//color  = add_vectors(color, test);
 	color = add_vectors(color, embient(inter.color));
 	color = normaliz_color(color);
+	//print_vector(color);
 	return (color);
 }

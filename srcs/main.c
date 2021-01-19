@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:39:56 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 12:57:35 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:34:25 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			render(t_world world)
 			{
 				//is_shadow(world, &intersection);
 				//color = ft_light(&ray, intersection);
+				//print_vector(color);
 				ft_draw(canvas, color, 0);
 			}
 			else

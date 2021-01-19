@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 08:46:16 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/18 10:13:51 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/19 18:14:58 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	t_intersection 	inter;
 
 	denom = dot_product(ray.dir, plan->normal);
-	if (fabsf(denom) > 0.0001f)
+	if (fabsf(denom) > 0.00001f)
 	{
-		origin_point = point_vector(ray.orig, plan->point);
+		origin_point = normaliz(point_vector(ray.orig, plan->point));
 		nom = dot_product(plan->normal, origin_point) / denom;
-		if (nom >= 0.000f)
+		if (nom >= 0.0000f)
 		{
 			inter.color = plan->color;
 			inter.hit =  nom;// what is the hit value to compute the point;

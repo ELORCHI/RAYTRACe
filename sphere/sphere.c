@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:35:45 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 12:01:21 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:18:36 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_intersection	ray_sphere_intersection(t_ray *ray, t_sphere *sphere)
 	{
 		inter.hit = g_intersection;
 		inter.point = position(*ray, if_hit);		
-		inter.normal = normal_at(*sphere, inter.point);
+		inter.normal = mat_vec_multi(g_camera.view,normal_at(*sphere, inter.point));
 		inter.color = sphere->color;
 		return (inter);
 	}
