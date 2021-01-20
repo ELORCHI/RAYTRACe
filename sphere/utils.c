@@ -6,19 +6,19 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:47:10 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 12:13:50 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/20 15:33:27 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sphere.h"
 #include "../include/rt.h"
-
+#include "../include/camera.h"
 /*void		sphere_transform(t_sphere *sphere)
 {
 
 }*/
 
-t_vector	normal_at(t_sphere sphere, t_vector world_point)
+/*t_vector	normal_at(t_sphere sphere, t_vector world_point)
 {
 	t_vector object_point;
 	t_vector object_normal;
@@ -33,6 +33,15 @@ t_vector	normal_at(t_sphere sphere, t_vector world_point)
 	world_normal.w = 0;
 	world_normal = normaliz(world_normal);
 	return (world_normal);
+}*/
+
+t_vector	normal_at(t_sphere sphere, t_vector hit_point)
+{
+	t_vector normal;
+
+	normal = normaliz(point_vector(sphere.orig,  hit_point));
+	//normal = mat_vec_multi(g_camera.view, normal);
+	return (normal);
 }
 
 t_sphere	*next_sphere(t_sphere *sphere)

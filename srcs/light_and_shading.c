@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 16:34:35 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/20 18:08:48 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_vector	embient(t_vector color)
 
 	result = normaliz_color(color_multp(g_embient.color, color));
 	result = normaliz_color(multp_vectors(result, g_embient.ratio));
+	//print_vector(result);
 	return (result);
 }
 
@@ -102,13 +103,14 @@ t_vector	embient(t_vector color)
 	return (result);
 }*/
 
-t_vector	defuse(t_intersection intersection)
+/*t_vector	defuse(t_intersection intersection)
 {
 	t_vector	hit_light;
 	t_vector	result;
 	float		dot;
 	float		tmp;
 
+	//print_vector(intersection.color);
 	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
 	dot = fmaxf(dot_product(hit_light, intersection.normal), 0);
 	result = color_multp(intersection.color, g_light->color);
@@ -117,27 +119,32 @@ t_vector	defuse(t_intersection intersection)
 	result = multp_vectors(result, tmp);
 	result = normaliz_color(result);
 	return (result);
-}
+}*/
 
+t_vector	defuse(t_intersection intersection)
+{
+	t_vector	hit_light;
+	t_vector	result;
+	float		dot;
+
+	result = (t_vector){0, 0, 0, 0};
+	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
+	dot = dot_product(hit_light, intersection.normal);
+	//print_vector(intersection.normal);
+	if (dot >= 0.0000f)
+	{
+		result = normaliz_color(color_multp(intersection.color, g_light->color));
+		result = normaliz_color(multp_vectors(intersection.color, dot));
+		return (result);
+	}
+	return (result);
+}
 t_vector	ft_light(t_ray *ray, t_intersection inter)
 {
 	t_vector color;
-	t_vector normal;
-	t_vector hit_point;
 
 	color = (t_vector){0, 0, 0, 0};
-	/**
-	//hit_point = position(*ray, intersection);
-	//normal = normal_at(*sphere, hit_point);
-	//color = defuse(sphere->color, normal, hit_point);
-	**/
-	/**the last three lines will be changed due to the inter structure **/
-	//if (inter.is_shadow == false)
-		color = defuse(inter);
-	//t_vector test = (t_vector){255, 255, 11,0};//embient(sphere->color);
-	//color  = add_vectors(color, test);
-	color = add_vectors(color, embient(inter.color));
-	color = normaliz_color(color);
-	//print_vector(color);
+	color = defuse(inter);
+	print_vector(color);
 	return (color);
 }
