@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 10:38:38 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/19 11:13:44 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:12:27 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct	s_mlx
 float 		g_intersection;
 
 int			create_trgb(t_vector color);
+
+t_vector	add_colors(t_vector color1, t_vector color2);
 
 void		ft_draw(t_mlx canvas, t_vector color, int is_black);
 

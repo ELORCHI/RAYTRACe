@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 11:03:56 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:16:45 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_vector	embient(t_vector color)
 	return (result);
 }*/
 
-t_vector	defuse(t_intersection intersection)
+/*t_vector	defuse(t_intersection intersection)
 {
 	t_vector	hit_light;
 	t_vector	result;
@@ -119,7 +119,7 @@ t_vector	defuse(t_intersection intersection)
 	result = multp_vectors(result, tmp);
 	result = normaliz_color(result);
 	return (result);
-}
+}*/
 
 /*t_vector	defuse(t_intersection intersection)
 {
@@ -134,11 +134,33 @@ t_vector	defuse(t_intersection intersection)
 	if (dot >= 0.000f)
 	{
 		result = normaliz_color(add_vectors(intersection.color, g_light->color));
-		result = normaliz_color(multp_vectors(result, dot));
+		result = multp_vectors(result, dot);
+		result = normaliz_color(multp_vectors(result, g_light->ratio));
 		return (result);
 	}
 	return (result);
 }*/
+
+t_vector	defuse(t_intersection intersection)
+{
+	t_vector 	hit_light;
+	t_vector 	result;
+	float		dot;
+
+	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
+	dot = dot_product(hit_light, intersection.normal);
+	//print_vector(intersection.color);
+	if (dot >= 0.0000f)
+	{
+		result = add_colors(intersection.color, g_light->color);
+		result = normaliz_color(multp_vectors(result, dot));
+		result = normaliz_color(multp_vectors(result, g_light->ratio));
+		return (result);
+	}
+	result = (t_vector){0, 0, 0, 0};
+	return (result);
+}
+
 t_vector	ft_light(t_ray *ray, t_intersection inter)
 {
 	t_vector color;

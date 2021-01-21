@@ -52,7 +52,7 @@ t_intersection	ray_sphere_intersection(t_ray *ray, t_sphere *sphere)
 		inter.point = position(*ray, inter.hit);		
 		inter.normal = normal_at(*sphere, inter.point);
 		inter.color = sphere->color;
-		//print_vector(inter.color);
+		// print_vector(inter.color);
 		return (inter);
 	}
 	inter.hit = -1;

@@ -6,13 +6,13 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 11:48:33 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 11:13:10 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:09:02 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rt.h"
 
-t_vector normaliz_color(t_vector color)
+t_vector 	normaliz_color(t_vector color)
 {
 	t_vector new;
 
@@ -24,7 +24,21 @@ t_vector normaliz_color(t_vector color)
 	return (new);
 }
 
-int		create_trgb(t_vector color)
+t_vector	add_colors(t_vector color1, t_vector color2)
+{
+	t_vector result;
+
+	if (color2.x == 0 && color2.y == 0 && color2.z == 0)
+	{
+		return (color1);
+	}
+	result.x = fminf((color1.x + color2.x) / 2, 1);
+	result.y = fminf((color1.y + color2.y) / 2, 1);
+	result.z = fminf((color1.z + color2.z) / 2, 1);
+	return (result);
+}
+
+int			create_trgb(t_vector color)
 {
 	int r = floorf(color.x * 255);
 	int g = floorf(color.y * 255);
