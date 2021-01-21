@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 11:48:33 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 18:06:01 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:30:23 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_vector normaliz_color(t_vector color)
 	t_vector new;
 
 	//print_vector(color);
-	new.x = fminf(color.x, 1.0f);
-	new.y =	fminf(color.y, 1.0f);
-	new.z = fminf(color.z, 1.0f);
+	new.x = fminf(color.x, 255);
+	new.y =	fminf(color.y, 255);
+	new.z = fminf(color.z, 255);
 	new.w = 0;
 	return (new);
 }

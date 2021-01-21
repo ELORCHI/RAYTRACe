@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:39:56 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 18:04:13 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:31:57 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	ft_init(t_sphere **sphere)
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	(*sphere)->orig = (t_vector){0, 0, 0,0};
 	(*sphere)->rad  = 1;
-	(*sphere)->color = (t_vector){0, 1, 1, 0};
+	(*sphere)->color = (t_vector){0, 255, 255, 0};
 	(*sphere)->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
 	g_light->orig = (t_vector){0, 5, 0, 1};
-	g_light->color = (t_vector){1, 1, 1, 0};
+	g_light->color = (t_vector){255, 255, 255, 0};
 	g_light->ratio = 0.5;	
 	g_light->color = multp_vectors(g_light->color, g_light->ratio);
 
-	g_embient.color = (t_vector){1, 1, 1, 0};
+	g_embient.color = (t_vector){255, 255, 255, 0};
 	g_embient.ratio = 0.2;
 		
 	(*sphere)->color = embient((*sphere)->color);
@@ -101,7 +101,8 @@ void			render(t_world world)
 			if (check_intersection(intersection) == true)
 			{
 				//print_vector(intersection.color);
-				color = add_vectors(color, ft_light(&ray, intersection));
+				//color = add_vectors(color, ft_light(&ray, intersection));
+				//color = normaliz_color(color);
 				//t_vector test = ft_light(&ray, intersection);
 				//print_vector (test);
 				ft_draw(canvas, color, 0);
@@ -126,6 +127,8 @@ int 			main()
 	ft_init(&(world.sphere));
 	//printf("%f", g_camera.pixel_size);	
 	//print_mat4(g_camera.view);
+	world.sphere->orig = mat_vec_multi(g_camera.view, world.sphere->orig);
+	g_light->orig = mat_vec_multi(g_camera.view, g_light->orig);
 	render(world);
 	//print_mat4(g_camera.view);
 	//t_ray ray = ray_for_pixel(100, 50);

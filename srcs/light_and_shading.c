@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 18:08:48 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:17:14 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,6 @@ t_vector	ft_light(t_ray *ray, t_intersection inter)
 
 	color = (t_vector){0, 0, 0, 0};
 	color = defuse(inter);
-	print_vector(color);
+	//print_vector(color);
 	return (color);
 }
