@@ -10,4 +10,5 @@ typedef struct	s_plan
     t_vector color;
 }		t_plan;
 
+t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray);
 #endif

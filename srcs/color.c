@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 11:48:33 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 10:30:23 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 11:13:10 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ t_vector normaliz_color(t_vector color)
 	t_vector new;
 
 	//print_vector(color);
-	new.x = fminf(color.x, 255);
-	new.y =	fminf(color.y, 255);
-	new.z = fminf(color.z, 255);
+	new.x = fminf(color.x, 1);
+	new.y =	fminf(color.y, 1);
+	new.z = fminf(color.z, 1);
 	new.w = 0;
 	return (new);
 }
 
 int		create_trgb(t_vector color)
 {
-	int r = floorf(color.x);
-	int g = floorf(color.y);
-	int b = floorf(color.z);
+	int r = floorf(color.x * 255);
+	int g = floorf(color.y * 255);
+	int b = floorf(color.z * 255);
 	return((r << 16) | (g << 8) | b);
 }
 

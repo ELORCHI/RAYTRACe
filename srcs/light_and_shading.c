@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 10:17:14 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 11:03:56 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_vector	embient(t_vector color)
 	t_vector result;
 
 	result = normaliz_color(color_multp(g_embient.color, color));
-	result = normaliz_color(multp_vectors(result, g_embient.ratio));
+	result = multp_vectors(result, g_embient.ratio);
 	//print_vector(result);
 	return (result);
 }
@@ -103,7 +103,7 @@ t_vector	embient(t_vector color)
 	return (result);
 }*/
 
-/*t_vector	defuse(t_intersection intersection)
+t_vector	defuse(t_intersection intersection)
 {
 	t_vector	hit_light;
 	t_vector	result;
@@ -114,14 +114,14 @@ t_vector	embient(t_vector color)
 	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
 	dot = fmaxf(dot_product(hit_light, intersection.normal), 0);
 	result = color_multp(intersection.color, g_light->color);
-	result = normaliz_color(result);
+	//result = normaliz_color(result);
 	tmp = dot * g_light->ratio;
 	result = multp_vectors(result, tmp);
 	result = normaliz_color(result);
 	return (result);
-}*/
+}
 
-t_vector	defuse(t_intersection intersection)
+/*t_vector	defuse(t_intersection intersection)
 {
 	t_vector	hit_light;
 	t_vector	result;
@@ -131,14 +131,14 @@ t_vector	defuse(t_intersection intersection)
 	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
 	dot = dot_product(hit_light, intersection.normal);
 	//print_vector(intersection.normal);
-	if (dot >= 0.0000f)
+	if (dot >= 0.000f)
 	{
-		result = normaliz_color(color_multp(intersection.color, g_light->color));
-		result = normaliz_color(multp_vectors(intersection.color, dot));
+		result = normaliz_color(add_vectors(intersection.color, g_light->color));
+		result = normaliz_color(multp_vectors(result, dot));
 		return (result);
 	}
 	return (result);
-}
+}*/
 t_vector	ft_light(t_ray *ray, t_intersection inter)
 {
 	t_vector color;

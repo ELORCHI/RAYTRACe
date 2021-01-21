@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 09:47:10 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 15:33:27 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:59:52 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_vector	normal_at(t_sphere sphere, t_vector hit_point)
 	t_vector normal;
 
 	normal = normaliz(point_vector(sphere.orig,  hit_point));
-	//normal = mat_vec_multi(g_camera.view, normal);
+	normal = mat_vec_multi(g_camera.view, normal);
 	return (normal);
 }
 

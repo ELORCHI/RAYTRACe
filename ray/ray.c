@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 11:42:45 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 10:26:38 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/21 10:34:35 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_ray		ray_for_pixel(int x, int y)
 	pixel = ft_pixel(pixel);
 	ray.orig = ft_pixel(vec4_creat(0, 0, 0, 1));
 	ray.dir = normaliz(point_vector(ray.orig, pixel));
-	print_vector(ray.orig);
+	//print_vector(ray.orig);
 	return (ray);
 }
 /*int main()
