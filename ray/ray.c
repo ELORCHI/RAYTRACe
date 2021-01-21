@@ -40,6 +40,7 @@ t_vector	ft_pixel(t_vector pixel)
 	matt = g_camera.view;
 	inverse_4x4(&inverse, &matt);
 	//inverse = identity_mat();
+    	// you may need to move the transpose
 	result = mat_vec_multi(transpose(inverse), pixel);
 	return (result);
 }

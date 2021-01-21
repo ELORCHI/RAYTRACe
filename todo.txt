@@ -1,10 +1,4 @@
+switch to use value between 0 and 255 for colors
 
-see how colors works
-
-
-check if th author in the ray tracer challenge multiplayed by the camera_matrix
-
-do the last one yourself and check the result
-
-think about the transpose matrxi and how to calculet it one time
+write the code for mlx getting started
 
