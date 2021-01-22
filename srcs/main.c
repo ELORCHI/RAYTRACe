@@ -29,19 +29,19 @@ void	ft_init(t_sphere **sphere)
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	(*sphere)->orig = (t_vector){0, 0, 0,0};
 	(*sphere)->rad  = 1;
-	(*sphere)->color = (t_vector){0, 1, 1, 0};
+	(*sphere)->color = (t_vector){1, 0, 0, 0};
 	(*sphere)->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){0, 0 , -5, 1};
+	g_light->orig = (t_vector){0, 0, -5, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
-	g_light->ratio = 0.5;	
+	g_light->ratio = 0.8;	
 	//g_light->color = multp_vectors(g_light->color, g_light->ratio);
 
 	g_embient.color = (t_vector){1, 1, 1, 0};
-	g_embient.ratio = 0.2;
+	g_embient.ratio = 0.5;
 		
-	(*sphere)->color = embient((*sphere)->color);
+	//(*sphere)->color = embient((*sphere)->color);
 	
 	g_resolution.hsize = 1000;
 	g_resolution.vsize = 1000;
@@ -89,13 +89,16 @@ void			render(t_world world)
 	t_mlx	    	canvas;
 	t_ray	    	ray;
 	t_intersection  intersection;
-	t_vector		color;
+	t_vector		color = (t_vector){0,0,0,0};
+	//tmp
+	t_vector		test = (t_vector){0, 0, 0, 0};
+	t_vector		emb;
 
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
-	color = world.sphere->color;
-	// print_vector(color);
+	//color = world.triangle->color;
+	//print_vector(color);
 	while (canvas.y < g_resolution.vsize)
 	{
 		canvas.x = 0;
@@ -106,14 +109,19 @@ void			render(t_world world)
 			// print_vector(intersection.color);
 			if (check_intersection(intersection) == true)
 			{
-				// print_vector(intersection.color);
-				color = add_colors(color, ft_light(&ray, intersection));
-				print_vector(color);
-				color = normaliz_color(add_vectors(embient(color), color));
-				// color = multp_vectors(color, g_embient.ratio);
+				//print_vector(intersection.color);
+				test = ft_light(&ray, intersection);
+				//test =  ft_light(&ray, intersection);
+				//print_vector(test);
+				//print_vector(color);
+				emb = embient(intersection.color);
+				color = add_colors(test, emb);
+				normaliz_color(color);
+				//color = add_vectors(embient(intersection.color), test);
+				//color = normaliz_color(multp_vectors(color, g_embient.ratio));
 				//color = normaliz_color(color);
 				//t_vector test = ft_light(&ray, intersection);
-				//print_vector (test);
+				//print_vector(color);
 				ft_draw(canvas, color, 0);
 			}
 			else
@@ -136,8 +144,8 @@ int 			main()
 
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
-	world.plan->normal = (t_vector){1, 1, 0, 0};
-	world.plan->color = (t_vector){-10, 0, 0, 0};
+	world.plan->normal = (t_vector){0, 1, 0, 0};
+	world.plan->color = (t_vector){1, 0, 0, 0};
 	world.plan->point = (t_vector){0, 0, 0, 1};
 	//////triangle//////
 	
@@ -152,7 +160,7 @@ int 			main()
 	//printf("%f", g_camera.pixel_size);	
 	//print_mat4(g_camera.view);
 	//world.sphere->orig = mat_vec_multi(g_camera.view, world.sphere->orig);
-	//_light->orig = mat_vec_multi(g_camera.view, g_light->orig);
+	//g_light->orig = mat_vec_multi(g_camera.view, g_light->orig);
 	render(world);
 	//print_mat4(g_camera.view);
 	//t_ray ray = ray_for_pixel(100, 50);

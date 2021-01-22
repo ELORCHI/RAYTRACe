@@ -81,7 +81,7 @@ t_vector	embient(t_vector color)
 {
 	t_vector result;
 
-	result = normaliz_color(color_multp(g_embient.color, color));
+	result = color_multp(g_embient.color, color);
 	result = multp_vectors(result, g_embient.ratio);
 	//print_vector(result);
 	return (result);
@@ -150,15 +150,17 @@ t_vector	defuse(t_intersection intersection)
 	hit_light = normaliz(hit_to_light(intersection.point, g_light->orig));
 	dot = dot_product(hit_light, intersection.normal);
 	//print_vector(intersection.color);
-	if (dot >= 0.0000f)
+	if (dot >= 0)
 	{
-		result = add_colors(intersection.color, g_light->color);
+		result = color_multp(intersection.color, g_light->color);
+		normaliz_color(result);
 		result = normaliz_color(multp_vectors(result, dot));
-		result = normaliz_color(multp_vectors(result, g_light->ratio));
+		result = multp_vectors(result, g_light->ratio);
+		normaliz_color(result);
+		//./print_vector(result);
 		return (result);
 	}
-	result = (t_vector){0, 0, 0, 0};
-	return (result);
+	return (intersection.color);
 }
 
 t_vector	ft_light(t_ray *ray, t_intersection inter)

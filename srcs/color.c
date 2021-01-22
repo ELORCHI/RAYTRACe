@@ -28,13 +28,11 @@ t_vector	add_colors(t_vector color1, t_vector color2)
 {
 	t_vector result;
 
-	if (color2.x == 0 && color2.y == 0 && color2.z == 0)
-	{
-		return (color1);
-	}
-	result.x = fminf((color1.x + color2.x) / 2, 1);
-	result.y = fminf((color1.y + color2.y) / 2, 1);
-	result.z = fminf((color1.z + color2.z) / 2, 1);
+	//print_vector(color1);
+	//print_vector(color2);
+	result.x = fminf((color1.x + color2.x), 1);
+	result.y = fminf((color1.y + color2.y), 1);
+	result.z = fminf((color1.z + color2.z), 1);
 	return (result);
 }
 

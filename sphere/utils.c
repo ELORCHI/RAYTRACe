@@ -40,7 +40,7 @@ t_vector	normal_at(t_sphere sphere, t_vector hit_point)
 	t_vector normal;
 
 	normal = normaliz(point_vector(sphere.orig,  hit_point));
-	normal = mat_vec_multi(g_camera.view, normal);
+	//normal = mat_vec_multi(g_camera.view, normal);
 	return (normal);
 }
 

@@ -34,7 +34,7 @@ bool		check_inter(t_ray *ray, t_sphere *sphere)
 
 	if (ft_touch(ray, sphere) == true)
 	{
-		if (g_intersection >= 0.f)
+		if (g_intersection >= 0)
 			return (true);
 	}
 	return (false);

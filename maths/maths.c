@@ -271,7 +271,7 @@ t_vector	color_multp(t_vector color1, t_vector color2)
 	result.y = color1.y * color2.y;
 	result.z = color1.z * color2.z;
 	result.w = 0;
-//	print_vector(result);
+	//print_vector(result);
 	return (result);
 }
 
