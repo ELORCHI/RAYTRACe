@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Pythagoras <Pythagoras@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 14:58:49 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 15:27:54 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/26 23:53:12 by Pythagoras       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # include "plan.h"
 # include "camera.h"
 #include "triangle.h"
+#include "cylinder.h"
 
 typedef struct s_world
 {
 	t_sphere	*sphere;
 	t_plan		*plan;
 	t_triangle	*triangle;
+	t_cylinder	*cylinders;
 }				t_world;
 
 t_intersection	intersect_world(t_world world, t_ray ray);
