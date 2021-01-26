@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:03:54 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 15:05:02 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:23:50 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ t_light			*g_light;
 t_embient		g_embient;
 
 
-t_vector 		embient(t_vector color);
-t_vector		ft_light(t_ray *ray, t_intersection intersection);
+t_vector 		embient(t_vector inter_color);
+//t_vector		ft_light(t_ray *ray, t_intersection intersection);
 t_vector 		hit_to_light(t_vector hit, t_vector light);
+t_vector		light(t_intersection inter);
 void			is_shadow(t_world world, t_intersection *intersection);
 
 #endif

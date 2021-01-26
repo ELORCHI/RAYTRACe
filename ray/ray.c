@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 11:42:45 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 16:50:40 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/25 15:05:41 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ t_vector	ft_pixel(t_vector pixel)
 	t_vector		result;
 	t_mat4x4		matt;
 
-	//matt = g_camera.view;
 	if (i == 0)
 	{
 		inverse_4x4(&inverse, &g_camera.view);
 		i = 1;
 	}
 	//inverse = identity_mat();
-	// you may need to move the transpose
+	// you may need to remove the transpose
 	result = mat_vec_multi(transpose(inverse), pixel);
 	return (result);
 }
@@ -64,7 +63,9 @@ t_ray		ray_for_pixel(int x, int y)
 	pixel = vec4_creat(px, py, -1, 1);
 	pixel = ft_pixel(pixel);
 	ray.orig = ft_pixel(vec4_creat(0, 0, 0, 1));
+	//ray.orig = vec4_creat(0, -8 , 0, 1);
 	ray.dir = normaliz(point_vector(ray.orig, pixel));
+	//print_vector(ray.dir);
 	//print_vector(ray.orig);
 	return (ray);
 }

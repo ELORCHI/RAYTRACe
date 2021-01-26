@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 08:21:36 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 18:16:45 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/25 16:16:49 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vector 	hit_to_light(t_vector hit, t_vector light)
 {
 	t_vector vect;
 
-	vect = point_vector(hit, light);
+	vect = normaliz(point_vector(hit, light));
 	return (vect);
 }
 
@@ -77,7 +77,7 @@ float		reflect(t_vector in, t_vector normal, t_vector dir, t_vector hit)
 //intersextion
 // add it when parssing aboject
 // multiply the light by the imbient dont add it
-t_vector	embient(t_vector color)
+/*t_vector	embient(t_vector color)
 {
 	t_vector result;
 
@@ -85,7 +85,7 @@ t_vector	embient(t_vector color)
 	result = multp_vectors(result, g_embient.ratio);
 	//print_vector(result);
 	return (result);
-}
+}*/
 
 /*t_vector	defuse(t_vector color, t_vector normal, t_vector hit)
 {
@@ -141,7 +141,7 @@ t_vector	embient(t_vector color)
 	return (result);
 }*/
 
-t_vector	defuse(t_intersection intersection)
+/*t_vector	defuse(t_intersection intersection)
 {
 	t_vector 	hit_light;
 	t_vector 	result;
@@ -161,9 +161,9 @@ t_vector	defuse(t_intersection intersection)
 		return (result);
 	}
 	return (intersection.color);
-}
+}*/
 
-t_vector	ft_light(t_ray *ray, t_intersection inter)
+/*t_vector	ft_light(t_ray *ray, t_intersection inter)
 {
 	t_vector color;
 
@@ -171,4 +171,4 @@ t_vector	ft_light(t_ray *ray, t_intersection inter)
 	color = defuse(inter);
 	//print_vector(color);
 	return (color);
-}
+}*/

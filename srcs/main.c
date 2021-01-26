@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:39:56 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/21 18:47:08 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/26 14:39:38 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	ft_init(t_sphere **sphere)
 	//t_light	 *light;
 	//t_embient embient;
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	(*sphere)->orig = (t_vector){0, 0, 0,0};
-	(*sphere)->rad  = 1;
+	(*sphere)->orig = (t_vector){0, 0, 3,0};
+	(*sphere)->rad  = 2;
 	(*sphere)->color = (t_vector){1, 0, 0, 0};
 	(*sphere)->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){0, 0, -5, 1};
+	g_light->orig = (t_vector){-2, 8, -3, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.8;	
 	//g_light->color = multp_vectors(g_light->color, g_light->ratio);
@@ -47,8 +47,8 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){0, 0 , -5, 1};
-	t_vector to = (t_vector){0, 0, 1, 1};
+	t_vector from = (t_vector){5, 5, 5, 1};
+	t_vector to = (t_vector){2, 4, 0, 1};
 	t_vector up = (t_vector){0, 1, 0, 0};
 	set_camera_view(from, to, up);
 }
@@ -59,9 +59,9 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	t_intersection	hit;
 	t_intersection	next_hit;
 
-	//next_hit = ray_plans_intersection(world.plan,  ray);
+	next_hit = ray_plans_intersection(world.plan,  ray);
 	//next_hit = ray_triangles_intersections(ray, world.triangle);
-	next_hit = ray_sphere_intersection(&ray, world.sphere);
+	//next_hit = ray_sphere_intersection(&ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < FLT_MAX)
 		hit = next_hit;
 	//printf("%f\n",hit.hit);
@@ -97,7 +97,7 @@ void			render(t_world world)
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
-	//color = world.triangle->color;
+	color = world.sphere->color;
 	//print_vector(color);
 	while (canvas.y < g_resolution.vsize)
 	{
@@ -106,21 +106,10 @@ void			render(t_world world)
 		{
 			ray = ray_for_pixel(canvas.x, canvas.y);
 			intersection = intersect_world(world, ray);
-			// print_vector(intersection.color);
 			if (check_intersection(intersection) == true)
 			{
 				//print_vector(intersection.color);
-				test = ft_light(&ray, intersection);
-				//test =  ft_light(&ray, intersection);
-				//print_vector(test);
-				//print_vector(color);
-				emb = embient(intersection.color);
-				color = add_colors(test, emb);
-				normaliz_color(color);
-				//color = add_vectors(embient(intersection.color), test);
-				//color = normaliz_color(multp_vectors(color, g_embient.ratio));
-				//color = normaliz_color(color);
-				//t_vector test = ft_light(&ray, intersection);
+				color = light(intersection);
 				//print_vector(color);
 				ft_draw(canvas, color, 0);
 			}
@@ -159,8 +148,13 @@ int 			main()
 	//printf("%f", g_camera.pixel_size);	
 	//printf("%f", g_camera.pixel_size);	
 	//print_mat4(g_camera.view);
-	//world.sphere->orig = mat_vec_multi(g_camera.view, world.sphere->orig);
-	//g_light->orig = mat_vec_multi(g_camera.view, g_light->orig);
+	//t_mat4x4 invers;
+	//inverse_4x4(&invers, &(g_camera.view));
+	//invers = transpose(invers);
+	//world.sphere->orig = mat_vec_multi(invers, world.sphere->orig);
+	//print_vector(world.sphere->orig);
+	//g_light->orig = mat_vec_multi(invers, g_light->orig);	
+	print_mat4(g_camera.view);
 	render(world);
 	//print_mat4(g_camera.view);
 	//t_ray ray = ray_for_pixel(100, 50);
