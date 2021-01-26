@@ -44,7 +44,6 @@ t_vector	ft_pixel(t_vector pixel)
 		i = 1;
 	}
 	//inverse = identity_mat();
-	// you may need to remove the transpose
 	result = mat_vec_multi(transpose(inverse), pixel);
 	return (result);
 }

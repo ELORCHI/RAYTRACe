@@ -308,7 +308,9 @@ t_mat4x4	*mat_alloc(void)
 t_vector	 mat_vec_multi(t_mat4x4 mat, t_vector vec)
 {
 	t_vector result;
-
+	// you need to test this function
+	// you may need to traspose the matrix befor multiplaying
+	// look for row and colomn major
 	result.x = dot_product(mat.c1, vec);
 	result.y = dot_product(mat.c2, vec);
 	result.z = dot_product(mat.c3, vec);

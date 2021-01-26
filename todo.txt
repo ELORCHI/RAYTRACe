@@ -1,4 +1,1 @@
-switch to use value between 0 and 255 for colors
-
-write the code for mlx getting started
-
+test if you traspose the matrix before you multiply it by the vector is going to fix the problem
