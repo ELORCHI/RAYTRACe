@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 04:44:09 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/20 16:26:30 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:32:47 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ t_vector	multp_vectors(t_vector vec, float scalar)
 	vec.x = vec.x * scalar;
 	vec.y = vec.y * scalar;
 	vec.z = vec.z * scalar;
+	vec.w = 0;
 	return (vec);
 }
 
@@ -181,7 +182,7 @@ t_vector	add_vectors(t_vector vec1, t_vector vec2)
 	summ_vec.x = vec1.x + vec2.x;
 	summ_vec.y = vec1.y + vec2.y;
 	summ_vec.z = vec1.z + vec2.z;
-	summ_vec.w = vec1.w + vec2.w;
+	summ_vec.w = 0;
 	return (summ_vec);
 }
 
@@ -223,7 +224,7 @@ bool	solve_quadratic(float a, float b, float c)
 		return (false);
 		printf("test");
 	}
-	else if (discr == .0f)
+	else if (discr == 0)
 	{
 		g_intersection = - 0.5 * b / a;
 		return (true);
