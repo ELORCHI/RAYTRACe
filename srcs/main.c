@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eel-orch <eel-orch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:39:56 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/26 14:39:38 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/01/27 14:16:24 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){5, 5, 5, 1};
-	t_vector to = (t_vector){2, 4, 0, 1};
+	t_vector from = (t_vector){10, 0, 0, 1};
+	t_vector to = (t_vector){0, 0, 0, 1};
 	t_vector up = (t_vector){0, 1, 0, 0};
 	set_camera_view(from, to, up);
 }
@@ -59,8 +59,8 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	t_intersection	hit;
 	t_intersection	next_hit;
 
-	next_hit = ray_plans_intersection(world.plan,  ray);
-	//next_hit = ray_triangles_intersections(ray, world.triangle);
+	//next_hit = ray_plans_intersection(world.plan,  ray);
+	next_hit = ray_triangles_intersections(ray, world.triangle);
 	//next_hit = ray_sphere_intersection(&ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < FLT_MAX)
 		hit = next_hit;
