@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static bool is_in_square(t_square *sq, t_vector3 hitp)
+#include "../include/square.h"
+
+/*static bool is_in_square(t_square *sq, t_vector3 hitp)
 {
     t_vector3   cp;
     double      halfd;
@@ -28,4 +30,43 @@ bool        try_sq(t_ray *ray, t_square *sq, double *t)
         return (is_in_square(sq, hitpoint));
     }
     return (false);
+}*/
+
+bool			inside_square(t_square *square, t_vector intersection)
+{
+	t_vector 	center_to_hit;
+	float		max_to_center;
+
+	max_to_center = square->side * sqrt(2) / 2;
+	center_to_hit = point_vector(square->center, intersection);
+	if (fmaxf(magnitude(center_to_hit) - max_to_center, 0) > 0)
+		return (false);
+	return (true);
+}
+
+t_plan			plan_sqaure(t_square *square)
+{
+	t_plan plan;
+
+	plan.normal = square->normal;
+	plan.point = square->center;
+	plan.color = square->color;
+	return (plan);
+}
+
+t_intersection	ray_sqaures_intersection(t_square *square, t_ray ray)
+{
+    t_intersection 	inter;
+	t_plan			plan;
+	bool			is_inside;
+
+	plan = plan_sqaure(square);
+	inter = ray_plans_intersection(&plan, ray);
+	if (inter.hit != -1)
+	{
+		is_inside = inside_square(square, inter.point);
+		if (!is_inside)
+			inter.hit = -1;
+	}
+	return (inter);
 }
