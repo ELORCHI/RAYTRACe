@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <eel-orch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/15 17:39:56 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/27 14:16:24 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/01/28 14:19:46 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/01/28 14:39:37 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "../include/ray.h"
 #include "../include/sphere.h"
@@ -17,6 +19,7 @@
 #include "../include/world.h"
 #include "../include/plan.h"
 #include "../include/triangle.h"
+#include "../include/square.h"
 #include <unistd.h>
 #include <stdio.h>
 
@@ -47,8 +50,8 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){10, 0, 0, 1};
-	t_vector to = (t_vector){0, 0, 0, 1};
+	t_vector from = (t_vector){100, 0, 0, 1};
+	t_vector to = (t_vector){1, 0, 0, 1};
 	t_vector up = (t_vector){0, 1, 0, 0};
 	set_camera_view(from, to, up);
 }
@@ -60,8 +63,9 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	t_intersection	next_hit;
 
 	//next_hit = ray_plans_intersection(world.plan,  ray);
-	next_hit = ray_triangles_intersections(ray, world.triangle);
+	//next_hit = ray_triangles_intersections(ray, world.triangle);
 	//next_hit = ray_sphere_intersection(&ray, world.sphere);
+	next_hit = ray_sqaures_intersection(world.square, ray);
 	if (next_hit.hit != -1 && next_hit.hit < FLT_MAX)
 		hit = next_hit;
 	//printf("%f\n",hit.hit);
@@ -97,7 +101,7 @@ void			render(t_world world)
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
-	color = world.sphere->color;
+	color = world.square->color;
 	//print_vector(color);
 	while (canvas.y < g_resolution.vsize)
 	{
@@ -140,10 +144,16 @@ int 			main()
 	
 	
 	world.triangle = (t_triangle *)malloc(sizeof(t_triangle));
-	world.triangle->p1 = (t_vector){0, 0 , 0, 1};
-	world.triangle->p2 = (t_vector){0 , 1 , 0, 1};
-	world.triangle->p3 = (t_vector){0, 0, 1, 1};
+	world.triangle->p1 = (t_vector){0, 20, 0, 1};
+	world.triangle->p2 = (t_vector){0 , 0 , 0, 1};
+	world.triangle->p3 = (t_vector){0, 10, 20, 1};
 	world.triangle->color = (t_vector){1, 0, 0, 0};
+
+	world.square = (t_square *)malloc(sizeof(t_square));
+	world.square->center = (t_vector){0, 0, 0, 1};
+	world.square->side = 1;
+	world.square->color = (t_vector){1, 0, 0, 0};
+	world.square->normal = (t_vector){1, 0, 0, 0};
 	//printf("%f", g_camera.pixel_size);	
 	//printf("%f", g_camera.pixel_size);	
 	//printf("%f", g_camera.pixel_size);	
