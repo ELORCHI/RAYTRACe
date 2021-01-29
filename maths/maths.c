@@ -236,8 +236,10 @@ bool	solve_quadratic(float a, float b, float c)
 	}
 	if (floatcmp(x, y) == x && x >= .0f)
 		g_intersection = x;
-	else
+	else if (y > 0)
 		g_intersection = y;
+	else
+		return (false)
 	return (true);
 }
 

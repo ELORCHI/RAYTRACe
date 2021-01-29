@@ -20,7 +20,7 @@ typedef struct	s_cylinder
 	t_vector 				normal;
 	t_vector 				color;
 	float 					height;
-	float					diameter;
+	float					raduis;
 	struct	s_cylinder 		*next;
 }				t_cylinder;
 
