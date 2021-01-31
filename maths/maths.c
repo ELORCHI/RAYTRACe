@@ -239,7 +239,7 @@ bool	solve_quadratic(float a, float b, float c)
 	else if (y > 0)
 		g_intersection = y;
 	else
-		return (false)
+		return (false);
 	return (true);
 }
 

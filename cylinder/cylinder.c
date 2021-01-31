@@ -20,7 +20,12 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	c = dot_product(X, X) - dot_product(X, cylinder->normal) * dot_product(X, cylinder->normal) - cylinder->raduis * cylinder->raduis;
 	return (solve_quadratic(a, b, c));
 }
+t_vector		normal_at_cylindert()
+{
+	t_vector normal;
 
+	return (normal);
+}
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
     t_intersection 	inter;
@@ -30,7 +35,13 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 	if (if_hit(cylinder, ray))
 	{
 		finit = dot_product(ray.dir, cylinder->normal) * g_intersection;
-	
+		if (finit > 0 && ((finit - cylinder->height) <= 0))
+		{	
+			inter.hit = g_intersection;
+			inter.point = position(ray, g_intersection);
+			inter.normal = normal_at_cylindert();
+			inter.color = cylinder->color;// make sure all intersection data_structure are filled before you try to read them
+		}
 	}
 	return (inter);
 }
