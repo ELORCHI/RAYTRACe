@@ -32,6 +32,12 @@ bool	is_digit(char *line)
 
 void	get_resolution(char **line)
 {
+	static int reso = 0;
+
+	if (reso == 0)
+		reso = 1;
+	else
+		ft_exit("resolutio ERROR\none resolution is allowed");
 	if (line != NULL)
 	{
 		if (!is_digit(*line))
