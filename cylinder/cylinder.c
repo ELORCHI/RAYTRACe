@@ -32,11 +32,17 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	return (solve_quadratic(a, b, c));
 }
 
-t_vector		normal_at_cylindert()
+t_vector		normal_at_cylindert(t_cylinder *cylinder, t_vector inter_point)
 {
-	t_vector normal;
+	t_vector 	normal_at_inter;
+	t_vector 	vec;
+	float		dot;
 
-	return (normal);
+	vec = point_vector(cylinder->point, inter_point);
+	dot = dot_product(cylinder->normal, vec);
+	normal_at_inter = subb_vectors(vec, multp_vectors(cylinder->normal, -1 * dot));
+	normal_at_inter = normaliz(normal_at_inter);
+	return (normal_at_inter);
 }
 
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
@@ -52,7 +58,7 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 		{	
 			inter.hit = g_intersection;
 			inter.point = position(ray, g_intersection);
-			inter.normal = normal_at_cylindert();
+			inter.normal = normal_at_cylindert(cylinder, inter.point);
 			inter.color = cylinder->color;// make sure all intersection data_structure are filled before you try to read them
 		}
 	}

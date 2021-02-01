@@ -142,6 +142,8 @@ t_vector	vec4_creat(float x, float y, float z, float d);
 
 t_vector	point_subb(t_vector	from, t_vector to);
 
+t_vector	subb_vectors(t_vector vec1, t_vector vec2);
+
 t_vector	point_vector(t_vector from, t_vector to);
 
 t_vector	cross_product(t_vector vec1, t_vector vec2);
