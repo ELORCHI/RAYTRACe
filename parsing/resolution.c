@@ -49,7 +49,7 @@ void	get_resolution(char **line)
 		if (!is_digit(*line))
 			ft_exit("RESOLUTION ERROR\nonly numbers are allowed");
 		g_resolution.vsize = ft_atoi(line[2]);
-	}
+	}// need to handle few arguments case
 	if (++line != NULL)
 		ft_exit("RESOLUTION ERROR\nerror to much params for resolution");
 	return (check_resolution());
