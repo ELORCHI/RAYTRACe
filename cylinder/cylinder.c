@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/01 12:08:53 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/01 12:09:16 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include "../include/cylinder.h"
 #include "../include/world.h"
 #include "../include/ray.h"
-
 
 
 bool			if_hit(t_cylinder *cylinder, t_ray ray)
@@ -20,12 +31,14 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	c = dot_product(X, X) - dot_product(X, cylinder->normal) * dot_product(X, cylinder->normal) - cylinder->raduis * cylinder->raduis;
 	return (solve_quadratic(a, b, c));
 }
+
 t_vector		normal_at_cylindert()
 {
 	t_vector normal;
 
 	return (normal);
 }
+
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
     t_intersection 	inter;
