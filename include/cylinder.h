@@ -12,7 +12,9 @@
 
 #ifndef CYLINDER_H
 # define CYLINDER_H
-#include "rt.h"
+
+# include "rt.h"
+# include "ray.h"
 
 typedef struct	s_cylinder
 {
@@ -23,5 +25,6 @@ typedef struct	s_cylinder
 	float					raduis;
 	struct	s_cylinder 		*next;
 }				t_cylinder;
+t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray);
 
 #endif

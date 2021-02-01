@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 04:44:09 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/26 16:32:47 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/02/01 16:29:32 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,29 +217,28 @@ bool	solve_quadratic(float a, float b, float c)
 	float discr;
 	float x;
 	float y;
+	float min;
+	float max;
 
 	discr = (b * b) + (- 4 * a * c);
+	g_intersection = -1;
 	if (discr < 0)
-	{
 		return (false);
-		printf("test");
-	}
 	else if (discr == 0)
 	{
+		//printf("0");
 		g_intersection = - 0.5 * b / a;
 		return (true);
 	}
-	else
-	{
-		x = 0.5 * (- b - sqrt(discr)) / a;
-		y = 0.5 * (- b + sqrt(discr)) / a;
-	}
-	if (floatcmp(x, y) == x && x >= .0f)
-		g_intersection = x;
-	else if (y > 0)
-		g_intersection = y;
-	else
-		return (false);
+	x = 0.5 * (- b - sqrt(discr)) / a;
+	y = 0.5 * (- b + sqrt(discr)) / a;
+	min = fminf(x, y);
+	max = fmaxf(x, y);
+	if (min >= 0)
+		g_intersection = min;
+	else if (max >= 0)
+		g_intersection = max;
+	//printf("%f\n%f\n", min, max);
 	return (true);
 }
 

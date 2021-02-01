@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/28 14:48:43 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/28 14:48:45 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/01 16:03:06 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/01 16:28:11 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_H
-# define WORLD_H
+#include "../include/rt.h"
+#include <stdio.h>
 
-# include "rt.h"
-# include "square.h"
-# include "sphere.h"
-# include "ray.h"
-# include "plan.h" 
-# include "camera.h"
-# include "triangle.h"
-# include "cylinder.h"
-
-typedef struct s_world
+int main()
 {
-	t_sphere	*sphere;
-	t_plan		*plan;
-	t_triangle	*triangle;
-	t_cylinder	*cylinder;
-	t_square	*square;
-}				t_world;
+	bool i;
 
-t_intersection	intersect_world(t_world world, t_ray ray);
-#endif
+	i = solve_quadratic(0, 2, -1);
+	printf("%f", g_intersection);
+	return (0);
+}

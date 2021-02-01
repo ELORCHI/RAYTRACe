@@ -14,7 +14,7 @@
 #include "../include/cylinder.h"
 #include "../include/world.h"
 #include "../include/ray.h"
-
+#include <stdio.h>
 
 bool			if_hit(t_cylinder *cylinder, t_ray ray)
 {
@@ -32,7 +32,7 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	return (solve_quadratic(a, b, c));
 }
 
-t_vector		normal_at_cylindert(t_cylinder *cylinder, t_vector inter_point)
+t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
 {
 	t_vector 	normal_at_inter;
 	t_vector 	vec;
@@ -49,16 +49,21 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
     t_intersection 	inter;
 	float			finit;
+	static int		test = 0;
 
 	inter.hit = -1;
 	if (if_hit(cylinder, ray))
 	{
-		finit = dot_product(ray.dir, cylinder->normal) * g_intersection;
-		if (finit > 0 && ((finit - cylinder->height) <= 0))
-		{	
+		//test++;
+		finit = dot_product(ray.dir, cylinder->normal) * g_intersection + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
+		//printf("%d\n", test);
+		if (finit >= 0 && finit <= cylinder->height)
+		{
+			//test++;
+			//printf("%d\n",test);
 			inter.hit = g_intersection;
 			inter.point = position(ray, g_intersection);
-			inter.normal = normal_at_cylindert(cylinder, inter.point);
+			inter.normal = normal_at_cylinder(cylinder, inter.point);
 			inter.color = cylinder->color;// make sure all intersection data_structure are filled before you try to read them
 		}
 	}

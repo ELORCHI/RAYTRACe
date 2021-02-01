@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-orch <eel-orch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/28 14:19:46 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/01/28 14:39:37 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/01 14:46:11 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/01 16:32:37 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../include/ray.h"
 #include "../include/sphere.h"
@@ -36,7 +34,7 @@ void	ft_init(t_sphere **sphere)
 	(*sphere)->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){-2, 8, -3, 1};
+	g_light->orig = (t_vector){10, 0, 3, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.8;	
 	//g_light->color = multp_vectors(g_light->color, g_light->ratio);
@@ -50,8 +48,8 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){100, 0, 0, 1};
-	t_vector to = (t_vector){1, 0, 0, 1};
+	t_vector from = (t_vector){-2, -5, -7, 1};
+	t_vector to = (t_vector){0, 0, -1, 1};
 	t_vector up = (t_vector){0, 1, 0, 0};
 	set_camera_view(from, to, up);
 }
@@ -65,7 +63,8 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	//next_hit = ray_plans_intersection(world.plan,  ray);
 	//next_hit = ray_triangles_intersections(ray, world.triangle);
 	//next_hit = ray_sphere_intersection(&ray, world.sphere);
-	next_hit = ray_sqaures_intersection(world.square, ray);
+	//next_hit = ray_sqaures_intersection(world.square, ray);
+	next_hit = ray_cylinders_intersection(world.cylinder, ray);
 	if (next_hit.hit != -1 && next_hit.hit < FLT_MAX)
 		hit = next_hit;
 	//printf("%f\n",hit.hit);
@@ -94,14 +93,13 @@ void			render(t_world world)
 	t_ray	    	ray;
 	t_intersection  intersection;
 	t_vector		color = (t_vector){0,0,0,0};
-	//tmp
 	t_vector		test = (t_vector){0, 0, 0, 0};
 	t_vector		emb;
 
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
-	color = world.square->color;
+	color = world.cylinder->color;
 	//print_vector(color);
 	while (canvas.y < g_resolution.vsize)
 	{
@@ -126,13 +124,11 @@ void			render(t_world world)
 	mlx_loop(canvas.mlx_ptr);
 }
 
-// you have to transform everthing by the camera transformation
-// evrything means objects not rays because they are already generated using that camera
-
 int 			main()
 {
 	t_world	world;
 
+	///////sphere///////
 	ft_init(&(world.sphere));
 
 	///////plan/////////
@@ -141,19 +137,25 @@ int 			main()
 	world.plan->color = (t_vector){1, 0, 0, 0};
 	world.plan->point = (t_vector){0, 0, 0, 1};
 	//////triangle//////
-	
-	
 	world.triangle = (t_triangle *)malloc(sizeof(t_triangle));
 	world.triangle->p1 = (t_vector){0, 20, 0, 1};
 	world.triangle->p2 = (t_vector){0 , 0 , 0, 1};
 	world.triangle->p3 = (t_vector){0, 10, 20, 1};
 	world.triangle->color = (t_vector){1, 0, 0, 0};
-
+	/////square///////
 	world.square = (t_square *)malloc(sizeof(t_square));
 	world.square->center = (t_vector){0, 0, 0, 1};
 	world.square->side = 1;
 	world.square->color = (t_vector){1, 0, 0, 0};
 	world.square->normal = (t_vector){1, 0, 0, 0};
+	/////cylinder/////
+	world.cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
+	world.cylinder->normal = (t_vector){0, 1, 0, 0};
+	world.cylinder->height = 4;
+	world.cylinder->raduis = 1;
+	world.cylinder->point = (t_vector){0, 0, 0, 0};
+	world.cylinder->color = (t_vector){1, 0, 0, 0};
+
 	//printf("%f", g_camera.pixel_size);	
 	//printf("%f", g_camera.pixel_size);	
 	//printf("%f", g_camera.pixel_size);	
