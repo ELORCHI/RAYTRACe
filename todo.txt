@@ -1,1 +1,1 @@
-test if you traspose the matrix before you multiply it by the vector is going to fix the problem
+check if the exit function free the memory befor it exits or i have to do that myself
