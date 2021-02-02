@@ -13,11 +13,14 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include "../include/camera.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <math.h>
 # include "../include/light.h" 
+
+int ft_int_size(int i);
 
 #endif

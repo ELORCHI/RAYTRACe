@@ -26,7 +26,7 @@ void	check_resolution()
 	}
 }
 
-bool	is_digit(char *line)
+bool	is_number(char *line)
 {
 	int i;
 
@@ -51,13 +51,13 @@ void	get_resolution(char **line)
 		ft_exit("resolutio ERROR\none resolution is allowed");
 	if (line != NULL)
 	{
-		if (!is_digit(*line))
+		if (!is_number(*line))
 			ft_exit("RESOLUTION ERROR\nonly numbers are allowed");
 		g_resolution.hsize = ft_atoi(line[1]);
 	}
 	if (++line != NULL)
 	{		
-		if (!is_digit(*line))
+		if (!is_number(*line))
 			ft_exit("RESOLUTION ERROR\nonly numbers are allowed");
 		g_resolution.vsize = ft_atoi(line[2]);
 	}// need to handle few arguments case
