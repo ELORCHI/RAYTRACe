@@ -12,16 +12,16 @@ bool	is_color(char *line)
 	i = -1;
 	while (line[++i] != '\0')
 	{
-		if (ft_isdigit(line[i]) == 1 || line[i] == ',' )
+		if ((ft_isdigit(line[i]) == 1) || line[i] == ',' )
 		{
 			if ( line[i] == ',')
 			{
-				if (i == 0 || line[i + 1] = '\0')
+				if (i == 0 || line[i + 1] == '\0')
 					return (false);
 				point++;
 				if (point > 2)
 					return (false);
-				if (ft_isdigit[i - 1] == 0 || ft_isdigit[i + 1] == 0)
+				if ((ft_isdigit(line[i - 1]) == 0) || (ft_isdigit(line[i + 1]) == 0))
 					return (false);
 			}
 		}
@@ -44,7 +44,6 @@ bool	is_rgb(t_vector rgb)
 
 bool	get_color(char *line, t_vector *color)
 {
-	t_vector 	color;
 	int			tmp;
 	int 		i;
 
@@ -52,9 +51,9 @@ bool	get_color(char *line, t_vector *color)
 	i = ft_int_size(tmp);
 	color->x = tmp;
 	tmp = atoi(line + i + 1);
-	i += ft_int_size(tmp);
+	i += 1 + ft_int_size(tmp);
 	color->y = tmp;
-	tmp = ft_int_size(line + i +1);
+	tmp = ft_atoi(line + i + 1);
 	color->z = tmp;
 	color->w = 0;
 	return (is_rgb(*color));

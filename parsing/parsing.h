@@ -14,7 +14,6 @@
 # define PARSING_H
 
 # include "libft/libft.h"
-# include "gnl/get_next_line.c"
 # include "../include/camera.h"
 # include <stdio.h>
 # include <stdlib.h>
