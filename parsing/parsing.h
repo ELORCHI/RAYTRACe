@@ -14,13 +14,15 @@
 # define PARSING_H
 
 # include "libft/libft.h"
+# include "gnl/get_next_line.c"
 # include "../include/camera.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <math.h>
-# include "../include/light.h" 
+# include "../include/rt.h"
 
-int ft_int_size(int i);
+int 	ft_int_size(int i);
+float	ft_atof(char *line);
 
 #endif
