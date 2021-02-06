@@ -23,14 +23,14 @@ bool get_scalar(char *line, float *scalar)
 	return (true);
 }
 
-int main()
-{
-	char *line = "522";
-	float *scalar = (float *)malloc(sizeof(float));
+// int main()
+// {
+// 	char *line = "522.5";
+// 	float *scalar = (float *)malloc(sizeof(float));
 	
-	if (get_scalar(line, scalar) == false)
-		printf("ok");
-	else
-		printf("%f", *scalar);
-	return (0);
-}
+// 	if (get_scalar(line, scalar) == false)
+// 		printf("ok");
+// 	else
+// 		printf("%f", *scalar);
+// 	return (0);
+// }
