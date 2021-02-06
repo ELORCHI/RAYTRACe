@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft/libft.h"
-# include "parsing.h"
-# include <stdio.h>
-# include <stdlib.h>
+#include "parsing.h"
 
 bool	is_float(char *line)
 {
@@ -38,26 +35,4 @@ bool	is_float(char *line)
 	if (point > 1 || digit == 0)
 		return (false);
 	return (true);
-}
-	/*while (line[i] != '\0' && (point == 0 || point == 1)
-	{
-		if (line[i] == '.')
-			point++;
-		i++;
-	}*/
-int main()
-{
-	bool i;
-	char *line = "22.2.9";
-	char *str = "";
-	char n;
-
-	i = is_float(line);
-	if (i == true)
-		printf("ok\n");
-	else
-		printf("not\n");
-	n = ft_atoi(str);
-	printf("%d", n);
-	return (0);
-}
+}	

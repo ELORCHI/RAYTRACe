@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   get_scalar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/01 12:10:57 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/01 12:11:01 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/06 18:15:09 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/06 18:15:11 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include "libft/libft.h"
-# include "../include/camera.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include <math.h>
-# include "../include/rt.h"
+bool get_scalar(char *line, float *scalar)
+{
+	if (is_float(line) == false)
+	{
+		printf("ERROR\ninvalide vector");
+		return (false);
+	}
+	*scalar = atof(line);
+	return (true);
+}
 
-int 	ft_int_size(int i);
-float	ft_atof(char *line);
-bool	is_float(char *line);
-bool get_scalar(char *line, float *scalar);
-
-#endif
+int main()
+{
+	char *line = "522";
+	float *scalar = (float *)malloc(sizeof(float));
+	
+	if (get_scalar(line, scalar) == false)
+		printf("ok");
+	else
+		printf("%f", *scalar);
+	return (0);
+}

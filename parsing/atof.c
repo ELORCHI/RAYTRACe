@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
 #include "parsing.h"
 
 float	to_float(int int_part, char *decimal, int negative)
@@ -61,16 +60,4 @@ float	ft_atof(char *line)
 	int_len += (i > 1) ? --i : 0;
 	number = to_float(int_part, line + int_len + 1, negative);
 	return(number); 
-}
-
-int main()
-{
-	float decimal;
-	char *line = "-69.0063";
-	int test;
-
-	test = ft_atoi(line);
-	decimal = ft_atof(line);
-	printf("%f\n%d\n",decimal, test);
-	return (0);
 }

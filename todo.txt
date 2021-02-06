@@ -1,1 +1,2 @@
 check if the exit function free the memory befor it exits or i have to do that myself
+do it
