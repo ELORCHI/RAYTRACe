@@ -21,9 +21,7 @@
 
 float		floatcmp(float a, float b)
 {
-	const float epsilon = 0.00001;
-
-	if (fabs(a - b) >= epsilon)
+	if (fabs(a - b) >= EPSILON)
 		return (b);
 	else
 		return (a);

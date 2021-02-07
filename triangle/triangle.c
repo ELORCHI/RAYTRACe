@@ -14,7 +14,7 @@
 #include "../include/ray.h"
 #include "../include/plan.h"
 
-t_intersection	plan_triangle(t_ray ray, t_triangle *tr)
+/*t_intersection	plan_triangle(t_ray ray, t_triangle *tr)
 {
 	t_intersection	inter;
 	t_plan			plan;
@@ -69,4 +69,50 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 		return (intersection);
 	}
 	return (intersection);
+}*/
+
+t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
+{
+	t_vector 		edge1;
+	t_vector 		edge2;
+	t_vector		cross;
+	t_intersection	inter;
+	float			dot;
+	t_vector		ray_to_tr;
+	float			u;
+
+	edge1 = point_vector(triangle->p1, triangle->p2);
+	edge2 = point_vector(triangle->p1, triangle->p3);
+	cross = cross_product(ray.dir, edge2);
+	dot = dot_product(edge1, cross);
+	if (dot > -EPSILON && dot < EPSILON) // ray parallel to the triangle
+	{
+		inter.hit = -1;
+		return (inter);
+	}
+	dot = 1.0/ dot;
+	ray_to_tr = point_vector(triangle->p1, ray.orig);
+	u = dot * dot_product(ray_to_tr, cross);
+	if (u < 0.0 || u > 1.0)
+	{
+		inter.hit = -1;
+		return (inter);
+	}
+	t_vector q;
+	q = cross_product(ray_to_tr, edge1);
+	float v;
+	v = dot * dot_product(ray.dir, q);
+	if (v < 0.0 || (v + u > 1.0))
+	{
+		inter.hit = -1;
+		return(inter);
+	}
+	inter.hit = dot * dot_product(q, edge2);
+	if (inter.hit > EPSILON)
+	{
+		inter.point = position(ray, inter.hit);
+		return(inter);
+	}
+	inter.hit = -1;
+	return (inter);
 }

@@ -16,10 +16,8 @@
 # include <stdbool.h>
 # include "mlx.h"
 # include <float.h>
+# define EPSILON 0.000001
 
-/*
- ** apsect_ratio = (x > y) ? x / y : y / x;
- */
 
 typedef struct	s_vector
 {
