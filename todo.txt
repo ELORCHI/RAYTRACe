@@ -1,2 +1,19 @@
-check if the exit function free the memory befor it exits or i have to do that myself
-do it
+ask about free and exit
+
+    going to do
+
+	parsing : understand double pointer arithmetics to handle few and too much argument cases
+	
+	test likned list adding and delitin;
+
+	fix cylinder or change the algorithm look for traore
+	
+	multiple objects
+
+	shadow
+
+	plan test it might be a problem
+	
+	triangle try to fix ro chagnge
+	
+	makefile
