@@ -21,9 +21,10 @@
 # include <math.h>
 # include "../include/rt.h"
 
-int 	ft_int_size(int i);
-float	ft_atof(char *line);
-bool	is_float(char *line);
-bool get_scalar(char *line, float *scalar);
-
+int 		ft_int_size(int i);
+int			is_float(char *line);
+int			get_scalar(char *line, float *scalar);
+int			nb_zeros(char *line, int nb ,int index);
+float		ft_atof(char *line);
+t_vector 	*get_vector(char *line);
 #endif

@@ -14,5 +14,16 @@
 
 t_vector *get_vector(char *line)
 {
-	is_vector()
+	t_vector 	*vec;
+	int 		index;
+
+	vec = (t_vector *)malloc(sizeof(t_vector));
+	index = 0;
+	index += get_scalar(line + index, &(vec->x));
+	//printf(" == x index == %d\n", index);
+	index += get_scalar(line + index + 1, &(vec->y));
+	//printf(" == Y index == %d\n", index);
+	index += get_scalar(line + index + 2, &(vec->z));
+	//printf("Z");
+	return (vec);
 }

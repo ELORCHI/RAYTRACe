@@ -12,25 +12,34 @@
 
 #include "parsing.h"
 
-bool get_scalar(char *line, float *scalar)
+int get_scalar(char *line, float *scalar)
 {
-	if (is_float(line) == false)
+	int i;
+
+	i = is_float(line);
+	if (i == 0)
 	{
 		printf("ERROR\ninvalide vector");
-		return (false);
+		exit(0);
 	}
 	*scalar = atof(line);
-	return (true);
+	//printf("%f", *scalar);
+	return (i);
 }
 
-// int main()
-// {
-// 	char *line = "522.5";
-// 	float *scalar = (float *)malloc(sizeof(float));
+int main()
+{
+	char *line = " -0.5,-9.06,0.9";
+	float *scalar = (float *)malloc(sizeof(float));
+	t_vector *vec;
+	int i = 0;
+//	i = get_scalar(line, scalar);
+	vec = get_vector(line);
 	
-// 	if (get_scalar(line, scalar) == false)
-// 		printf("ok");
-// 	else
-// 		printf("%f", *scalar);
-// 	return (0);
-// }
+	print_vector(*vec);
+	// if (i == 0)
+	// 	printf("ok");
+	// else
+	// 	printf("i = %d\n%f",i, *scalar);
+	return (0);
+}

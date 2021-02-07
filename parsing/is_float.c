@@ -12,27 +12,30 @@
 
 #include "parsing.h"
 
-bool	is_float(char *line)
+int	is_float(char *line)
 {
 	int i;
 	int point;
 	int digit;
+	int negative;
 
 	digit = 0;
 	i = 0;
 	point = 0;
-	while (line[i] != '\0' && (point == 0 || point == 1))
+	negative = 0;
+	while (line[i] != '\0' && line[i] != ',' && (point == 0 || point == 1))
 	{
-		if (ft_isdigit(line[i]) == 1 || line[i] == '.')
+		if (ft_isdigit(line[i]) == 1 || line[i] == '.' || line[i] == '-')
 		{
-		  point += (line[i] == '.') ? 1 : 0;
-		  digit += (ft_isdigit(line[i]) == 1) ? 1 : 0;
+			point += (line[i] == '.') ? 1 : 0;
+			digit += (ft_isdigit(line[i]) == 1) ? 1 : 0;
+			negative += (line[i] == '-') ? 1 : 0;
 			i++;
 		}
 		else
-			return (false);	
+			return (0);	
 	}
 	if (point > 1 || digit == 0)
-		return (false);
-	return (true);
+		return (0);
+	return (i);
 }	
