@@ -16,9 +16,16 @@ void	get_ambinet(char **line)
 {
 	static int amb = 0;
 
-	if (amb = 0)
+	if (amb == 1)
+	{
+		printf("ERROR\n in ambient: only on ambient is allowed");
+		exit(0);
+	}
+	if (amb == 0)
 		amb = 1;
-	if (++line == NULL)
-		ft_exit("ERROR\n few arguments for ambient light");
-		
+	if (line[1] == NULL || line[2] == NULL)
+		printf("ERROR\n in ambient: few arguments");
+	// hande too mush aguments case
+	get_scalar(line[1], &(g_embient.ratio));
+	get_color(line[2], &(g_embient.color));
 }
