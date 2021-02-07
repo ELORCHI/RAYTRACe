@@ -15,26 +15,14 @@
 #include "../include/sphere.h"
 #include "../include/camera.h"
 #include <stdio.h>
+
 //check if the mat_vec_multi fucntion return the right vector or point 
 // ps : check the vector.w element for each
 
-/*void	translat(t_sphere *sphere, float x, float y, float z)
-{
-	t_mat4x4	tmp;
-
-	tmp = translation(x, y, z);
-	inverse_4x4(&(sphere->trans), &tmp);
-}
-
-void	scale(t_sphere *sphere, float x, float y, float z)
-{
-	t_mat4x4 tmp;
-
-	tmp = scaling(x, y, y);
-	inverse_4x4(&(sphere->trans), &tmp);
-}*/
-
 // need to test this and compare it with the given up given in sceen.rt
+//check if reper is correct (x,y,z)
+//justify why transposing the view matrix
+
 t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 {
 	t_vector forward;
@@ -52,18 +40,23 @@ t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 	return (view_matrix);
 }
 
-void		set_camera_view(t_vector from, t_vector to, t_vector up)
+//not tested yet
+//to avoid the case of null vectors when creatin camera's vectors
+void		set_camera_view(t_vector from, t_vector to)
 {
 	float		dot;
 	t_vector	forward;
+	t_vector	up;
 
+	up = (t_vector){0, 1, 0, 0};
 	forward = point_vector(from, to);
 	dot = dot_product(forward, up);
-	/*if (dot == .0f)
+	if (fabs(dot) < EPSILON)
 	{
 		up.x = 1;
-		up.y = 1;
-	}*/
+		up.y = 0;
+		up.z = 0;
+	}
 	camera();
 	g_camera.view = view_transform(from, to, up);
 }

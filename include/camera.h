@@ -33,7 +33,7 @@ typedef struct 	s_camera
 	struct  	s_camera *next;
 }				t_camera;
 
-void		set_camera_view(t_vector from, t_vector to, t_vector up);
+void		set_camera_view(t_vector from, t_vector to);
 void		camera(void);
 
 t_resolution	g_resolution;
