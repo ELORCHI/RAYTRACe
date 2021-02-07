@@ -18,12 +18,22 @@
 
 typedef struct	s_triangle
 {
-	t_vector p1;
-	t_vector p2;
-	t_vector p3;
-	t_vector normal;
-	t_vector color;
+	t_vector 			p1;
+	t_vector 			p2;
+	t_vector 			p3;
+	t_vector 			normal;
+	t_vector 			color;
+	struct s_triangle 	*next;
 }				t_triangle;
+
+typedef struct 	s_vertex
+{
+	t_vector 	edge1;
+	t_vector 	edge2;
+	t_vector 	ray_to_tr;
+	float		u;
+	float		v;
+}				t_vertex;
 
 t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle);
 #endif
