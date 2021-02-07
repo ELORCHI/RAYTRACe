@@ -77,7 +77,10 @@ bool	is_rgb(t_vector rgb)
 	if (rgb.z < 0 || rgb.z > 255)
 		valid = false;
 	if (valid == false)
+	{	
 		printf("ERROR\ninvalid RGB\nvalue must be an int in range [0,255]\n");
+		exit(0);
+	}
 	return (valid);
 }
 
@@ -89,7 +92,7 @@ bool	get_color(char *line, t_vector *color)
 	if (is_color(line) == false)
 	{
 		printf("ERROR\ninvalid color parameter");
-		return (false);
+		exit (0);
 	}
 	tmp = atoi(line);
 	int_len = ft_int_size(tmp) + nb_zeros(line, tmp, 0);
@@ -99,7 +102,6 @@ bool	get_color(char *line, t_vector *color)
 	color->y = tmp;
 	tmp = ft_atoi(line + int_len + 1);
 	color->z = tmp;
-	color->w = 0;
-	
+	color->w = 0;	
 	return (is_rgb(*color));
 }

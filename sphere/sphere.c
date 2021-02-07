@@ -34,7 +34,7 @@ bool		check_inter(t_ray *ray, t_sphere *sphere)
 
 	if (ft_touch(ray, sphere) == true)
 	{
-		if (g_intersection >= 0)
+		if (g_intersection[0] >= 0)
 			return (true);
 	}
 	return (false);
@@ -48,7 +48,7 @@ t_intersection	ray_sphere_intersection(t_ray *ray, t_sphere *sphere)
 	if_hit = check_inter(ray, sphere);
 	if (if_hit == true)
 	{
-		inter.hit = g_intersection;
+		inter.hit = g_intersection[0];
 		inter.point = position(*ray, inter.hit);		
 		inter.normal = normal_at(*sphere, inter.point);
 		inter.color = sphere->color;

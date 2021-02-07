@@ -96,7 +96,7 @@ typedef struct	s_mlx
 	int		y;
 }				t_mlx;
 
-float 		g_intersection;
+float 		*g_intersection;
 
 int			create_trgb(t_vector color);
 

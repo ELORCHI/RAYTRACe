@@ -45,24 +45,42 @@ t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
 	return (normal_at_inter);
 }
 
+float			which_finit(t_cylinder *cylinder, t_ray ray)
+{
+	float finit;
+	float tmp;
+
+	finit = -1;
+	tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[0] + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
+	if (tmp >= 0 && tmp <= cylinder->height)
+		finit = tmp;
+	else
+	{
+		tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[1] + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
+		if (tmp >= 0 && tmp <= cylinder->height)
+		{	
+			finit = tmp;
+			g_intersection[0] = g_intersection[1];
+		}
+	}
+	return (finit);
+}
+
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
     t_intersection 	inter;
 	float			finit;
-	static int		test = 0;
 
 	inter.hit = -1;
 	if (if_hit(cylinder, ray))
 	{
-		//test++;
-		finit = dot_product(ray.dir, cylinder->normal) * g_intersection + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
-		//printf("%d\n", test);
-		if (finit >= 0 && finit <= cylinder->height)
+		finit = which_finit(cylinder, ray);
+		if (finit > 0)
 		{
 			//test++;
 			//printf("%d\n",test);
-			inter.hit = g_intersection;
-			inter.point = position(ray, g_intersection);
+			inter.hit = g_intersection[0];
+			inter.point = position(ray, inter.hit);
 			inter.normal = normal_at_cylinder(cylinder, inter.point);
 			inter.color = cylinder->color;// make sure all intersection data_structure are filled before you try to read them
 		}

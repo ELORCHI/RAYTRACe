@@ -221,24 +221,24 @@ bool	solve_quadratic(float a, float b, float c)
 	float max;
 
 	discr = (b * b) + (- 4 * a * c);
-	g_intersection = -1;
 	if (discr < 0)
 		return (false);
-	else if (discr == 0)
-	{
-		//printf("0");
-		g_intersection = - 0.5 * b / a;
-		return (true);
-	}
 	x = 0.5 * (- b - sqrt(discr)) / a;
 	y = 0.5 * (- b + sqrt(discr)) / a;
 	min = fminf(x, y);
 	max = fmaxf(x, y);
 	if (min >= 0)
-		g_intersection = min;
+	{
+		g_intersection[0] = min;
+		g_intersection[1] = max;	
+	}
 	else if (max >= 0)
-		g_intersection = max;
-	//printf("%f\n%f\n", min, max);
+	{
+		g_intersection[0] = max;
+		g_intersection[1] = max;
+	}
+	else
+		return(false);
 	return (true);
 }
 
