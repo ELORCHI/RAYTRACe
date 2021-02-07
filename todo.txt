@@ -6,7 +6,7 @@ ask about free and exit
 	
 	test likned list adding and delitin;
 
-	fix cylinder or change the algorithm look for traore
+	fix cylinder or change the algorithm look for traore ==done==
 	
 	multiple objects
 
@@ -14,6 +14,6 @@ ask about free and exit
 
 	plan test it might be a problem
 	
-	triangle try to fix ro chagnge
+	triangle try to fix ro chagnge ==done need normalization==
 	
 	makefile
