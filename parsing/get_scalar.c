@@ -27,19 +27,3 @@ int get_scalar(char *line, float *scalar)
 	return (i);
 }
 
-int main()
-{
-	char *line = " -0.5,-9.06,0.9";
-	float *scalar = (float *)malloc(sizeof(float));
-	t_vector *vec;
-	int i = 0;
-//	i = get_scalar(line, scalar);
-	vec = get_vector(line);
-	
-	print_vector(*vec);
-	// if (i == 0)
-	// 	printf("ok");
-	// else
-	// 	printf("i = %d\n%f",i, *scalar);
-	return (0);
-}

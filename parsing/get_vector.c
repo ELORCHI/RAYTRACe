@@ -12,18 +12,18 @@
 
 #include "parsing.h"
 
-t_vector *get_vector(char *line)
+t_vector get_vector(char *line)
 {
-	t_vector 	*vec;
 	int 		index;
-
-	vec = (t_vector *)malloc(sizeof(t_vector));
+	t_vector	vec;
+	
 	index = 0;
-	index += get_scalar(line + index, &(vec->x));
+	index += get_scalar(line + index, &(vec.x));
 	//printf(" == x index == %d\n", index);
-	index += get_scalar(line + index + 1, &(vec->y));
+	index += get_scalar(line + index + 1, &(vec.y));
 	//printf(" == Y index == %d\n", index);
-	index += get_scalar(line + index + 2, &(vec->z));
+	index += get_scalar(line + index + 2, &(vec.z));
+	vec.w = 0;
 	//printf("Z");
 	return (vec);
 }

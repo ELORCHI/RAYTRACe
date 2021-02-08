@@ -31,8 +31,9 @@ int			is_float(char *line);
 int			get_scalar(char *line, float *scalar);
 int			nb_zeros(char *line, int nb ,int index);
 void		get_resolution(char **line);
+void		ft_exit(char *error_message);
 bool    	get_color(char *line, t_vector *color);
 bool 		count_params(char **line, int params_number);
 float		ft_atof(char *line);
-t_vector 	*get_vector(char *line);
+t_vector 	get_vector(char *line);
 #endif

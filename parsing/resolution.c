@@ -15,7 +15,7 @@
 void	ft_exit(char *error_message)
 {
 	printf("%s", error_message);
-	exit(1);
+	exit(0);
 }
 
 void	check_resolution()
