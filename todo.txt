@@ -1,5 +1,5 @@
 	
-	first to do check camera
+	first to do check camera	(you maight test switich to vector directly for forward vector)
 	
 	ask about free and exit 								==done=	
 	
@@ -16,8 +16,6 @@
 
 	change the normal of triangle plan square to the opposit if need to 
 
-	parsing : understand double pointer arithmetics to handle few and too much argument cases
-	
 	test likned list adding and delitin;
 	
 	multiple objects
