@@ -47,16 +47,16 @@ void		set_camera_view(t_vector from, t_vector to)
 	float		dot;
 	t_vector	forward;
 	t_vector	up;
+	t_vector	test;
 
 	up = (t_vector){0, 1, 0, 0};
 	forward = point_vector(from, to);
-	dot = dot_product(forward, up);
-	printf("dot = %f", dot);
-	if (fabs(dot - 1) < EPSILON)
+	test = cross_product(normaliz(forward), up);
+	if (test.x == 0 && test.y == 0 && test.z == 0)
 	{
-		up.x = 1;
+		up.x = 0;
 		up.y = 0;
-		up.z = 0;
+		up.z = 1;
 	}
 	camera();
 	g_camera.view = view_transform(from, to, up);
