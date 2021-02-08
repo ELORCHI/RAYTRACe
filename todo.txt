@@ -1,24 +1,22 @@
 	
 	first to do check camera	(you maight test switich to vector directly for forward vector) ==done==
 	
-	ask about free and exit 								==done=	
+	ask about free and exit 																	==done=	
 	
-	triangle try to fix ro chagnge 						 	==done==
+	triangle try to fix ro chagnge 						 										==done==
 
-	fix cylinder or change the algorithm look for traore 	==done==
+	fix cylinder or change the algorithm look for traore 										==done==
 
-	fix camera vectors										==done==
+	fix camera vectors																			==done==
 	
-	shadow													==needs test== 
+	multiple objects == buuuugiiis buugs shitiiii bugs==
 
-   
-    going to do
+	shadow																						==needs test== 
 
+    ===going to do==
+
+	finish parsing
 
 	test likned list adding and delitin;
-	
-	multiple objects
-
-	plan test it might be a problem
 
 	makefile
