@@ -16,12 +16,9 @@
 #include "../include/camera.h"
 #include <stdio.h>
 
+// check this if there is a camera prplm
 //check if the mat_vec_multi fucntion return the right vector or point 
 // ps : check the vector.w element for each
-
-// need to test this and compare it with the given up given in sceen.rt
-//check if reper is correct (x,y,z)
-//justify why transposing the view matrix
 
 t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 {

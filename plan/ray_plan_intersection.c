@@ -46,11 +46,11 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	t_intersection 	inter;
 
 	denom = dot_product(ray.dir, plan->normal);
-	if (fabsf(denom) >= 0.0001f)
+	if (fabsf(denom) > EPSILON)
 	{
 		origin_point = normaliz(point_vector(ray.orig, plan->point));
 		nom = dot_product(plan->normal, origin_point) / denom;
-		if (nom >= 0.0001f)
+		if (nom > EPSILON)
 		{
 			inter.color = plan->color;
 			inter.hit =  nom;// what is the hit value to compute the point;
