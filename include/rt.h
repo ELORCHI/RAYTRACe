@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include "mlx.h"
 # include <float.h>
+# include <stdlib.h>
 # define EPSILON 0.000001
 
 
@@ -94,7 +95,7 @@ typedef struct	s_mlx
 	int		y;
 }				t_mlx;
 
-float 		*g_intersection;
+float 		g_intersection[2];
 
 int			create_trgb(t_vector color);
 

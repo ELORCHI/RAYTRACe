@@ -51,7 +51,8 @@ void		set_camera_view(t_vector from, t_vector to)
 	up = (t_vector){0, 1, 0, 0};
 	forward = point_vector(from, to);
 	dot = dot_product(forward, up);
-	if (fabs(dot) < EPSILON)
+	printf("dot = %f", dot);
+	if (fabs(dot - 1) < EPSILON)
 	{
 		up.x = 1;
 		up.y = 0;
