@@ -1,19 +1,27 @@
-ask about free and exit
+	
+	first to do check camera
+	
+	ask about free and exit 								==done=	
+	
+	triangle try to fix ro chagnge 						 	==done not / tested yet==
 
+	fix cylinder or change the algorithm look for traore 	==done==
+
+	fix camera vectors										==done / not test ye/ fix comment==
+	
+	shadow													==needs test/
+
+   
     going to do
+
+	change the normal of triangle plan square to the opposit if need to 
 
 	parsing : understand double pointer arithmetics to handle few and too much argument cases
 	
 	test likned list adding and delitin;
-
-	fix cylinder or change the algorithm look for traore ==done==
 	
 	multiple objects
 
-	shadow
-
 	plan test it might be a problem
-	
-	triangle try to fix ro chagnge ==done need normalization==
-	
+
 	makefile
