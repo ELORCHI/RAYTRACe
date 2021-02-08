@@ -30,6 +30,7 @@ int 		ft_int_size(int i);
 int			is_float(char *line);
 int			get_scalar(char *line, float *scalar);
 int			nb_zeros(char *line, int nb ,int index);
+void		get_resolution(char **line);
 bool    	get_color(char *line, t_vector *color);
 bool 		count_params(char **line, int params_number);
 float		ft_atof(char *line);

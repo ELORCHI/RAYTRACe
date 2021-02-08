@@ -16,7 +16,7 @@ void	get_ambinet(char **line)
 {
 	static int amb = 0;
 
-	count_params(**line);
+	count_params(line, 3);
 	if (amb == 1)
 	{
 		printf("ERROR\n in ambient: only on ambient is allowed");
