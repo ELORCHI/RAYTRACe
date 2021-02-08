@@ -12,17 +12,21 @@
 
 #include "parsing.h"
 
-bool count_params(char **line, int params_number)
+bool	count_params(char **line, int params_number)
 {
 	int i;
 
+	i = 0;
 	while (*line)
 	{
 		i++;
 		line++;
 	}
-	i++;
 	if (i == params_number)
 		return (true);
-	return (false);
+	else if (i < params_number)
+		printf("ERROR\nfew arguments");
+	else
+		printf("ERROR\ntoo much arguments");
+	exit(EXIT_FAILURE);
 }

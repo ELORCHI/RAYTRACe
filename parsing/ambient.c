@@ -16,6 +16,7 @@ void	get_ambinet(char **line)
 {
 	static int amb = 0;
 
+	count_params(**line);
 	if (amb == 1)
 	{
 		printf("ERROR\n in ambient: only on ambient is allowed");
@@ -25,7 +26,6 @@ void	get_ambinet(char **line)
 		amb = 1;
 	if (line[1] == NULL || line[2] == NULL)
 		printf("ERROR\n in ambient: few arguments");
-	// hande too mush aguments case
 	get_scalar(line[1], &(g_embient.ratio));
 	get_color(line[2], &(g_embient.color));
 }
