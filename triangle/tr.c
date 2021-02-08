@@ -2,7 +2,6 @@
 #include "../include/ray.h"
 #include "../include/plan.h"
 
-// about the triangle normal calculate it with the usual methode if its not working check on other on
 
 t_intersection	check(t_vertex vertex, t_intersection inter, t_ray ray, t_triangle tr)
 {
@@ -10,6 +9,7 @@ t_intersection	check(t_vertex vertex, t_intersection inter, t_ray ray, t_triangl
 	{
 		inter.point = position(ray, inter.hit);
 		inter.color = tr.color;
+		inter.normal = cross_product(vertex.edge1, vertex.edge2);
 		return(inter);
 	}
 	inter.hit = -1;
@@ -26,6 +26,7 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 	inter.hit = -1;
 	vertex.edge1 = point_vector(triangle->p1, triangle->p2);
 	vertex.edge2 = point_vector(triangle->p1, triangle->p3);
+	cross = cross_product(ray.dir, vertex.edge2);
 	dot = dot_product(vertex.edge1, cross);
 	if (dot > -EPSILON && dot < EPSILON) 
 		return (inter);
