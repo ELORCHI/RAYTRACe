@@ -57,7 +57,7 @@ void	ft_init(t_sphere **sphere)
 //this function needs to be modified
 t_intersection	intersect_objects(t_world world, t_ray ray)
 {
-	t_intersection	hit;
+	t_intersection	inter;
 	t_intersection	next_hit;
 
 	//next_hit = ray_plans_intersection(world.plan,  ray);
@@ -65,10 +65,13 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	//next_hit = ray_sphere_intersection(&ray, world.sphere);
 	//next_hit = ray_sqaures_intersection(world.square, ray);
 	next_hit = ray_cylinders_intersection(world.cylinder, ray);
-	if (next_hit.hit != -1 && next_hit.hit < FLT_MAX)
-		hit = next_hit;
-	//printf("%f\n",hit.hit);
-	//hit = ray_plans
+	if (next_hit.hit != -1)
+		inter = next_hit;
+	next_hit = ray_sphere_intersection(ray, world.sphere);
+	if (next_hit != -1 && next_hit.hit < inter.hit)
+		inter = next_hit;
+	//ps if multpl objects is not working try to check if the intersection functions set intersection.hit to 
+	// ..the right value if no intersection is found or its negative t value;
 	return (next_hit);
 }
 
@@ -111,6 +114,7 @@ void			render(t_world world)
 			if (check_intersection(intersection) == true)
 			{
 				//print_vector(intersection.color);
+				is_shadow(world, intersection);
 				color = light(intersection);
 				//print_vector(color);
 				ft_draw(canvas, color, 0);
