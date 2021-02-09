@@ -32,12 +32,16 @@ t_vector	defuse(t_intersection inter)
 	t_vector	defuse_;
 	float		diff;
 
-	light_dir = normaliz(point_vector(inter.point, g_light->orig));
-	//print_vector(light_dir);
-	diff = fmaxf(dot_product(light_dir, inter.normal), 0.0f);
-	defuse_ = multp_vectors(g_light->color, diff);
-	//print_vector(inter.normal);
-	//printf("%f\n", diff);
+	defuse_ = (t_vector){0, 0, 0, 0};
+	if (inter.is_shadow == false)
+	{
+		light_dir = normaliz(point_vector(inter.point, g_light->orig));
+		//print_vector(light_dir);
+		diff = fmaxf(dot_product(light_dir, inter.normal), 0.0f);
+		defuse_ = multp_vectors(g_light->color, diff);
+		//print_vector(inter.normal);
+		//printf("%f\n", diff);
+	}
 	return (defuse_);
 }
 

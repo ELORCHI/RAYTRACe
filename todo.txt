@@ -1,5 +1,5 @@
 	
-		=== do this first === fix multiple objects problem ==
+		=== do this first === fix multiple objects problem ==									==done==
 						  === move to shadow ==
 	first to do check camera	(you maight test switich to vector directly for forward vector) ==done==
 	
@@ -11,9 +11,9 @@
 
 	fix camera vectors																			==done==
 	
-	multiple objects 																			==read commet==
+	multiple objects 																			==read==
 
-	shadow																						==needs test== 
+	shadow																						==needs== 
 
     ===going to do==
 

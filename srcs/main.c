@@ -28,13 +28,13 @@ void	ft_init(t_sphere **sphere)
 	//t_light	 *light;
 	//t_embient embient;
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	(*sphere)->orig = (t_vector){0, 0, 3,0};
-	(*sphere)->rad  = 2;
+	(*sphere)->orig = (t_vector){5, 0.5, 1,0};
+	(*sphere)->rad  = 1;
 	(*sphere)->color = (t_vector){1, 0, 0, 0};
 	(*sphere)->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){10, 0, 3, 1};
+	g_light->orig = (t_vector){-5, 2, 0, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.8;	
 	//g_light->color = multp_vectors(g_light->color, g_light->ratio);
@@ -48,8 +48,8 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){-2, -5, -7, 1};
-	t_vector to = (t_vector){0, 0, -1, 1};
+	t_vector from = (t_vector){2, 0, -10, 1};
+	t_vector to = (t_vector){0, 0, 0, 1};
 	set_camera_view(from, to);
 }
 
@@ -66,16 +66,13 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	last.hit = FLT_MAX;
 	next_hit = ray_triangles_intersections(ray, world.triangle);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	{
 		last = next_hit;
-	//	printf("tr == %f\n", next_hit.hit);
-	}
 	next_hit = ray_sphere_intersection(ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	{
-		printf("sph == %f\n", next_hit.hit);
 		last = next_hit;
-	}
+	next_hit = ray_plans_intersection(world.plan, ray);
+	if (next_hit.hit != -1 && next_hit.hit < last.hit)
+		last = next_hit;	
 	if (last.hit == FLT_MAX)
 		last.hit = -1;
 	return (last);
@@ -109,8 +106,6 @@ void			render(t_world world)
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
-	//color = world.cylinder->color;
-	//print_vector(color);
 	while (canvas.y < g_resolution.vsize)
 	{
 		canvas.x = 0;
@@ -121,7 +116,7 @@ void			render(t_world world)
 			if (check_intersection(intersection) == true)
 			{
 				//print_vector(intersection.color);
-				//is_shadow(world, &intersection);
+				is_shadow(world, &intersection);
 				color = light(intersection);
 				//print_vector(color);
 				ft_draw(canvas, color, 0);
@@ -145,14 +140,15 @@ int 			main()
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
 	world.plan->normal = (t_vector){0, 1, 0, 0};
-	world.plan->color = (t_vector){1, 0, 0, 0};
-	world.plan->point = (t_vector){0, 0, 0, 1};
+	world.plan->color = (t_vector){0, 1, 1, 0};
+	world.plan->point = (t_vector){0, -5, 0, 1};
 	//////triangle//////
 	world.triangle = (t_triangle *)malloc(sizeof(t_triangle));
-	world.triangle->p1 = (t_vector){0, 20, 0, 1};
-	world.triangle->p2 = (t_vector){0 , 0 , 0, 1};
-	world.triangle->p3 = (t_vector){0, 10, 20, 1};
+	world.triangle->p1 = (t_vector){0, 3, 5, 1};
+	world.triangle->p2 = (t_vector){0 , 8, 9, 1};
+	world.triangle->p3 = (t_vector){3, 6, 9, 1};
 	world.triangle->color = (t_vector){1, 1, 1, 0};
+
 	/////square///////
 	world.square = (t_square *)malloc(sizeof(t_square));
 	world.square->center = (t_vector){0, 0, 0, 1};

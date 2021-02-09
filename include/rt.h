@@ -164,7 +164,13 @@ t_vector 	normaliz_color(t_vector color);
 t_mat4x4 	look_at();
 
 t_mat4x4	identity_mat(void);
+
 t_mat4x4	scaling(float x, float y, float z);
+
+t_mat4x4	rotation_z(float teta);
+
+t_mat4x4	rotation_x(float teta);
+
 t_mat4x4	mat_multp(t_mat4x4 a, t_mat4x4 b);
 
 t_mat4x4	transpose(t_mat4x4 mat);

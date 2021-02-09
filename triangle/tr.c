@@ -9,7 +9,8 @@ t_intersection	check(t_vertex vertex, t_intersection inter, t_ray ray, t_triangl
 	{
 		inter.point = position(ray, inter.hit);
 		inter.color = tr.color;
-		inter.normal = cross_product(vertex.edge1, vertex.edge2);
+		inter.normal = cross_product(vertex.edge2, vertex.edge1);
+		//fix_normal_for_multpl lights
 		return(inter);
 	}
 	inter.hit = -1;
