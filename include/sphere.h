@@ -25,9 +25,9 @@ typedef struct	sphere
 	struct sphere 	*next;
 }				t_sphere;
 
-bool				ft_touch(t_ray *ray, t_sphere *sphere);
-t_intersection		ray_sphere_intersection(t_ray *ray, t_sphere *sphere);
-bool				check_inter(t_ray *ray, t_sphere *sphere);
+bool				ft_touch(t_ray ray, t_sphere *sphere);
+t_intersection		ray_sphere_intersection(t_ray ray, t_sphere *sphere);
+bool				check_inter(t_ray ray, t_sphere *sphere);
 t_vector			normal_at(t_sphere sphere, t_vector world_point);
 void				translat(t_sphere *sphere, float x, float y, float z);
 
