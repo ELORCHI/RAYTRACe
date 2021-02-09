@@ -18,6 +18,7 @@
 void	is_shadow(t_world world, t_intersection *intersection)
 {
 	t_vector		hit_light;
+	t_vector		hit_shadow;
 	t_intersection	shadow;
 	float			distance;
 	t_ray			ray;
@@ -27,12 +28,13 @@ void	is_shadow(t_world world, t_intersection *intersection)
 	ray.dir = normaliz(hit_light);
 	ray.orig = intersection->point;
 	shadow = intersect_world(world, ray);
+	// avoid intersecting the obejct with itself
 	if (shadow.hit == -1)
 		intersection->is_shadow = false;
 	else
 	{
-		hit_light = hit_to_light(shadow.point, g_light->orig);
-		if (distance >= magnitude(hit_light))
+		hit_shadow = hit_to_light(intersection->point, shadow.point);
+		if (distance > magnitude(hit_shadow))
 			intersection->is_shadow = true;
 		else
 			intersection->is_shadow = false;
