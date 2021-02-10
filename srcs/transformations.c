@@ -39,7 +39,7 @@ t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 
 //not tested yet
 //to avoid the case of null vectors when creatin camera's vectors
-void		set_camera_view(t_vector from, t_vector to)
+void		set_camera_view()
 {
 	float		dot;
 	t_vector	forward;
@@ -47,7 +47,7 @@ void		set_camera_view(t_vector from, t_vector to)
 	t_vector	test;
 
 	up = (t_vector){0, 1, 0, 0};
-	forward = point_vector(from, to);
+	forward = point_vector(g_camera->orig, g_camera->dir);
 	test = cross_product(normaliz(forward), up);
 	if (test.x == 0 && test.y == 0 && test.z == 0)
 	{
@@ -56,7 +56,7 @@ void		set_camera_view(t_vector from, t_vector to)
 		up.z = 1;
 	}
 	camera();
-	g_camera.view = view_transform(from, to, up);
+	g_camera->view = view_transform(g_camera->orig, g_camera->dir, up);
 }
 
 /*int main()

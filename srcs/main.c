@@ -48,9 +48,10 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
-	t_vector from = (t_vector){2, 0, -10, 1};
-	t_vector to = (t_vector){0, 0, 0, 1};
-	set_camera_view(from, to);
+	g_camera = (t_camera *)malloc(sizeof(t_camera));
+	g_camera->orig = (t_vector){2, 0, -10, 1};
+	g_camera->dir = (t_vector){0, 0, 0, 1};
+	set_camera_view(g_camera->orig, g_camera->dir);
 }
 
 //this function needs to be modified
@@ -173,7 +174,7 @@ int 			main()
 	//world.sphere->orig = mat_vec_multi(invers, world.sphere->orig);
 	//print_vector(world.sphere->orig);
 	//g_light->orig = mat_vec_multi(invers, g_light->orig);	
-	print_mat4(g_camera.view);
+	//print_mat4(g_camera.view);
 	render(world);
 	//print_mat4(g_camera.view);
 	//t_ray ray = ray_for_pixel(100, 50);

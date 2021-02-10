@@ -28,6 +28,8 @@ typedef struct 	s_camera
 	float		half_height;
 	float		half_width;
 	float		pixel_size;
+	t_vector	orig;
+	t_vector	dir;
 	t_mat4x4	view;
 	struct		s_camere *previous;
 	struct  	s_camera *next;
@@ -37,5 +39,5 @@ void		set_camera_view(t_vector from, t_vector to);
 void		camera(void);
 
 t_resolution	g_resolution;
-t_camera 		g_camera;
+t_camera 		*g_camera;
 #endif

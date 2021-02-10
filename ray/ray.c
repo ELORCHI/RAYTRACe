@@ -40,7 +40,7 @@ t_vector	ft_pixel(t_vector pixel)
 
 	if (i == 0)
 	{
-		inverse_4x4(&inverse, &g_camera.view);
+		inverse_4x4(&inverse, &(g_camera->view));
 		i = 1;
 	}
 	//inverse = identity_mat();
@@ -55,10 +55,10 @@ t_ray		ray_for_pixel(int x, int y)
 	t_vector	pixel;	
 	t_ray		ray;
 
-	px = (x + 0.5) * g_camera.pixel_size;
-	py = (y + 0.5) * g_camera.pixel_size;
-	px = g_camera.half_width - px;
-	py = g_camera.half_height - py;
+	px = (x + 0.5) * g_camera->pixel_size;
+	py = (y + 0.5) * g_camera->pixel_size;
+	px = g_camera->half_width - px;
+	py = g_camera->half_height - py;
 	pixel = vec4_creat(px, py, -1, 1);
 	pixel = ft_pixel(pixel);
 	ray.orig = ft_pixel(vec4_creat(0, 0, 0, 1));
