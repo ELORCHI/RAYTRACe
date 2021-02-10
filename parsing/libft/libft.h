@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 19:09:00 by eel-orch          #+#    #+#             */
-/*   Updated: 2019/11/04 19:06:04 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/02/10 11:57:07 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ char	*ft_strnstr(const char *fulls, const char *subs, size_t len);
 char	*ft_strrchr(const char *string, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*skip_tabs(char **line)
+
 #endif
