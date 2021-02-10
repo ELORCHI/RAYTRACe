@@ -33,8 +33,8 @@ void	add_cameras(t_camera **tmp)
 		prev = pars;
 		pars = pars->next;
 	}
+	(*tmp)->previous = prev;
 	pars->next = *tmp;
-	pars->previous = prev;
 }
 
 void	get_camera(char **params)
