@@ -1,5 +1,16 @@
-	
-		=== do this first === fix multiple objects problem ==									==done==
+
+=======		going to do		======
+
+	finish parsing
+		free globals its easy
+		free reading
+		add the other objects in reading proccess
+
+	makefile
+
+	test likned list adding and delitin;														==done==
+
+	=== do this first === fix multiple objects problem ==										==done==
 						  === move to shadow ==
 	first to do check camera	(you maight test switich to vector directly for forward vector) ==done==
 	
@@ -14,11 +25,4 @@
 	multiple objects 																			==read==
 
 	shadow																						==needs== 
-
-    ===going to do==
-
-	finish parsing
-
-	test likned list adding and delitin;
-
-	makefile
+   
