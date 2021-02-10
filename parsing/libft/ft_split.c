@@ -84,29 +84,21 @@ char		**ft_split(char const *s, char c)
 char		*skip_tabs(char **line)
 {
 	char 	*new;
+	char	*tmp;
 	int		index;
 
-	new = (char *)malloc(sizeof(char) * ft_strlen(*line));
-	printf("%s\n", *line);
+	tmp = *line;
+	new = (char *)malloc(sizeof(char) * ft_strlen(tmp));
 	index = 0;
-	while ((*line)[index] != '\0')
+	while (tmp[index] != '\0')
 	{
-		if ((*line)[index] == 9)
+		if (tmp[index] == 9)
 			new[index] = 32;
 		else
-			new[index] = (*line)[index];
+			new[index] = tmp[index];
 		index++;
 	}
+	new[index] = '\0';
 	free(*line);
 	return (new);
-}
-
-int main()
-{
-	char *line;
-	line = ft_strdup(" okkk");
-	printf("%s\n", line);
-	char *new_line;
-	new_line = skip_tabs(&line);
-	printf("\n|%s|", new_line);
 }

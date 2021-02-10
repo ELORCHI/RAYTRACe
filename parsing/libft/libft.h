@@ -48,6 +48,6 @@ char	*ft_strnstr(const char *fulls, const char *subs, size_t len);
 char	*ft_strrchr(const char *string, int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-char	*skip_tabs(char **line)
+char	*skip_tabs(char **line);
 
 #endif
