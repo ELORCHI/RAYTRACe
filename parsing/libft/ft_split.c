@@ -78,3 +78,35 @@ char		**ft_split(char const *s, char c)
 		return (0);
 	return (allo(ptr, s, nbwords, c));
 }
+
+#include <stdio.h>
+
+char		*skip_tabs(char **line)
+{
+	char 	*new;
+	int		index;
+
+	new = (char *)malloc(sizeof(char) * ft_strlen(*line));
+	printf("%s\n", *line);
+	index = 0;
+	while ((*line)[index] != '\0')
+	{
+		if ((*line)[index] == 9)
+			new[index] = 32;
+		else
+			new[index] = (*line)[index];
+		index++;
+	}
+	free(*line);
+	return (new);
+}
+
+int main()
+{
+	char *line;
+	line = ft_strdup(" okkk");
+	printf("%s\n", line);
+	char *new_line;
+	new_line = skip_tabs(&line);
+	printf("\n|%s|", new_line);
+}
