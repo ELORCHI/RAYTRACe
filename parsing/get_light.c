@@ -50,21 +50,23 @@ void	get_light(char **params)
 
 int main()
 {
-	char *line1 = "l 0.2,10.7,9 0.6 255,0,255";
-	char *line2 = "l 8,10.7,9 0.6 255,0,33";
+	char *line1 = ft_strdup("l 0.2,10.7,9 0.6 255,0,255");
+	char *line2 = ft_strdup("l 8,10.7,9 0.6 255,0,33");
+	line1 = skip_tabs(&line1);
+	line2 = skip_tabs(&line2);
 	char **params1 = ft_split(line1, 32);
 	char **params2 = ft_split(line2, 32);
 	get_light(params1);
 	get_light(params2);
-	while (g_light->next != NULL)
-	{
-	 	print_vector(g_light->orig);
-		printf("light ratio == %f\n", g_light->ratio);
-		print_vector(g_light->color);
-		g_light = g_light->next;
-	}
-	print_vector(g_light->orig);
-	printf("light ratio == %f\n", g_light->ratio);
-	print_vector(g_light->color);
+	// while (g_light->next != NULL)
+	// {
+	//  	print_vector(g_light->orig);
+	// 	printf("light ratio == %f\n", g_light->ratio);
+	// 	print_vector(g_light->color);
+	// 	g_light = g_light->next;
+	// }
+	// print_vector(g_light->orig);
+	// printf("light ratio == %f\n", g_light->ratio);
+	// print_vector(g_light->color);
 	return (0);
 }
