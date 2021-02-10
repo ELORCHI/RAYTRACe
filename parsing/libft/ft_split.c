@@ -86,9 +86,11 @@ char		*skip_tabs(char **line)
 	char 	*new;
 	char	*tmp;
 	int		index;
+	int		len;
 
 	tmp = *line;
-	new = (char *)malloc(sizeof(char) * ft_strlen(tmp));
+	len = ft_strlen(*line);
+	new = (char *)malloc(sizeof(char) * (len + 1));
 	index = 0;
 	while (tmp[index] != '\0')
 	{
