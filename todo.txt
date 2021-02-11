@@ -2,23 +2,26 @@
 =======		going to do		======
 
 	first to do
-		let the split skip the spaces
-		check if you put next to NULL in tmp
+		let the split skip the spaces ==find an other methode to free the splited line ==
+		check if you put next to NULL in tmp 
 	finish parsing
-		free globals its easy
 		free reading (when checking spaces)
-		free objects pasams (when afecting objects)
-		free object and rays at_the end
+		free objects pasams (when afecting objects) == not yet ==
+		free object and rays at_the end				== not yet ==
 		multiple objects :
-			camera == done not tested ==
-			plan	== not tested ==
-			square == not tested ==
-			sphere == == 
-			cylindeer ==not finieshed yet==
 			test multiple objects of the same object
 
 	makefile
-
+	parssing
+		linked list	
+			plan					== done ==
+			square					== done ==
+			sphere					== done == 
+			triangle				== done	==
+			camera 					== done == 
+			cylindeer				== done ==
+			free globals its easy 	== done ==
+	
 	test likned list adding and delitin;														==done==
 
 	=== do this first === fix multiple objects problem ==										==done==
@@ -35,5 +38,14 @@
 	
 	multiple objects 																			==read==
 
-	shadow																						==needs== 
+	shadow																						==needs a fix== 
    
+   void main()
+{
+    float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * lightColor;
+
+    vec3 result = ambient * objectColor;
+    FragColor = vec4(result, 1.0);
+}  
+

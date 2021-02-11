@@ -44,21 +44,39 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	float			nom;
 	t_vector		origin_point;
 	t_intersection 	inter;
-
-	denom = dot_product(ray.dir, plan->normal);
-	if (fabsf(denom) > EPSILON)
+	t_plan			*tmp_plan;
+	float			near = FLT_MAX;
+	
+	tmp_plan = plan;
+	inter.hit = -1;
+	static int i = 0;
+	while (tmp_plan != NULL)
 	{
-		origin_point = normaliz(point_vector(ray.orig, plan->point));
-		nom = dot_product(plan->normal, origin_point) / denom;
-		if (nom > EPSILON)
+		denom = dot_product(ray.dir, tmp_plan->normal);
+		if (fabsf(denom) > EPSILON)
 		{
-			inter.color = plan->color;
-			inter.hit =  nom;// what is the hit value to compute the point;
-			inter.point  = position(ray,nom);
-			inter.normal = plan->normal;
-			return (inter);
+			origin_point = normaliz(point_vector(ray.orig, tmp_plan->point));
+			nom = dot_product(tmp_plan->normal, origin_point) / denom;
+			if (tmp_plan->next == NULL)
+					printf("%f\n", nom);
+			if (nom > EPSILON)
+			{
+				inter.color = tmp_plan->color;
+				inter.hit =  nom;
+				inter.point  = position(ray,nom);
+				inter.normal = tmp_plan->normal;
+				near = inter.hit;
+			}
+		}
+		if (i == 1)
+			tmp_plan = NULL;
+		else
+		{
+			tmp_plan->normal = (t_vector){0, -1, 0, 0};
+			tmp_plan->color = (t_vector){1, 1, 1, 0};
+			tmp_plan->point = (t_vector){0, 5, 0, 1};
+			i = 1;
 		}
 	}
-	inter.hit = -1;
 	return (inter);
 }

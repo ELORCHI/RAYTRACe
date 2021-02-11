@@ -28,22 +28,25 @@ void	ft_init(t_sphere **sphere)
 	//t_light	 *light;
 	//t_embient embient;
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	(*sphere)->orig = (t_vector){5, 0.5, 1,0};
+	(*sphere)->orig = (t_vector){5, 1, -2,0};
 	(*sphere)->rad  = 1;
 	(*sphere)->color = (t_vector){1, 0, 0, 0};
-	(*sphere)->next = NULL;
+	(*sphere)->next = (t_sphere *)malloc(sizeof(t_sphere));
+	
+	t_sphere *tmp = (*sphere)->next;
+	tmp->orig = (t_vector){-5, 0.5, 5};
+	tmp->rad = 1;
+	tmp->next = NULL;
+	tmp->color = (t_vector){1, 1, 0, 0};
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){-5, 2, 0, 1};
+	g_light->orig = (t_vector){0, 0, -10, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.8;	
-	//g_light->color = multp_vectors(g_light->color, g_light->ratio);
 
 	g_embient.color = (t_vector){1, 1, 1, 0};
-	g_embient.ratio = 0.5;
-		
-	//(*sphere)->color = embient((*sphere)->color);
-	
+	g_embient.ratio = 0.1;
+
 	g_resolution.hsize = 1000;
 	g_resolution.vsize = 1000;
 	g_resolution.fov = 90;
@@ -54,7 +57,6 @@ void	ft_init(t_sphere **sphere)
 	set_camera_view(g_camera->orig, g_camera->dir);
 }
 
-//this function needs to be modified
 t_intersection	intersect_objects(t_world world, t_ray ray)
 {
 	t_intersection	last;
@@ -78,7 +80,6 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 		last.hit = -1;
 	return (last);
 }
-
 
 t_intersection	intersect_world(t_world world, t_ray ray)
 {
@@ -117,7 +118,7 @@ void			render(t_world world)
 			if (check_intersection(intersection) == true)
 			{
 				//print_vector(intersection.color);
-				is_shadow(world, &intersection);
+				//is_shadow(world, &intersection);
 				color = light(intersection);
 				//print_vector(color);
 				ft_draw(canvas, color, 0);
@@ -141,8 +142,15 @@ int 			main()
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
 	world.plan->normal = (t_vector){0, 1, 0, 0};
-	world.plan->color = (t_vector){0, 1, 1, 0};
+	world.plan->color = (t_vector){1, 1, 1, 0};
 	world.plan->point = (t_vector){0, -5, 0, 1};
+	world.plan->next = (t_plan *)malloc(sizeof(t_plan));
+
+	t_plan *tmp_plan = world.plan->next;
+	tmp_plan->normal = (t_vector){0, -1, 0, 0};
+	tmp_plan->color = (t_vector){1, 1, 1, 0};
+	tmp_plan->point = (t_vector){0, 5, 0, 1};
+	world.plan->next = NULL;
 	//////triangle//////
 	world.triangle = (t_triangle *)malloc(sizeof(t_triangle));
 	world.triangle->p1 = (t_vector){0, 3, 5, 1};

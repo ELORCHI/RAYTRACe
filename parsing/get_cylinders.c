@@ -40,7 +40,6 @@ void get_cylinders(t_cylinder **cylinder, char **params)
 		*cylinder = tmp;
 	else
 	{
-		i = 7;
 		pars = *cylinder;
 		while (pars->next != NULL)
 			pars = pars->next;
@@ -49,29 +48,29 @@ void get_cylinders(t_cylinder **cylinder, char **params)
 	i++;
 }
 
-int main()
-{
-	char *line1 = ft_strdup("cy -50.0,-50,-50 -50,-50,0 10,0,255 14.2 21.42");
-	char *line2 = ft_strdup("cy 10.0,0.0,20.6 0,0,1.0 0,0,0 12.2 20");
+// int main()
+// {
+// 	char *line1 = ft_strdup("cy -50.0,-50,-50 -50,-50,0 10,0,255 14.2 21.42");
+// 	char *line2 = ft_strdup("cy 10.0,0.0,20.6 0,0,1.0 0,0,0 12.2 20");
 
-	line1 = skip_tabs(&line1);
-	line2 = skip_tabs(&line2);
+// 	line1 = skip_tabs(&line1);
+// 	line2 = skip_tabs(&line2);
 
-	char **params1 = ft_split(line1, 32);
-	char **params2 = ft_split(line2, 32);
+// 	char **params1 = ft_split(line1, 32);
+// 	char **params2 = ft_split(line2, 32);
 
-	t_cylinder *cylinder;
-	get_cylinders(&cylinder, params1);
-	get_cylinders(&cylinder, params2);
-	int i = 0;
-	while (cylinder != NULL)
-	{
-		printf("%d\n", i);
-		print_vector(cylinder->point);
-		print_vector(cylinder->normal);
-		print_vector(cylinder->color);
-		printf("cylinder->raduis == %f\ncylinder->height == %f\n",cylinder->raduis, cylinder->height);
-		cylinder = cylinder->next;
-	}
-	return (0);
-}
+// 	t_cylinder *cylinder;
+// 	get_cylinders(&cylinder, params1);
+// 	get_cylinders(&cylinder, params2);
+// 	int i = 0;
+// 	while (cylinder != NULL)
+// 	{
+// 		printf("%d\n", i);
+// 		print_vector(cylinder->point);
+// 		print_vector(cylinder->normal);
+// 		print_vector(cylinder->color);
+// 		printf("cylinder->raduis == %f\ncylinder->height == %f\n",cylinder->raduis, cylinder->height);
+// 		cylinder = cylinder->next;
+// 	}
+// 	return (0);
+// }
