@@ -14,10 +14,11 @@
 
 void get_spheres(t_sphere **sphere, char **params)
 {
-	t_sphere *tmp;
-	t_sphere *pars;
-
-	count_params(*params, 4);
+	t_sphere 	*tmp;
+	t_sphere 	*pars;
+	static int	i = 0;
+	
+	count_params(params, 4);
 	tmp = (t_sphere *)malloc(sizeof(t_sphere));
 	tmp->next = NULL;
 	params++;
@@ -28,13 +29,38 @@ void get_spheres(t_sphere **sphere, char **params)
 		ft_exit("ERROR\n sphere raduis must be positive");
 	params++;
 	get_color(*params, &(tmp->color));
-	if ((*sphere)->next == NULL)
+	if (i == 0)
 		(*sphere) = tmp;
 	else
 	{
 		pars = (*sphere);
 		while (pars->next != NULL)
 			pars = pars->next;
-		pars = tmp;
+		pars->next = tmp;
 	}
-} 
+	i = 1;
+}
+
+int main()
+{
+	char *line = ft_strdup("sp 0,0,20 20 255,0,0");
+	t_sphere *sphere;
+	t_sphere *tmp;
+
+	line = skip_tabs(&line);
+	char **params = ft_split(line, 32);
+	get_spheres(&sphere, params);
+	print_vector(sphere->orig);
+	print_vector(sphere->color);
+	printf("sphere raduis == %f", sphere->rad);
+
+	char *line2 = ft_strdup("sp -50,0.3,-0 20 255,0,044");
+	line2 = skip_tabs(&line2);
+	char **params2 = ft_split(line2, 32);
+	get_spheres(&sphere, params2);
+	sphere = sphere->next;
+	//tmp = sphere->next;
+	print_vector(sphere->orig);
+	print_vector(sphere->color);
+	printf("sphere raduis == %f", sphere->rad);
+}
