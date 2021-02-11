@@ -8,7 +8,6 @@ void	ft_init_light(t_light *light)
 	light->ratio = 0.0f;
 	light->next = NULL;
 }
-// not tested yet
 
 void	get_light(char **params)
 {
