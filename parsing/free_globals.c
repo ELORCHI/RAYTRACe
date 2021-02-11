@@ -17,6 +17,7 @@
 void	free_globals()
 {
 	t_light *tmp;
+	t_camera *free_cam;
 
 	while (g_light != NULL)
 	{
@@ -25,4 +26,10 @@ void	free_globals()
 		free(tmp);
 	}
 	free(g_intersection);
+	while (g_all_cameras != NULL)
+	{
+		free_cam = g_all_cameras;
+		g_all_cameras = g_all_cameras->next;
+		free(free_cam);
+	}
 }
