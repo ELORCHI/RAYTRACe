@@ -19,22 +19,22 @@ void init_plans(t_plan *plan)
 	plan->normal = (t_vector){0, 0, 0, 0};
 }
 
-//not tested yet
-void get_plan(t_plan **plan, char **params)
+void get_plans(t_plan **plan, char **params)
 {
-	t_plan 	*tmp;
-	t_plan	*pars;
+	t_plan 		*tmp;
+	t_plan		*pars;
+	static int 	i = 0;
 
 	count_params(params, 4);
 	tmp = (t_plan *)malloc(sizeof(t_plan));
-	init_plans(tmp);
+	tmp->next = NULL;
 	params++;
 	tmp->point = get_vector(*params);
 	params++;
 	tmp->normal = get_vector(*params);
 	params++;
 	get_color(*params, &(tmp->color));
-	if ((*plan)->next == NULL)
+	if (i == 0)
 		*plan = tmp;
 	else
 	{
@@ -42,5 +42,30 @@ void get_plan(t_plan **plan, char **params)
 		while (pars->next != NULL)
 			pars = pars->next;
 		pars->next = tmp;
+	}
+	i++;
+}
+
+int main ()
+{
+	char *line1 = ft_strdup("pl 10,10,10 0,1.0,0 255,0,225");
+	char *line2 = ft_strdup("pl 0,0,0 0,1.0,0 255,255,225");
+
+	line1 = skip_tabs(&line1);
+	line2 = skip_tabs(&line2);
+
+	char **params1 = ft_split(line1, 32);
+	char **params2 = ft_split(line2, 32);
+
+	t_plan *plan;
+	get_plans(&plan, params1);
+	get_plans(&plan, params2);
+	while (plan != NULL)
+	{
+		print_vector(plan->point);
+		print_vector(plan->normal);
+		print_vector(plan->color);
+		plan = plan->next;
+		printf("======NEXT=====\n");
 	}
 }

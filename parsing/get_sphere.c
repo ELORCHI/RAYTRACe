@@ -41,26 +41,26 @@ void get_spheres(t_sphere **sphere, char **params)
 	i = 1;
 }
 
-int main()
-{
-	char *line = ft_strdup("sp 0,0,20 20 255,0,0");
-	t_sphere *sphere;
-	t_sphere *tmp;
+// int main()
+// {
+// 	char *line = ft_strdup("sp 0,0,20 20 255,0,0");
+// 	t_sphere *sphere;
+// 	t_sphere *tmp;
 
-	line = skip_tabs(&line);
-	char **params = ft_split(line, 32);
-	get_spheres(&sphere, params);
-	print_vector(sphere->orig);
-	print_vector(sphere->color);
-	printf("sphere raduis == %f", sphere->rad);
+// 	line = skip_tabs(&line);
+// 	char **params = ft_split(line, 32);
+// 	get_spheres(&sphere, params);
+// 	print_vector(sphere->orig);
+// 	print_vector(sphere->color);
+// 	printf("sphere raduis == %f", sphere->rad);
 
-	char *line2 = ft_strdup("sp -50,0.3,-0 20 255,0,044");
-	line2 = skip_tabs(&line2);
-	char **params2 = ft_split(line2, 32);
-	get_spheres(&sphere, params2);
-	sphere = sphere->next;
-	//tmp = sphere->next;
-	print_vector(sphere->orig);
-	print_vector(sphere->color);
-	printf("sphere raduis == %f", sphere->rad);
-}
+// 	char *line2 = ft_strdup("sp -50,0.3,-0 20 255,0,044");
+// 	line2 = skip_tabs(&line2);
+// 	char **params2 = ft_split(line2, 32);
+// 	get_spheres(&sphere, params2);
+// 	sphere = sphere->next;
+// 	//tmp = sphere->next;
+// 	print_vector(sphere->orig);
+// 	print_vector(sphere->color);
+// 	printf("sphere raduis == %f", sphere->rad);
+// }
