@@ -41,5 +41,5 @@ void		camera(void);
 
 t_resolution	g_resolution;
 t_camera 		*g_camera;
-t_camera		*g_cameras;
+t_camera		*g_all_cameras;
 #endif
