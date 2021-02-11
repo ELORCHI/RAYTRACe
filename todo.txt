@@ -1,10 +1,21 @@
 
 =======		going to do		======
 
+	first to do
+		let the split skip the spaces
+		check if you put next to NULL in tmp
 	finish parsing
 		free globals its easy
-		free reading
-		add the other objects in reading proccess
+		free reading (when checking spaces)
+		free objects pasams (when afecting objects)
+		free object and rays at_the end
+		multiple objects :
+			camera == done not tested ==
+			plan	== not tested ==
+			square == not tested ==
+			sphere == == 
+			cylindeer ==not finieshed yet==
+			test multiple objects of the same object
 
 	makefile
 

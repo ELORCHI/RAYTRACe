@@ -28,10 +28,11 @@ typedef struct 	s_camera
 	float		half_height;
 	float		half_width;
 	float		pixel_size;
+	float		fov;//sheck that
 	t_vector	orig;
 	t_vector	dir;
 	t_mat4x4	view;
-	struct		s_camere *previous;
+	struct		s_camera *previous;
 	struct  	s_camera *next;
 }				t_camera;
 
@@ -40,4 +41,5 @@ void		camera(void);
 
 t_resolution	g_resolution;
 t_camera 		*g_camera;
+t_camera		*g_cameras;
 #endif
