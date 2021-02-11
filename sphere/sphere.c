@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/rt.h"
 #include "../include/ray.h"
 #include "../include/light.h"
 #include "../include/camera.h"
@@ -43,18 +44,24 @@ bool		check_inter(t_ray ray, t_sphere *sphere)
 t_intersection	ray_sphere_intersection(t_ray ray, t_sphere *sphere)
 {
 	float			if_hit;
-	t_intersection	inter;	
+	t_intersection	inter;
+	t_sphere		*tmp_sphere;
 
-	if_hit = check_inter(ray, sphere);
-	if (if_hit == true)
+	tmp_sphere = sphere;
+	inter.hit = FLT_MAX;
+	while (tmp_sphere != NULL)
 	{
-		inter.hit = g_intersection[0];
-		inter.point = position(ray, inter.hit);		
-		inter.normal = normal_at(*sphere, inter.point);
-		inter.color = sphere->color;
-		// print_vector(inter.color);
-		return (inter);
+		if_hit = check_inter(ray, tmp_sphere);
+		if (if_hit == true && g_intersection[0] < inter.hit)
+		{
+			inter.hit = g_intersection[0];
+			inter.point = position(ray, inter.hit);		
+			inter.normal = normal_at(*tmp_sphere, inter.point);
+			inter.color = tmp_sphere->color;
+		}
+		tmp_sphere = tmp_sphere->next;
 	}
-	inter.hit = -1;
+	if (inter.hit == FLT_MAX)
+		inter.hit = -1;
 	return (inter);
 }
