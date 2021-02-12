@@ -25,7 +25,6 @@ void	free_globals()
 		g_light = g_light->next;
 		free(tmp);
 	}
-	free(g_intersection);
 	while (g_all_cameras != NULL)
 	{
 		free_cam = g_all_cameras;
