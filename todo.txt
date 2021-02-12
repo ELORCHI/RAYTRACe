@@ -8,10 +8,16 @@
 		free reading (when checking spaces)
 		free objects pasams (when afecting objects) == not yet ==
 		free object and rays at_the end				== not yet ==
+		
 		multiple objects :
 			test multiple objects of the same object
-
-	makefile
+				sphere 		== done ==
+				planes 		== done ==
+				triangles 	== done ==
+				square		== not yet ==
+				cylindeer	== not yet ==
+	shadow					==needs a fix== 
+	makefile				== not yet==
 	parssing
 		linked list	
 			plan					== done ==
@@ -19,7 +25,7 @@
 			sphere					== done == 
 			triangle				== done	==
 			camera 					== done == 
-			cylindeer				== done ==
+			cylinder				== done ==
 			free globals its easy 	== done ==
 	
 	test likned list adding and delitin;														==done==
@@ -38,7 +44,6 @@
 	
 	multiple objects 																			==read==
 
-	shadow																						==needs a fix== 
    
    void main()
 {

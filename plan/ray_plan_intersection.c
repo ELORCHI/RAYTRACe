@@ -68,7 +68,7 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 		}
 		tmp_plan = tmp_plan->next;
 	}
-	if (near = FLT_MAX)
+	if (near == FLT_MAX)
 		inter.hit = -1;
 	return (inter);
 }

@@ -52,7 +52,7 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
 	g_camera = (t_camera *)malloc(sizeof(t_camera));
-	g_camera->orig = (t_vector){2, 0, -10, 1};
+	g_camera->orig = (t_vector){0, 0, -10, 1};
 	g_camera->dir = (t_vector){0, 0, 0, 1};
 	set_camera_view(g_camera->orig, g_camera->dir);
 }
@@ -142,22 +142,31 @@ int 			main()
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
 	world.plan->normal = (t_vector){0, 1, 0, 0};
-	world.plan->color = (t_vector){1, 1, 1, 0};
+	world.plan->color = (t_vector){1, 0, 0, 0};
 	world.plan->point = (t_vector){0, -5, 0, 1};
 	world.plan->next = (t_plan *)malloc(sizeof(t_plan));
-
-	t_plan *tmp_plan = world.plan->next;
-	tmp_plan->normal = (t_vector){0, -1, 0, 0};
-	tmp_plan->color = (t_vector){1, 1, 1, 0};
-	tmp_plan->point = (t_vector){0, 5, 0, 1};
 	world.plan->next = NULL;
+	// t_plan *tmp_plan = world.plan->next;
+	// tmp_plan->normal = (t_vector){1, 0, 0, 0};
+	// tmp_plan->color = (t_vector){1, 1, 1, 0};
+	// tmp_plan->point = (t_vector){-5, 0, 0, 1};
+	// world.plan->next->next = NULL;
 	//////triangle//////
 	world.triangle = (t_triangle *)malloc(sizeof(t_triangle));
 	world.triangle->p1 = (t_vector){0, 3, 5, 1};
 	world.triangle->p2 = (t_vector){0 , 8, 9, 1};
 	world.triangle->p3 = (t_vector){3, 6, 9, 1};
 	world.triangle->color = (t_vector){1, 1, 1, 0};
+	world.triangle->next = (t_triangle *)malloc(sizeof(t_triangle));
 
+	t_triangle *tmp_tr = world.triangle->next;
+
+	tmp_tr->p1 = (t_vector){5, 2, 5, 1};
+	tmp_tr->p2 = (t_vector){5, 5, 9, 1};
+	tmp_tr->p3 = (t_vector){5, 4, 9, 1};
+	tmp_tr->color = (t_vector){1, 0, 0, 0};
+	world.triangle->next->next = NULL;
+	//tmp_tr->next = NULL;
 	/////square///////
 	world.square = (t_square *)malloc(sizeof(t_square));
 	world.square->center = (t_vector){0, 0, 0, 1};
