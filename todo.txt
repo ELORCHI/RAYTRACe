@@ -1,4 +1,15 @@
 
+=======		have to do		======
+
+	cylindeer multi tracing							== not yet 		== easy shit
+	shadow											== needs a fix	== 
+	makefile										== not yet		==
+	read all from a file and affect to the world	== not yet		==
+	mlx_images										== not yet		==
+	bmp file										== not yet		==
+	multiple camrera rendring						== not yet		== // put all globals to global after a key or render all at all
+	key												== ESC			==
+
 =======		going to do		======
 
 	first to do
@@ -14,10 +25,8 @@
 				sphere 		== done ==
 				planes 		== done ==
 				triangles 	== done ==
-				square		== not yet ==
-				cylindeer	== not yet ==
-	shadow					==needs a fix== 
-	makefile				== not yet==
+				square		== done ==
+	
 	parssing
 		linked list	
 			plan					== done ==
@@ -42,7 +51,6 @@
 
 	fix camera vectors																			==done==
 	
-	multiple objects 																			==read==
 
    
    void main()
