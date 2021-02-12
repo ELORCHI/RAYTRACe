@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 14:46:11 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/01 16:32:37 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/02/12 16:12:19 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_init(t_sphere **sphere)
 	tmp->color = (t_vector){1, 1, 0, 0};
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){0, 0, -10, 1};
-	g_light->color = (t_vector){1, 1, 1, 0};
+	g_light->orig = (t_vector){-10, 0, 3, 1};
+	g_light->color = (t_vector){1, 0, 0, 0};
 	g_light->ratio = 0.8;	
-
+	//-5 0 3
 	g_embient.color = (t_vector){1, 1, 1, 0};
 	g_embient.ratio = 0.1;
 
@@ -52,8 +52,10 @@ void	ft_init(t_sphere **sphere)
 	g_resolution.fov = 90;
 	// t_vector from = (t_vector){5, 0 , 0, 1};
 	g_camera = (t_camera *)malloc(sizeof(t_camera));
-	g_camera->orig = (t_vector){0, 0, -10, 1};
-	g_camera->dir = (t_vector){0, 0, 0, 1};
+	g_camera->orig = (t_vector){0, 0, 0, 1};
+	g_camera->dir = (t_vector){0, 0, 3, 1};
+	// (0,0 , 10)
+	// (0,0,0 10)
 	set_camera_view(g_camera->orig, g_camera->dir);
 }
 
@@ -67,15 +69,18 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	//next_hit = ray_cylinders_intersection(world.cylinder, ray);
 	
 	last.hit = FLT_MAX;
-	next_hit = ray_triangles_intersections(ray, world.triangle);
+	next_hit = ray_sqaures_intersection(world.square, ray);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-		last = next_hit;
-	next_hit = ray_sphere_intersection(ray, world.sphere);
-	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-		last = next_hit;
-	next_hit = ray_plans_intersection(world.plan, ray);
-	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-		last = next_hit;	
+			last = next_hit;
+	// next_hit = ray_triangles_intersections(ray, world.triangle);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	// 	last = next_hit;
+	// next_hit = ray_sphere_intersection(ray, world.sphere);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	// 	last = next_hit;
+	// next_hit = ray_plans_intersection(world.plan, ray);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	// 	last = next_hit;
 	if (last.hit == FLT_MAX)
 		last.hit = -1;
 	return (last);
@@ -91,7 +96,7 @@ t_intersection	intersect_world(t_world world, t_ray ray)
 
 bool			check_intersection(t_intersection intersection)
 {
-	if (intersection.hit != -1)
+	if (intersection.hit != -1 && intersection.hit > 0)
 		return (true);
 	return (false);
 }
@@ -102,7 +107,6 @@ void			render(t_world world)
 	t_ray	    	ray;
 	t_intersection  intersection;
 	t_vector		color = (t_vector){0,0,0,0};
-	t_vector		test = (t_vector){0, 0, 0, 0};
 	t_vector		emb;
 
 	canvas.mlx_ptr = mlx_init();
@@ -120,6 +124,7 @@ void			render(t_world world)
 				//print_vector(intersection.color);
 				//is_shadow(world, &intersection);
 				color = light(intersection);
+				//color = intersection.color;
 				//print_vector(color);
 				ft_draw(canvas, color, 0);
 			}
@@ -141,10 +146,10 @@ int 			main()
 
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
-	world.plan->normal = (t_vector){0, 1, 0, 0};
+	world.plan->normal = (t_vector){1, 0, 0, 0};
 	world.plan->color = (t_vector){1, 0, 0, 0};
-	world.plan->point = (t_vector){0, -5, 0, 1};
-	world.plan->next = (t_plan *)malloc(sizeof(t_plan));
+	world.plan->point = (t_vector){2, 0, 0, 1};
+	// world.plan->next = (t_plan *)malloc(sizeof(t_plan));
 	world.plan->next = NULL;
 	// t_plan *tmp_plan = world.plan->next;
 	// tmp_plan->normal = (t_vector){1, 0, 0, 0};
@@ -169,10 +174,19 @@ int 			main()
 	//tmp_tr->next = NULL;
 	/////square///////
 	world.square = (t_square *)malloc(sizeof(t_square));
-	world.square->center = (t_vector){0, 0, 0, 1};
+	world.square->center = (t_vector){-5, 0, 3, 0};
 	world.square->side = 1;
-	world.square->color = (t_vector){1, 0, 0, 0};
-	world.square->normal = (t_vector){1, 0, 0, 0};
+	world.square->color = (t_vector){1, 1, 1, 0};
+	world.square->normal = (t_vector){-1, 0, 0, 0};
+	world.square->next = (t_square *)malloc(sizeof(t_square));
+	
+	t_square *tmp_square = world.square->next;
+	tmp_square->center = (t_vector){5, 0, 3, 0};
+	tmp_square->normal =(t_vector){-1, 0, 0, 0};
+	tmp_square->color = (t_vector){1, 1 ,1, 0};
+	tmp_square->side = 1;
+	tmp_square->next = NULL;
+
 	/////cylinder/////
 	world.cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
 	world.cylinder->normal = (t_vector){0, 1, 0, 0};

@@ -130,18 +130,26 @@ t_plan			plan_sqaure(t_square *square)
 t_intersection	ray_sqaures_intersection(t_square *square, t_ray ray)
 {
     t_intersection 	inter;
+	t_intersection	inter_plan;
 	t_plan			*plan;
-	bool			is_inside;
+	bool			is_inside;			
 
 	plan = (t_plan *)malloc(sizeof(t_plan));
-	*plan = plan_sqaure(square);
-	plan->next = NULL;
-	inter = ray_plans_intersection(plan, ray);
-	if (inter.hit != -1)
+	inter.hit = FLT_MAX;
+	while (square != NULL)
 	{
-		is_inside = inside_square(square, inter.point);
-		if (!is_inside)
-			inter.hit = -1;
+		*plan = plan_sqaure(square);
+		plan->next = NULL;
+		inter_plan = ray_plans_intersection(plan, ray);
+		if (inter_plan.hit != -1 && inter_plan.hit < inter.hit)
+		{
+			is_inside = inside_square(square, inter_plan.point);
+			if (is_inside == true)
+				inter = inter_plan;
+		}
+		square = square->next;
 	}
+	if(inter.hit == FLT_MAX)
+		inter.hit = -1;
 	return (inter);
 }
