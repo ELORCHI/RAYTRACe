@@ -9,7 +9,8 @@
 	bmp file										== not yet		==
 	multiple camrera rendring						== not yet		== // put all globals to global after a key or render all at all
 	key												== ESC			==
-
+	multi lights									== not yet		==
+	switch normal if dot with light is negative		== not yet		==
 =======		going to do		======
 
 	first to do
