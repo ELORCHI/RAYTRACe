@@ -102,15 +102,15 @@ float		magnitude(t_vector vec)
 
 t_vector	normaliz(t_vector vec)
 {
-	float magnitud;
+	float magn;
 
-	magnitud = magnitude(vec);
-	if (magnitude > 0)
+	magn = magnitude(vec);
+	if (magn > 0)
 	{
-		magnitud = 1 / magnitud;
-		vec.x = vec.x * magnitud;
-		vec.y = vec.y * magnitud;
-		vec.z = vec.z * magnitud;
+		magn = 1 / magn;
+		vec.x = vec.x * magn;
+		vec.y = vec.y * magn;
+		vec.z = vec.z * magn;
 		vec.w = 0;
 	}
 	return (vec);
