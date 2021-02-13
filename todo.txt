@@ -1,16 +1,16 @@
 
 =======		have to do		======
 
+	key												== done			== 
+	switch normal if dot with light is negative		== done			==
+	shadow											== done			==
+	multi defuse lights								== done			== 
 	cylindeer multi tracing							== not tested yet	== easy shit
-	multi defuse lights								== not tested yet	==
-	switch normal if dot with light is negative		== not tested yet	==
-	shadow											== needs a fix	== 
-	makefile										== not yet		==
+	mlx_images										== not yet		==
 	read all from a file and affect to the world	== not yet		==
-	mlx_images										== not yet	/	==
-	bmp file										== not yet		=={
+	bmp file										== not yet		==
 	multiple camrera rendring						== not yet		== // put all globals to global after a key or render all at all
-	key												== ESC			== mlx hook}
+	makefile										== not yet		==
 =======		going to do		======
 
 	first to do
