@@ -13,7 +13,7 @@ void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 	{
 		inter->point = position(ray, inter->hit);
 		inter->color = tr->color;
-		inter->normal = cross_product(vertex.edge2, vertex.edge1);
+		inter->normal = cross_product(vertex.edge1, vertex.edge2);
 		near = inter->hit;
 	}
 	if (i == 1)
@@ -46,6 +46,7 @@ int				for_normintte(t_vertex *vertex, t_vector *cross, t_ray ray, float *dot)
 	return (1);
 }
 
+
 t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 {
 	t_vertex	 	vertex;
@@ -61,7 +62,7 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 		while (1)
 		{
 			vertex = helper(tmp_tr, &cross, &dot, ray);
-			if (dot > -EPSILON && dot < EPSILON) 
+			if (dot > -EPSILON && dot < EPSILON)
 				break;
 			dot = 1.0 / dot;
 			vertex.ray_to_tr = point_vector(tmp_tr->p1, ray.orig);
