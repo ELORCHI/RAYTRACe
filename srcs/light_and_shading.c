@@ -28,6 +28,7 @@ t_vector 	hit_to_light(t_vector hit, t_vector light)
 	t_vector vect;
 
 	vect = normaliz(point_vector(hit, light));
+	vect.w = 0;
 	return (vect);
 }
 

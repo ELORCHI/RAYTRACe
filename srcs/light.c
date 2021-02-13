@@ -25,50 +25,53 @@ t_vector	embient(t_vector inter_color)
 	//color = color_multp(inter_color, embient_color);
 	return (embient_color);
 }
+float	dot3(t_vector vec1, t_vector vec2)
+{
+	float dot;
 
-//first test wihout shadows
-//then switch the normal in case the dot is negative
-//fix shadow
-//you might need to add is_shadow here becuse an intersection could be in shadow for a light and none for the other
+	dot = (vec1.x * vec2.x) + (vec1.y * vec2.y) + (vec1.z * vec2.z);
+	return (dot);
+}
 
-t_vector	defuse(t_intersection inter)
+t_vector	defuse(t_intersection inter, t_ray ray, t_world world)
 {
 	t_vector 	light_dir;
 	t_vector	defuse_;
+	t_vector	tmp_shade;
 	t_light		*tmp_light;
 	float		dot;
-	float		diff;
+
+	t_intersection test = inter;
 
 	defuse_ = (t_vector){0, 0, 0, 0};
 	tmp_light = g_light;
+	dot = dot3(inter.normal, ray.dir);
+	
+	if (dot < 0)
+		inter.normal =  multp_vectors(inter.normal, -1);
 	while (tmp_light != NULL)
 	{
-		//is_shadow for the curent light
-		if (inter.is_shadow == false)
+		is_shadow(world, &test, tmp_light);
+		if (test.is_shadow == false)
 		{
-			light_dir = normaliz(point_vector(inter.point, tmp_light->orig));//to tmp_light
-			diff = fmaxf(dot_product(light_dir, inter.normal), 0.0f);
-			// dot = dot_prodcut(light_dir, inter.normal)
-			//if (dot < 0)
-			//	dot = dot_product(light_dir, multp_vectors(inter.normal, -1))
-			defuse_ = add_colors(defuse_, multp_vectors(tmp_light->color, diff));//to tmp_light and add colors
-			// add the previous defuse to the next one
-			//where is the fucking light brightness
+			light_dir = normaliz(point_vector(tmp_light->orig, inter.point));
+			dot = fmaxf(dot3(light_dir, inter.normal), 0);
+			tmp_shade = multp_vectors(tmp_light->color, dot * tmp_light->ratio);
+			defuse_ = add_colors(defuse_, tmp_shade);
 		}
 		tmp_light = tmp_light->next;
 	}
 	return (defuse_);
 }
 
-t_vector	light(t_intersection inter)
+t_vector	light(t_intersection inter, t_ray ray, t_world world)
 {
 	t_vector defuse_;
 	t_vector emb;
 	t_vector pixel_color;
 
 	emb = embient(inter.color);
-	defuse_ = defuse(inter);
-	//print_vector(defuse_);
+	defuse_ = defuse(inter, ray, world);
 	pixel_color = add_colors(defuse_, emb);
 	pixel_color = color_multp(inter.color, pixel_color);
 	return (pixel_color);

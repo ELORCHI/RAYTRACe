@@ -37,9 +37,8 @@ t_embient		g_embient;
 
 
 t_vector 		embient(t_vector inter_color);
-//t_vector		ft_light(t_ray *ray, t_intersection intersection);
 t_vector 		hit_to_light(t_vector hit, t_vector light);
-t_vector		light(t_intersection inter);
-void			is_shadow(t_world world, t_intersection *intersection);
+t_vector		light(t_intersection inter, t_ray ray, t_world world);
+void			is_shadow(t_world world, t_intersection *intersection, t_light *light);
 
 #endif
