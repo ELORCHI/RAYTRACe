@@ -73,7 +73,7 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 	float			finit;
 
 	inter.hit = FLT_MAX;
-	tmp_cyl = cylinder
+	tmp_cyl = cylinder;
 	while (tmp_cyl != NULL)
 	{
 		if (if_hit(cylinder, ray))
