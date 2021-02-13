@@ -15,23 +15,23 @@
 #include "../include/light.h"
 #include "../include/world.h"
 
-t_vector	adjust_intersection(t_intersection inter)
+void	adjust_intersection(t_intersection *inter)
 {
-	inter.point = add_vectors(multp_vectors(inter.normal, 0.1), inter.point);
-	inter.point.w = 0;
-	return (inter.point);
+	inter->point = add_vectors(multp_vectors(inter->normal, 0.01), inter->point);
+	inter->point.w = 0;
 }
 
-void	is_shadow(t_world world, t_intersection *intersection)
+void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
 {
 	t_vector		hit_light;
 	t_vector		hit_shadow;
 	t_intersection	shadow;
 	float			distance;
+	float			dis_to_shadow;
 	t_ray			ray;
 
-	intersection->point = adjust_intersection(*intersection);
-	hit_light = hit_to_light(intersection->point, g_light->orig);
+	adjust_intersection(intersection);
+	hit_light = point_vector(intersection->point, light->orig);
 	distance = magnitude(hit_light);
 	ray.dir = normaliz(hit_light);
 	ray.orig = intersection->point;
@@ -40,9 +40,9 @@ void	is_shadow(t_world world, t_intersection *intersection)
 		intersection->is_shadow = false;
 	else
 	{
-		hit_shadow = hit_to_light(intersection->point, shadow.point);
-		//intersection->is_shadow = true;
-		if ((distance - magnitude(hit_shadow) + EPSILON) >= 0)
+		hit_shadow = point_vector(intersection->point, shadow.point);
+		dis_to_shadow = magnitude(hit_shadow);
+		if ((distance - dis_to_shadow) >= 0)
 			intersection->is_shadow = true;
 		else
 			intersection->is_shadow = false;
