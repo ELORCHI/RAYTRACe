@@ -28,20 +28,20 @@ void	ft_init(t_sphere **sphere)
 	//t_light	 *light;
 	//t_embient embient;
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	(*sphere)->orig = (t_vector){5, 1, -2,0};
+	(*sphere)->orig = (t_vector){0, 0, 10,0};
 	(*sphere)->rad  = 1;
-	(*sphere)->color = (t_vector){1, 0, 0, 0};
+	(*sphere)->color = (t_vector){0, 1, 0, 0};
 	(*sphere)->next = (t_sphere *)malloc(sizeof(t_sphere));
 	
 	t_sphere *tmp = (*sphere)->next;
-	tmp->orig = (t_vector){-5, 0.5, 5};
+	tmp->orig = (t_vector){0, 5, 10};
 	tmp->rad = 1;
 	tmp->next = NULL;
 	tmp->color = (t_vector){1, 1, 0, 0};
 
 	g_light = (t_light *)malloc(sizeof(t_light));
 	g_light->orig = (t_vector){-10, 0, 3, 1};
-	g_light->color = (t_vector){1, 0, 0, 0};
+	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.8;	
 	//-5 0 3
 	g_embient.color = (t_vector){1, 1, 1, 0};
@@ -72,15 +72,15 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	next_hit = ray_sqaures_intersection(world.square, ray);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
 			last = next_hit;
-	// next_hit = ray_triangles_intersections(ray, world.triangle);
-	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	// 	last = next_hit;
-	// next_hit = ray_sphere_intersection(ray, world.sphere);
-	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	// 	last = next_hit;
-	// next_hit = ray_plans_intersection(world.plan, ray);
-	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	// 	last = next_hit;
+	next_hit = ray_triangles_intersections(ray, world.triangle);
+	if (next_hit.hit != -1 && next_hit.hit < last.hit)
+		last = next_hit;
+	next_hit = ray_sphere_intersection(ray, world.sphere);
+	if (next_hit.hit != -1 && next_hit.hit < last.hit)
+		last = next_hit;
+	next_hit = ray_plans_intersection(world.plan, ray);
+	if (next_hit.hit != -1 && next_hit.hit < last.hit)
+		last = next_hit;
 	if (last.hit == FLT_MAX)
 		last.hit = -1;
 	return (last);
@@ -99,6 +99,19 @@ bool			check_intersection(t_intersection intersection)
 	if (intersection.hit != -1 && intersection.hit > 0)
 		return (true);
 	return (false);
+}
+
+int				key_press(int keycode)
+{
+	if (keycode == 53)
+		exit(0);
+	return (0);
+}
+
+int				ft_quit(int keycode)
+{
+		exit(0);
+		return (0);
 }
 
 void			render(t_world world)
@@ -134,6 +147,8 @@ void			render(t_world world)
 		}
 		canvas.y++;
 	}
+	mlx_hook(canvas.win_ptr, 2, 0, key_press, &canvas.mlx_ptr);
+	mlx_hook(canvas.win_ptr, 17, 0, ft_quit, &canvas.mlx_ptr);
 	mlx_loop(canvas.mlx_ptr);
 }
 
@@ -146,9 +161,9 @@ int 			main()
 
 	///////plan/////////
 	world.plan = (t_plan *)malloc(sizeof(t_plan));
-	world.plan->normal = (t_vector){1, 0, 0, 0};
+	world.plan->normal = (t_vector){0, 1, 0, 0};
 	world.plan->color = (t_vector){1, 0, 0, 0};
-	world.plan->point = (t_vector){2, 0, 0, 1};
+	world.plan->point = (t_vector){0, -100, 0, 1};
 	// world.plan->next = (t_plan *)malloc(sizeof(t_plan));
 	world.plan->next = NULL;
 	// t_plan *tmp_plan = world.plan->next;
@@ -170,6 +185,7 @@ int 			main()
 	tmp_tr->p2 = (t_vector){5, 5, 9, 1};
 	tmp_tr->p3 = (t_vector){5, 4, 9, 1};
 	tmp_tr->color = (t_vector){1, 0, 0, 0};
+	// tmp_tr->next = NULL;
 	world.triangle->next->next = NULL;
 	//tmp_tr->next = NULL;
 	/////square///////
