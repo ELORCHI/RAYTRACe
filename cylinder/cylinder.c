@@ -66,6 +66,11 @@ float			which_finit(t_cylinder *cylinder, t_ray ray)
 	return (finit);
 }
 
+// it might be a problem in the cylinder because it did not show well at the bottom
+// check the normal and all
+// line 83 i also removed the coparison to checkk if the intersection is near than the prevoious one 
+	// after shosing the right finit
+
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
     t_intersection 	inter;
@@ -76,14 +81,14 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 	tmp_cyl = cylinder;
 	while (tmp_cyl != NULL)
 	{
-		if (if_hit(cylinder, ray))
+		if (if_hit(tmp_cyl, ray))// an error were here i was checking always the first cylinder
 		{
-			finit = which_finit(cylinder, ray);
-			if (finit > 0)
+			finit = which_finit(tmp_cyl, ray);//also here
+			if (finit > 0 && g_intersection[0] < inter.hit)
 			{
 				inter.hit = g_intersection[0];
 				inter.point = position(ray, inter.hit);
-				inter.normal = normal_at_cylinder(tmp_cyl, inter.point);
+				inter.normal = normal_at_cylinder(tmp_cyl, inter.point);// aand here
 				inter.color = tmp_cyl->color;
 			}
 		}
