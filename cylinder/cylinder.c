@@ -79,12 +79,12 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 		if (if_hit(cylinder, ray))
 		{
 			finit = which_finit(cylinder, ray);
-			if (finit > 0 && g_intersection[0] < inter.hit)
+			if (finit > 0)
 			{
 				inter.hit = g_intersection[0];
 				inter.point = position(ray, inter.hit);
-				inter.normal = normal_at_cylinder(cylinder, inter.point);
-				inter.color = cylinder->color;// make sure all intersection data_structure are filled before you try to read them
+				inter.normal = normal_at_cylinder(tmp_cyl, inter.point);
+				inter.color = tmp_cyl->color;
 			}
 		}
 		tmp_cyl = tmp_cyl->next;
