@@ -27,8 +27,8 @@ t_vertex	helper(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
 	t_vertex vertex;
 
 	vertex.edge1 = point_vector(tr->p1, tr->p2);
-	vertex.edge2 = point_vector(tr->p1, tr->p3);
-	*cross = cross_product(ray.dir, vertex.edge2);
+	vertex.edge2 = point_vector(tr->p1, tr->p3);//try changing this two
+	*cross = cross_product(ray.dir, vertex.edge2);//naybe changing this cross
 	*dot = dot_product(vertex.edge1, *cross);
 	return (vertex);
 }
@@ -39,7 +39,7 @@ int				for_normintte(t_vertex *vertex, t_vector *cross, t_ray ray, float *dot)
 	vertex->u = (*dot) * dot_product(vertex->ray_to_tr, *cross);
 	if (vertex->u < 0.0 || vertex->u > 1.0)
 				return 0;
-	*cross = cross_product(vertex->ray_to_tr, vertex->edge1);
+	*cross = cross_product(vertex->ray_to_tr, vertex->edge1);//try switching cross
 	vertex->v = (*dot) * dot_product(ray.dir, *cross);
 	if (vertex->v < 0.0 || (vertex->v + vertex->u > 1.0))
 		return (0);
