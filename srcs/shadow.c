@@ -15,10 +15,12 @@
 #include "../include/light.h"
 #include "../include/world.h"
 
-void	adjust_intersection(t_intersection *inter)
+t_vector	adjust_intersection(t_intersection inter)
 {
-	inter->point = add_vectors(multp_vectors(inter->normal, 0.01), inter->point);
-	inter->point.w = 0;
+	t_vector result;
+	result = add_vectors(multp_vectors(inter.normal, 0.01), inter.point);
+	return (result);
+	result.w = 0;
 }
 
 void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
@@ -30,7 +32,7 @@ void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
 	float			dis_to_shadow;
 	t_ray			ray;
 
-	adjust_intersection(intersection);
+	intersection->point = adjust_intersection(*intersection); // thie problem might be here
 	hit_light = point_vector(intersection->point, light->orig);
 	distance = magnitude(hit_light);
 	ray.dir = normaliz(hit_light);

@@ -17,7 +17,7 @@
 # include "mlx.h"
 # include <float.h>
 # include <stdlib.h>
-# define EPSILON 0.000001
+# define EPSILON 0.0001
 
 
 typedef struct	s_vector

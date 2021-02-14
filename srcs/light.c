@@ -25,6 +25,7 @@ t_vector	embient(t_vector inter_color)
 	//color = color_multp(inter_color, embient_color);
 	return (embient_color);
 }
+
 float	dot3(t_vector vec1, t_vector vec2)
 {
 	float dot;
@@ -45,16 +46,17 @@ t_vector	defuse(t_intersection inter, t_ray ray, t_world world)
 
 	defuse_ = (t_vector){0, 0, 0, 0};
 	tmp_light = g_light;
+
 	dot = dot3(inter.normal, ray.dir);
-	
-	if (dot < 0)
-		inter.normal =  multp_vectors(inter.normal, -1);
+	// if (dot > 0)
+	// 	inter.normal =  multp_vectors(inter.normal, -1);
+	//there is a problem in the inverted normal
 	while (tmp_light != NULL)
 	{
 		is_shadow(world, &test, tmp_light);
 		if (test.is_shadow == false)
 		{
-			light_dir = normaliz(point_vector(tmp_light->orig, inter.point));
+			light_dir = normaliz(point_vector(inter.point, tmp_light->orig));
 			dot = fmaxf(dot3(light_dir, inter.normal), 0);
 			tmp_shade = multp_vectors(tmp_light->color, dot * tmp_light->ratio);
 			defuse_ = add_colors(defuse_, tmp_shade);
