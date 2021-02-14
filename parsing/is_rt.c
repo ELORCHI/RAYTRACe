@@ -12,16 +12,21 @@
 
 #include "parsing.h"
 
-void	is_rt(char *line)
+int is_rt(char *line)
 {
 	int len;
 
 	len = ft_strlen(line);
 	if (len < 3)
+	{
 		ft_exit("ERROR\ninvalide scene argument");
+		retun (-1);
+	}
 	if (ft_strncmp(line + len - 3, ".rt", 3) != 0)
 	{
 		printf("ERROR\nInvalide scene argument");
 		exit(0);
+		return(-1);
 	}
+	retun (1);
 }

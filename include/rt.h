@@ -107,6 +107,7 @@ typedef struct  s_data
 float 		g_intersection[2];
 
 t_data		g_img;
+int			save;
 
 int			create_trgb(t_vector color);
 

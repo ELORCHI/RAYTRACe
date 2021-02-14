@@ -2,11 +2,11 @@
 =======		have to do		======
 
 	key												== done			== 
-	switch normal if dot with light is negative		== done			==
 	shadow											== done			==
 	multi defuse lights								== done			== 
 	cylindeer multi tracing							== not tested yet	== easy shit
-	mlx_images										== not yet		==
+	switch normal if dot with light is negative		== something mashi hya hadik == // dont do it for the sphere
+	mlx_images										== not tested yet ==
 	read all from a file and affect to the world	== not yet		==
 	bmp file										== not yet		==
 	multiple camrera rendring						== not yet		== // put all globals to global after a key or render all at all
