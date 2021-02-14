@@ -45,7 +45,7 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	t_vector		origin_point;
 	t_intersection 	inter;
 	t_plan			*tmp_plan;
-	float			near;
+	float			near;// reaplace this one by the inter.hit its the same
 	
 	tmp_plan = plan;
 	inter.hit = -1;
@@ -53,7 +53,7 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	while (tmp_plan != NULL)
 	{
 		denom = dot_product(ray.dir, tmp_plan->normal);
-		if (fabsf(denom) > EPSILON)
+		if (fabsf(denom) > EPSILON)// i might need to remove fabsf from here
 		{
 			origin_point = normaliz(point_vector(ray.orig, tmp_plan->point));
 			nom = dot_product(tmp_plan->normal, origin_point) / denom;
