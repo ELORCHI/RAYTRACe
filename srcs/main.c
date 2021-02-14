@@ -132,6 +132,8 @@ void			render(t_world world)
 	canvas.mlx_ptr = mlx_init();
 	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
 	canvas.y = 0;
+	g_img.img = mlx_new_window(canvas.mlx_ptr);
+	g_img.img =  mlx_get_data_addr(g_img.img, &(g_img.bits_per_pixel), &(g_img.line_length), &(g_img.endian));
 	while (canvas.y < g_resolution.vsize)
 	{
 		canvas.x = 0;
@@ -156,6 +158,8 @@ void			render(t_world world)
 	}
 	mlx_hook(canvas.win_ptr, 2, 0, key_press, &canvas.mlx_ptr);
 	mlx_hook(canvas.win_ptr, 17, 0, ft_quit, &canvas.mlx_ptr);
+	mlx_put_image_to_window(canvas.mlx_ptr, canvas.win_ptr, g_img.img, 0, 0);
+	//check if it is the right arrangement of mlx shit
 	mlx_loop(canvas.mlx_ptr);
 }
 
