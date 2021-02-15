@@ -46,26 +46,26 @@ void get_plans(t_plan **plan, char **params)
 	i++;
 }
 
-int main ()
-{
-	char *line1 = ft_strdup("pl 10,10,10 0,1.0,0 255,0,225");
-	char *line2 = ft_strdup("pl 0,0,0 0,1.0,0 255,255,225");
+// int main ()
+// {
+// 	char *line1 = ft_strdup("pl 10,10,10 0,1.0,0 255,0,225");
+// 	char *line2 = ft_strdup("pl 0,0,0 0,1.0,0 255,255,225");
 
-	line1 = skip_tabs(&line1);
-	line2 = skip_tabs(&line2);
+// 	line1 = skip_tabs(&line1);
+// 	line2 = skip_tabs(&line2);
 
-	char **params1 = ft_split(line1, 32);
-	char **params2 = ft_split(line2, 32);
+// 	char **params1 = ft_split(line1, 32);
+// 	char **params2 = ft_split(line2, 32);
 
-	t_plan *plan;
-	get_plans(&plan, params1);
-	get_plans(&plan, params2);
-	while (plan != NULL)
-	{
-		print_vector(plan->point);
-		print_vector(plan->normal);
-		print_vector(plan->color);
-		plan = plan->next;
-		printf("======NEXT=====\n");
-	}
-}
+// 	t_plan *plan;
+// 	get_plans(&plan, params1);
+// 	get_plans(&plan, params2);
+// 	while (plan != NULL)
+// 	{
+// 		print_vector(plan->point);
+// 		print_vector(plan->normal);
+// 		print_vector(plan->color);
+// 		plan = plan->next;
+// 		printf("======NEXT=====\n");
+// 	}
+// }

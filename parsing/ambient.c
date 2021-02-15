@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-void	get_ambinet(char **line)
+void	get_ambient(char **line)
 {
 	static int amb = 0;
 

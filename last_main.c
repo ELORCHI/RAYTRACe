@@ -1,31 +1,44 @@
 #include "include/world.h"
 #include "parsing/parsing.h"
 
-void	set_object(t_world *wolrd, char *line, int last)
+void	set_object(t_world **world, char **line, int last)
 {
 	char **params;
 
-	line = skip_tabs(line);
-	params = ft_split(line, 32);
-	else if (ft_strncmp(*params, "A")
-		get_ambient();
-	else if (ft_strncmp(*params, "R")
-		get_resolution();
-	else if (ft_strncmp(*params, "s")
-		set_spheres(&(world.sphres), params);
-	else if (ft_strncmp(*params, "pl")
-		set_plans(&(world.plans), params);
-	else if (ft_strncmp(*params, "cy")
-		set_cylinders(&(world.cylinders), params);
-	else if (ft_strncmp(*params, "c")
-		set_cameras();
-	else if (ft_strncmp(*params, "l")
-		set_light();
-	else if (ft_strncmp(*params, "tr")
-		set_triangle(*params, "sq");
+	*line = skip_tabs(line);
+	params = ft_split(*line, 32);
+	if (ft_strncmp(*params, (char *)"A", 1))
+		get_ambient(params);
+	else if (ft_strncmp(*params, (char *)"R", 1))
+		get_resolution(params);
+	else if (ft_strncmp(*params, (char *)"s", 1))
+		get_spheres(&((*world)->sphere), params);
+	else if (ft_strncmp(*params, (char *)"pl", 2))
+		get_plans(&((*world)->plan), params);
+	else if (ft_strncmp(*params, (char *)"cy", 2))
+		get_cylinders(&((*world)->cylinder), params);
+	else if (ft_strncmp(*params, (char *)"c", 1))
+		get_camera(params);
+	else if (ft_strncmp(*params, (char *)"l", 1))
+		get_light(params);
+	else if (ft_strncmp(*params, (char *)"tr", 2))
+		get_triangles(&((*world)->triangle), params);
+	else if (ft_strncmp(*params, (char *)"sq", 2))
+		get_squares(&((*world)->square), params);
 	else
 		ft_exit("ERROR\n invalide object");
 	//teset if resolution on ambient are missing
+	free(*line);
+}
+
+void	free_world(t_world **world)
+{
+	free_spheres(&((*world)->sphere));
+	free_planes(&((*world)->plan));
+	free_cylinders(&((*world)->cylinder));
+	free_squares(&((*world)->square));
+	free_triangles(&((*world)->triangle));
+	free_globals();
 }
 
 void	set_world(char *arg)
@@ -33,20 +46,19 @@ void	set_world(char *arg)
 	int 	fd;
 	int 	i;
 	char 	*line;
-	t_world world;
+	t_world *world;
 
 	fd = open(arg, O_RDONLY);
 	line = NULL;
-	while (i = get_next_line(fd, &line))
+	while ((i = get_next_line(fd, &line)) || i == 0)
 	{
-		set_object(&world, line, i);
+		set_object(&world, &line, i);
 		free(line);
-		if (i = 0)
+		if (i == 0)
 			break;
 	}
-	free(line);
-	render(world);
-	free_world(&wolrd);
+	render(*world);
+	free_world(&world);
 }
 
 int 	main(int argc, char *argv[])
@@ -64,6 +76,6 @@ int 	main(int argc, char *argv[])
 	}
 	else
 		ft_exit("ERROR\ntoo much arguments");
-	exit (EXIT_SUCCES);
+	exit (EXIT_SUCCESS);
 	return (0);
 }

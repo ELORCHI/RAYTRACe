@@ -20,7 +20,7 @@ int is_rt(char *line)
 	if (len < 3)
 	{
 		ft_exit("ERROR\ninvalide scene argument");
-		retun (-1);
+		return (-1);
 	}
 	if (ft_strncmp(line + len - 3, ".rt", 3) != 0)
 	{
@@ -28,5 +28,5 @@ int is_rt(char *line)
 		exit(0);
 		return(-1);
 	}
-	retun (1);
+	return (1);
 }
