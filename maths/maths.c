@@ -90,10 +90,10 @@ t_vector	point_to_vector(t_vector point)
 
 float		magnitude(t_vector vec)
 {
-	float magnitude;
+	float magn;
 
-	magnitude = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	return (magnitude);
+	magn = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	return (magn);
 }
 
 /*
