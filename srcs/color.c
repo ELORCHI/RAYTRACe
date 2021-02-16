@@ -16,7 +16,6 @@ t_vector 	normaliz_color(t_vector color)
 {
 	t_vector new;
 
-	//print_vector(color);
 	new.x = fminf(color.x, 1);
 	new.y =	fminf(color.y, 1);
 	new.z = fminf(color.z, 1);
@@ -28,8 +27,6 @@ t_vector	add_colors(t_vector color1, t_vector color2)
 {
 	t_vector result;
 
-	//print_vector(color1);
-	//print_vector(color2);
 	result.x = fminf((color1.x + color2.x), 1);
 	result.y = fminf((color1.y + color2.y), 1);
 	result.z = fminf((color1.z + color2.z), 1);
@@ -45,13 +42,13 @@ int			create_trgb(t_vector color)
 }
 
 //not tested yet
-int		my_mlx_pixel_put(t_mlx canvas, int color)
-{
-	char *dst;
+// void		my_mlx_pixel_put(t_mlx canvas, int color)
+// {
+// 	char *dst;
 
-	dst = g_img.addr + (canvas.y * g_img.line_length + x *(g_img.bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+// 	dst = g_img.addr + (canvas.y * g_img.line_length + canvas.y *(g_img.bits_per_pixel / 8));
+// 	*(unsigned int *)dst = color;
+// }
 
 void	ft_draw(t_mlx canvas, t_vector color, int is_black)
 {
@@ -60,8 +57,10 @@ void	ft_draw(t_mlx canvas, t_vector color, int is_black)
 	int_color = create_trgb(color);
 	if (is_black == 0)
 	{
-		my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, int_color);
+		//my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, int_color);
+		mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, int_color);
 	}
 	else
-		my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, 0);
+		mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, 0);
+		//my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, 0);
 }
