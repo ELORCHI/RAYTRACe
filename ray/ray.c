@@ -38,12 +38,11 @@ t_vector	ft_pixel(t_vector pixel)
 	t_vector		result;
 	t_mat4x4		matt;
 
-	if (i == 0)
+	if (i == nb_cameras)
 	{
 		inverse_4x4(&inverse, &(g_camera->view));
-		i = 1;
+		i++;
 	}
-	//inverse = identity_mat();
 	result = mat_vec_multi(transpose(inverse), pixel);
 	return (result);
 }
@@ -62,23 +61,6 @@ t_ray		ray_for_pixel(int x, int y)
 	pixel = vec4_creat(px, py, -1, 1);
 	pixel = ft_pixel(pixel);
 	ray.orig = ft_pixel(vec4_creat(0, 0, 0, 1));
-	//ray.orig = vec4_creat(0, -8 , 0, 1);
 	ray.dir = normaliz(point_vector(ray.orig, pixel));
-	//print_vector(ray.dir);
-	//print_vector(ray.orig);
 	return (ray);
 }
-/*int main()
-{
-	t_ray ray;
-	float speed;
-	t_vector hit;
-
-	speed = 4;
-	ray.orig = (t_vector){0, 0, -5, 0};
-	ray.dir = (t_vector){1 ,0 , 0, 1};
-	ray.inter = (t_vector){0, 0, 0, 0};
-	hit = position(ray, speed);
-	print_vector(hit);
-	return (0);
-}*/

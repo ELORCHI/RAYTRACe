@@ -41,26 +41,23 @@ int			create_trgb(t_vector color)
 	return((r << 16) | (g << 8) | b);
 }
 
-//not tested yet
-// void		my_mlx_pixel_put(t_mlx canvas, int color)
-// {
-// 	char *dst;
+void		my_mlx_pixel_put(t_mlx canvas, int color, t_data **img)
+{
+	char *dst;
 
-// 	dst = g_img.addr + (canvas.y * g_img.line_length + canvas.y *(g_img.bits_per_pixel / 8));
-// 	*(unsigned int *)dst = color;
-// }
+	dst = (*img)->addr + (canvas.y * (*img)->line_length + canvas.x *((*img)->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
-void	ft_draw(t_mlx canvas, t_vector color, int is_black)
+void	ft_draw(t_mlx canvas, t_vector color, int is_black, t_data **img)
 {
 	int int_color;
 
 	int_color = create_trgb(color);
 	if (is_black == 0)
 	{
-		//my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, int_color);
-		mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, int_color);
+		my_mlx_pixel_put(canvas, int_color, img);
 	}
 	else
-		mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, 0);
-		//my_mlx_pixel_put(canvas.mlx_ptr, canvas.win_ptr, canvas.x, canvas.y, 0);
+		my_mlx_pixel_put(canvas, 0, img);
 }

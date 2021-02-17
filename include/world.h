@@ -33,6 +33,5 @@ typedef struct s_world
 
 t_intersection	intersect_world(t_world world, t_ray ray);
 t_intersection	intersect_objects(t_world world, t_ray ray);
-void			ft_draw(t_mlx canvas, t_vector color, int is_black);
 void			render(t_world world);
 #endif
