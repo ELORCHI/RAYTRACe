@@ -19,13 +19,14 @@ void init_plans(t_plan *plan)
 	plan->normal = (t_vector){0, 0, 0, 0};
 }
 
-void get_plans(t_plan **plan, char **params)
+int get_plans(t_plan **plan, char **params)
 {
 	t_plan 		*tmp;
 	t_plan		*pars;
 	static int 	i = 0;
 
-	count_params(params, 4);
+	if (count_params(params, 4) == false)
+		return (-1);
 	tmp = (t_plan *)malloc(sizeof(t_plan));
 	tmp->next = NULL;
 	params++;
@@ -44,6 +45,9 @@ void get_plans(t_plan **plan, char **params)
 		pars->next = tmp;
 	}
 	i++;
+	if (g_nb_error = -1)
+		return (-1);
+	return (0);
 }
 
 // int main ()

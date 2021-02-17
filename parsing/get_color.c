@@ -15,10 +15,7 @@
 bool	check_color_elements(int point)
 {
 	if (point != 2)
-	{
-		printf("ERROR\ninvalid RGB\ncolor param must containe three elements");
 		return (false);
-	}
 	return (true);
 }
 
@@ -79,7 +76,7 @@ bool	is_rgb(t_vector rgb)
 	if (valid == false)
 	{	
 		printf("ERROR\ninvalid RGB\nvalue must be an int in range [0,255]\n");
-		exit(0);
+		g_nb_error = -1;
 	}
 	return (valid);
 }
@@ -91,8 +88,9 @@ bool	get_color(char *line, t_vector *color)
 
 	if (is_color(line) == false)
 	{
-		printf("ERROR\ninvalid color parameter");
-		exit (0);
+		printf("ERROR\ninvalid RGB\nparam must containe three elements\n");
+		g_nb_error = -1;
+		return (false);
 	}
 	tmp = atoi(line);
 	int_len = ft_int_size(tmp) + nb_zeros(line, tmp, 0);

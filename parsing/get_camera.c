@@ -28,12 +28,13 @@ void	add_cameras(t_camera **tmp)
 	pars->next = *tmp;
 }
 
-void	get_camera(char **params)
+int	get_camera(char **params)
 {
 	t_camera 	*tmp;
 	static int 	i = 0;
 
-	count_params(params, 4);
+	if (count_params(params, 4) == false);
+		retun (-1);
 	tmp = (t_camera *)malloc(sizeof(t_camera));
 	tmp->next = NULL;
 	params++;
@@ -41,9 +42,10 @@ void	get_camera(char **params)
 	params++;
 	tmp->dir = get_vector(*params);
 	params++;
-	get_scalar(*params, &(tmp->fov));
+	if (get_scalar(*params, &(tmp->fov)) == -1)
+		return (-1);
 	if (tmp->fov < 0 || tmp->fov > 180)
-		ft_exit("ERROR\n FOV must be positive");
+		return (ft_exit("ERROR\n FOV must be positive less tha 180 degres"));
 	if (i == 0)
 	{
 		g_all_cameras = tmp;
@@ -52,6 +54,10 @@ void	get_camera(char **params)
 	else
 		add_cameras(&tmp);
 	i++;
+	if (g_nb_error == -1)
+		return (-1);
+	g_nb_error = 0;
+	return (0);
 }
 
 // int main()

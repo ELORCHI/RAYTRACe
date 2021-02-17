@@ -9,7 +9,7 @@ void	ft_init_light(t_light *light)
 	light->next = NULL;
 }
 
-void	get_light(char **params)
+int	get_light(char **params)
 {
 	t_light *tmp;
 	t_light	*pars;
@@ -21,9 +21,10 @@ void	get_light(char **params)
 	params++;
 	tmp->orig = get_vector(*params);
 	params++;
-	get_scalar(*params, &(tmp->ratio));
+	if (get_scalar(*params, &(tmp->ratio)) == -1)
+		return (-1);
 	if (tmp->ratio < 0)
-		ft_exit("ERROR\n light ratio must be positive");
+		return (ft_exit("ERROR\n light ratio must be positive"));
 	params++;
 	get_color(*params, &(tmp->color));
 	tmp->next = NULL;
@@ -37,7 +38,10 @@ void	get_light(char **params)
 		pars->next = tmp;
 		i++;
 	}
+	if (g_nb_error = -1)
+		return (-1);
 	i++;
+	return (0);
 }
 
 // int main()

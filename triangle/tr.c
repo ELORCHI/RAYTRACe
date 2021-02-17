@@ -2,7 +2,6 @@
 #include "../include/ray.h"
 #include "../include/plan.h"
 
-
 void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 {
 	static float 	near = FLT_MAX;
@@ -13,7 +12,7 @@ void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 	{
 		inter->point = position(ray, inter->hit);
 		inter->color = tr->color;
-		inter->normal = tr->normal;//(vertex.edge2, vertex.edge1);
+		inter->normal = tr->normal;
 		near = inter->hit;
 	}
 	if (i == 1)

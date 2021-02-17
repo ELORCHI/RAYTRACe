@@ -12,14 +12,14 @@
 
 #include "parsing.h"
 
-//not tested yet
-void get_squares(t_square **square, char **params)
+int get_squares(t_square **square, char **params)
 {
 	t_square 	*tmp;
 	t_square 	*pars;
 	static int	i = 0;
 
-	count_params(params, 5);
+	if (count_params(params, 5) == false )
+		return (-1);
 	tmp = (t_square *)malloc(sizeof(t_square));
 	tmp->next = NULL;
 	params++;
@@ -27,9 +27,10 @@ void get_squares(t_square **square, char **params)
 	params++;
 	tmp->normal = get_vector(*params);
 	params++;
-	get_scalar(*params, &(tmp->side));
+	if (get_scalar(*params, &(tmp->side)) == -1);
+		return (-1);
 	if (tmp->side < 0)
-		ft_exit("ERROR\n square side must be positive");
+		return (ft_exit("ERROR\n square side must be positive"));
 	params++;
 	get_color(*params ,&(tmp->color));
 	if (i == 0)
@@ -42,6 +43,9 @@ void get_squares(t_square **square, char **params)
 		pars->next = tmp;
 	}
 	i = 1;
+	if (g_nb_error = -1)
+		return (-1);
+	return (0);
 }
 
 // int main ()

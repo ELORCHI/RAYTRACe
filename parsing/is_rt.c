@@ -25,17 +25,17 @@ int is_rt(char *line)
 	if (ft_strncmp(line + len - 3, ".rt", 3) != 0)
 	{
 		printf("ERROR\nInvalide scene argument");
-		exit(0);
 		return(-1);
 	}
 	return (1);
 }
 
-void	is_save(char *line)
+int	is_save(char *line)
 {
 	if (ft_strncmp(line, "save", 4) != 0)
 	{
 		printf("ERROR\nInvalide saving argument");
-			exit(0);
+		return (-1);
 	}
+	return (0);
 }

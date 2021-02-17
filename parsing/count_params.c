@@ -28,5 +28,5 @@ bool	count_params(char **line, int params_number)
 		printf("ERROR\nfew arguments");
 	else
 		printf("ERROR\ntoo much arguments");
-	exit(EXIT_FAILURE);
+	return (false);
 }

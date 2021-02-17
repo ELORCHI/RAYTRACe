@@ -13,7 +13,7 @@
 #include "parsing.h"
 
 //need to fix cylinder (diametre and raduis problem)
-void get_cylinders(t_cylinder **cylinder, char **params)
+int get_cylinders(t_cylinder **cylinder, char **params)
 {
 	t_cylinder *tmp;
 	t_cylinder *pars;
@@ -29,13 +29,15 @@ void get_cylinders(t_cylinder **cylinder, char **params)
 	params++;
 	get_color(*params, &(tmp->color));
 	params++;
-	get_scalar(*params, &(tmp->raduis));
+	if (get_scalar(*params, &(tmp->raduis)) == -1)
+		return (-1);
 	if (tmp->raduis < 0)
-		ft_exit("ERROR\ncylinder's diamertre must be positive");
+		return (ft_exit("ERROR\ncylinder's diamertre must be positive"));
 	params++;
-	get_scalar(*params, &(tmp->height));
+	if (get_scalar(*params, &(tmp->height)) == -1);
+		return (-1);
 	if (tmp->height < 0)
-		ft_exit("ERROT\ncylinder's hight must be positve");
+		return (ft_exit("ERROT\ncylinder's hight must be positve"));
 	if (i == 0)
 		*cylinder = tmp;
 	else
@@ -45,7 +47,11 @@ void get_cylinders(t_cylinder **cylinder, char **params)
 			pars = pars->next;
 		pars->next = tmp;
 	}
+	if (g_nb_error = -1)
+		return(-1);
+	g_nb_error = 0;
 	i++;
+	return (0);
 }
 
 // int main()

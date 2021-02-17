@@ -17,38 +17,12 @@
 //vergule must be  max to
 // only numbers are allowed after .
 
-//not tested yet
-int count(char *line)
-{
-	int i;
-	int nb;
-
-	nb = 0;
-	i = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] == ',')
-		{
-			nb++;
-			if (i == 0)
-				ft_exit("ERROR\ninvalide vector");// not allowed first
-			if (ft_isdigit(line[i - 1]) == 0)// must have a digit befor it
-				ft_exit("ERROR\ninvalide vector");
-			if (line[i + 1] != '\0' && ft_isdigit(line[i + 1]) == 0)//also after and should not be at the end
-				ft_exit("ERROR\ninvalide vector");
-			if (nb > 2)
-				ft_exit("ERROR\ninvalide vector");// should not be more than 2
-		}
-		i++;
-	}
-	return (0);
-}
 
 int	helper(char *line, int *i, int *digit, int *negative, int *point)
 {
 	if (ft_isdigit(line[*i]) == 1 || line[*i] == '.' || line[*i] == '-')
 	{
-		if (line[*i] = '.')
+		if (line[*i] == '.')
 		{
 			*point += 1;
 			if (line[*i + 1] == '\0')
@@ -58,12 +32,12 @@ int	helper(char *line, int *i, int *digit, int *negative, int *point)
 			}
 			else
 				return (0);
-			
 		}
 		*digit += (ft_isdigit(line[*i]) == 1) ? 1 : 0;
 		if (*negative > 1)
 			return (0);
 	}
+	return (-1);
 }
 
 int	is_float(char *line)
@@ -81,9 +55,7 @@ int	is_float(char *line)
 	{
 		if (ft_isdigit(line[i]) == 1 || line[i] == '.' || line[i] == '-')
 		{
-			point += (line[i] == '.') ? 1 : 0;
-			digit += (ft_isdigit(line[i]) == 1) ? 1 : 0;
-			negative += (line[i] == '-') ? 1 : 0;
+			helper(line, &i, &digit, &negative, &point);
 			i++;
 		}
 		else

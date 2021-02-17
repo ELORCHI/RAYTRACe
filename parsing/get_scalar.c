@@ -19,11 +19,10 @@ int get_scalar(char *line, float *scalar)
 	i = is_float(line);
 	if (i == 0)
 	{
-		printf("ERROR\ninvalide vector");
-		exit(0);
+		printf("ERROR\ninvalide scalar\n");
+		return (-1);
 	}
 	*scalar = atof(line);
-	//printf("%f", *scalar);
 	return (i);
 }
 

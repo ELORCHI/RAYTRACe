@@ -12,21 +12,23 @@
 
 #include "parsing.h"
 
-void get_spheres(t_sphere **sphere, char **params)
+int	get_spheres(t_sphere **sphere, char **params)
 {
 	t_sphere 	*tmp;
 	t_sphere 	*pars;
 	static int	i = 0;
 	
-	count_params(params, 4);
+	if (count_params(params, 4) == false);
+		return (-1);
 	tmp = (t_sphere *)malloc(sizeof(t_sphere));
 	tmp->next = NULL;
 	params++;
 	tmp->orig = get_vector(*params);
 	params++;
-	get_scalar(*params, &(tmp->rad));
+	if (get_scalar(*params, &(tmp->rad)));
+		return (-1);
 	if (tmp->rad < 0)
-		ft_exit("ERROR\n sphere raduis must be positive");
+		return (ft_exit("ERROR\n sphere raduis must be positive"));
 	params++;
 	get_color(*params, &(tmp->color));
 	if (i == 0)
@@ -39,6 +41,9 @@ void get_spheres(t_sphere **sphere, char **params)
 		pars->next = tmp;
 	}
 	i = 1;
+	if (g_nb_error = -1)
+		return (-1);
+	return (0);
 }
 
 // int main()
