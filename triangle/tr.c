@@ -13,7 +13,7 @@ void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 	{
 		inter->point = position(ray, inter->hit);
 		inter->color = tr->color;
-		inter->normal = cross_product(vertex.edge1, vertex.edge2);
+		inter->normal = tr->normal;//(vertex.edge2, vertex.edge1);
 		near = inter->hit;
 	}
 	if (i == 1)
@@ -27,8 +27,8 @@ t_vertex	helper(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
 	t_vertex vertex;
 
 	vertex.edge1 = point_vector(tr->p1, tr->p2);
-	vertex.edge2 = point_vector(tr->p1, tr->p3);//try changing this two
-	*cross = cross_product(ray.dir, vertex.edge2);//naybe changing this cross
+	vertex.edge2 = point_vector(tr->p1, tr->p3);
+	*cross = cross_product(vertex.edge2, ray.dir);
 	*dot = dot_product(vertex.edge1, *cross);
 	return (vertex);
 }
@@ -39,7 +39,7 @@ int				for_normintte(t_vertex *vertex, t_vector *cross, t_ray ray, float *dot)
 	vertex->u = (*dot) * dot_product(vertex->ray_to_tr, *cross);
 	if (vertex->u < 0.0 || vertex->u > 1.0)
 				return 0;
-	*cross = cross_product(vertex->ray_to_tr, vertex->edge1);//try switching cross
+	*cross = cross_product(vertex->edge1, vertex->ray_to_tr);
 	vertex->v = (*dot) * dot_product(ray.dir, *cross);
 	if (vertex->v < 0.0 || (vertex->v + vertex->u > 1.0))
 		return (0);
@@ -66,13 +66,6 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 				break;
 			dot = 1.0 / dot;
 			vertex.ray_to_tr = point_vector(tmp_tr->p1, ray.orig);
-			// vertex.u = dot * dot_product(vertex.ray_to_tr, cross);
-			// if (vertex.u < 0.0 || vertex.u > 1.0)
-			// 	break;
-			// cross = cross_product(vertex.ray_to_tr, vertex.edge1);
-			// vertex.v = dot * dot_product(ray.dir, cross);
-			// if (vertex.v < 0.0 || (vertex.v + vertex.u > 1.0))
-			// 	break;
 			if (for_normintte(&vertex, &cross, ray, &dot) == 0)
 				break;
 			inter.hit = dot * dot_product(cross, vertex.edge2);

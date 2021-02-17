@@ -17,8 +17,8 @@ void	camera()
 	float half_view;
 	float aspect;
 
-	g_resolution.fov *= (M_PI / 180); 
-	half_view = tan(g_resolution.fov / 2);
+	g_camera->fov *= (M_PI / 180); 
+	half_view = tan(g_camera->fov / 2);
 	aspect = (float)g_resolution.hsize / (float)g_resolution.vsize;
 	if (aspect >= 1.0f)
 	{

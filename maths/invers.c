@@ -68,7 +68,7 @@ bool	inverse_4x4(t_mat4x4 *inverse, t_mat4x4 *mat)
 	i = 0;
 	row = 0;
 	deter = determinant_4x4(mat, 0);
-	if (deter == 0)// to review this condition
+	if (deter == 0)
 		return (false);
 	deter = 1 / deter;
 	while (i < 4)
@@ -80,7 +80,6 @@ bool	inverse_4x4(t_mat4x4 *inverse, t_mat4x4 *mat)
 		vec->z = cofactor_4x4(mat, i, ++row, 0) * deter;
 		vec->w = cofactor_4x4(mat, i, ++row, 0) * deter;
 		i++;
-		//print_vector(*vec);
 	}
 	*inverse = transpose(*inverse); 
 	return (true);

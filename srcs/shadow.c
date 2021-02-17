@@ -19,8 +19,8 @@ t_vector	adjust_intersection(t_intersection inter)
 {
 	t_vector result;
 	result = add_vectors(multp_vectors(inter.normal, 0.01), inter.point);
-	return (result);
 	result.w = 0;
+	return (result);
 }
 
 void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
@@ -32,7 +32,7 @@ void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
 	float			dis_to_shadow;
 	t_ray			ray;
 
-	intersection->point = adjust_intersection(*intersection); // thie problem might be here
+	intersection->point = adjust_intersection(*intersection);
 	hit_light = point_vector(intersection->point, light->orig);
 	distance = magnitude(hit_light);
 	ray.dir = normaliz(hit_light);

@@ -45,30 +45,29 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	t_vector		origin_point;
 	t_intersection 	inter;
 	t_plan			*tmp_plan;
-	float			near;// reaplace this one by the inter.hit its the same
 	
 	tmp_plan = plan;
-	inter.hit = -1;
-	near = FLT_MAX;
+	inter.hit = FLT_MAX;
+
 	while (tmp_plan != NULL)
 	{
 		denom = dot_product(ray.dir, tmp_plan->normal);
-		if (fabsf(denom) > EPSILON)// i might need to remove fabsf from here
+		if (fabsf(denom) > EPSILON)
 		{
-			origin_point = normaliz(point_vector(ray.orig, tmp_plan->point));
-			nom = dot_product(tmp_plan->normal, origin_point) / denom;
-			if (nom > EPSILON && nom < near)
+			origin_point = point_vector(tmp_plan->point, ray.orig);
+			nom = dot_product(normaliz(tmp_plan->normal), origin_point) / denom;
+			nom *= -1;
+			if (nom > EPSILON && nom < inter.hit)
 			{
 				inter.color = tmp_plan->color;
 				inter.hit =  nom;
-				inter.point  = position(ray,nom);
-				inter.normal = tmp_plan->normal;
-				near = inter.hit;
+				inter.point  = position(ray, nom);
+				inter.normal = normaliz(tmp_plan->normal);
 			}
 		}
 		tmp_plan = tmp_plan->next;
 	}
-	if (near == FLT_MAX)
+	if (inter.hit == FLT_MAX)
 		inter.hit = -1;
 	return (inter);
 }
