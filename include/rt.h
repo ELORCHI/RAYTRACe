@@ -97,23 +97,27 @@ typedef struct	s_mlx
 
 typedef struct  s_data
 {
-    void        *img;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
+    void        	*img;
+    char        	*addr;
+    int         	bits_per_pixel;
+    int         	line_length;
+    int         	endian;
+	struct	s_data	*head;
+	struct  s_data 	*next;
 }               t_data;
 
 float 		g_intersection[2];
 
-t_data		g_img;
-int			save;
+t_mlx		g_canvas;
+t_data		*g_img;
+t_data		*display_img;
+int			g_save;
 
 int			create_trgb(t_vector color);
 
 t_vector	add_colors(t_vector color1, t_vector color2);
 
-void		ft_draw(t_mlx canvas, t_vector color, int is_black);
+void		ft_draw(t_mlx canvas, t_vector color, int is_black, t_data **img);
 
 float		magnitude(t_vector vec);
 
@@ -129,6 +133,10 @@ float		minor_3x3(t_mat3x3 *mat3, int colomn, int row);
 
 bool		solve_quadratic(float a, float b, float c);
 
+float		element_4x4(t_mat4x4 *mat, int colomn, int row, int skip);
+
+t_mat3x3	sub_mat4x4(t_mat4x4 *mat4, int colomn, int row);
+
 void		init_reper(void);
 
 void		print_vector(t_vector vec2);
@@ -137,9 +145,13 @@ void 		print_mat4(t_mat4x4 mat);
 
 void		print3_vec(t_vec3 vec);
 
+float		element_3x3(t_mat3x3 *mat, int colomn, int row, int row2);
+
 void		scale_mat4(t_mat4x4 *mat, float scalar);
 
 float		determinant_3x3(t_mat3x3 *mat3, int colomn);
+
+bool		vect_cmp(t_vector v1, t_vector v2);
 
 float		determinant_4x4(t_mat4x4 *mat4, int colomn);
 
@@ -196,4 +208,5 @@ t_mat3x3	mat3_creat(t_vec3 v1, t_vec3 v2, t_vec3 v3);
 t_mat3x3	sub_mat4x4(t_mat4x4 *mat4, int colomn, int row);
 
 t_mat2x2	sub_mat3x3(t_mat3x3 *mat3, int colomn, int row);
+
 #endif

@@ -23,10 +23,6 @@
 
 void	ft_init(t_sphere **sphere)
 {
-	//t_ray	*ray;
-	//t_sphere *sphere;
-	//t_light	 *light;
-	//t_embient embient;
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
 	(*sphere)->orig = (t_vector){3, 0, 0,0};
 	(*sphere)->rad  = 1;
@@ -43,25 +39,32 @@ void	ft_init(t_sphere **sphere)
 	g_light->orig = (t_vector){7, 12, 0, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
 	g_light->ratio = 0.5;
-	g_light->next = NULL;//(t_light *)malloc(sizeof(t_light));
+	g_light->next = (t_light *)malloc(sizeof(t_light));
 
-	// t_light *tmp_light = g_light->next;
-	// tmp_light->orig = (t_vector){-1, -5, 0, 1};
-	// tmp_light->color = (t_vector){0, 0, 0, 1};
-	// tmp_light->ratio = 0.1;
-	// tmp_light->next = NULL;
+	t_light *tmp_light = g_light->next;
+	tmp_light->orig = (t_vector){-1, -5, 0, 1};
+	tmp_light->color = (t_vector){0, 0, 0, 1};
+	tmp_light->ratio = 0.1;
+	tmp_light->next = NULL;
 
 	g_embient.color = (t_vector){1, 1, 1, 0};
 	g_embient.ratio = 0.1;
 
-	g_resolution.hsize = 1000;
-	g_resolution.vsize = 1000;
-	g_resolution.fov = 90;
+	g_resolution.hsize = 500;
+	g_resolution.vsize = 500;
+	//g_resolution.fov = 90;
 
-	g_camera = (t_camera *)malloc(sizeof(t_camera));
-	g_camera->orig = (t_vector){0, 15, 0, 1};
-	g_camera->dir = (t_vector){0, 0, 0, 1};
-	set_camera_view(g_camera->orig, g_camera->dir);
+	g_all_cameras = (t_camera *)malloc(sizeof(t_camera));
+	g_all_cameras->orig = (t_vector){0, 15, 0, 1};
+	g_all_cameras->dir = (t_vector){0, 0, 0, 1};
+	g_all_cameras->fov = 90;
+	g_all_cameras->next = (t_camera *)malloc(sizeof(t_camera));
+
+	t_camera *test = g_all_cameras->next;
+	test->orig =  (t_vector){0, 10, 0, 1};
+	test->dir =  (t_vector){0, 0, 0, 1};
+	test->fov = 90;
+	test->next = NULL;
 }
 
 t_intersection	intersect_objects(t_world world, t_ray ray)
@@ -106,8 +109,17 @@ bool			check_intersection(t_intersection intersection)
 
 int				key_press(int keycode)
 {
+
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 123)
+	{
+		if (display_img->next == NULL)
+			display_img = g_img;
+		else
+			display_img = display_img->next;
+		mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
+	}
 	return (0);
 }
 
@@ -117,42 +129,68 @@ int				ft_quit(int keycode)
 		return (0);
 }
 
+void			next_image(t_data **tmp_img)
+{
+		(*tmp_img)->next = (t_data *)malloc(sizeof(t_data));
+		*tmp_img = (*tmp_img)->next;
+		(*tmp_img)->next = NULL;
+		(*tmp_img)->head = g_img;
+}
+
 void			render(t_world world)
 {
-	t_mlx	    	canvas;
 	t_ray	    	ray;
 	t_intersection  intersection;
-	t_vector		color = (t_vector){0,0,0,0};
-	t_vector		emb;
+	t_vector		color;
+	t_camera		*tmp;
 
-	canvas.mlx_ptr = mlx_init();
-	canvas.win_ptr = mlx_new_window(canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
-	canvas.y = 0;
-	// g_img.img = mlx_new_window(canvas.mlx_ptr);
-	// g_img.img =  mlx_get_data_addr(g_img.img, &(g_img.bits_per_pixel), &(g_img.line_length), &(g_img.endian));
-	while (canvas.y < g_resolution.vsize)
+	g_canvas.mlx_ptr = mlx_init();
+	g_canvas.win_ptr = mlx_new_window(g_canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize, "MINI_RT");
+
+	tmp = g_all_cameras;
+	
+	t_data	*tmp_img;
+	
+	g_img = (t_data *)malloc(sizeof(t_data));
+	g_img->next = NULL;
+	tmp_img = g_img;
+	
+	nb_cameras = -1;
+	while (tmp != NULL)
 	{
-		canvas.x = 0;
-		while (canvas.x < g_resolution.hsize)
+		nb_cameras++;
+		g_camera = tmp;
+		set_camera_view(g_camera->orig, g_camera->dir);
+		tmp_img->img = mlx_new_image(g_canvas.mlx_ptr, g_resolution.hsize, g_resolution.vsize);
+		tmp_img->addr =  mlx_get_data_addr(tmp_img->img, &(tmp_img->bits_per_pixel), &(tmp_img->line_length), &(tmp_img->endian));
+		g_canvas.y = 0;
+		while (g_canvas.y < g_resolution.vsize)
 		{
-			ray = ray_for_pixel(canvas.x, canvas.y);
-			intersection = intersect_world(world, ray);
-			if (check_intersection(intersection) == true)
+			g_canvas.x = 0;
+			while (g_canvas.x < g_resolution.hsize)
 			{
-				color = light(intersection, ray, world);
-				ft_draw(canvas, color, 0);
+				ray = ray_for_pixel(g_canvas.x, g_canvas.y);
+				intersection = intersect_world(world, ray);
+				if (check_intersection(intersection) == true)
+				{
+					color = light(intersection, ray, world);
+					ft_draw(g_canvas, color, 0, &tmp_img);
+				}
+				else
+					ft_draw(g_canvas, color, 1, &tmp_img);
+				g_canvas.x++;
 			}
-			else
-				ft_draw(canvas, color, 1);
-			canvas.x++;
+			g_canvas.y++;
 		}
-		canvas.y++;
+		if (tmp->next != NULL)
+			next_image(&tmp_img);
+		tmp = tmp->next;
 	}
-	mlx_hook(canvas.win_ptr, 2, 0, key_press, &canvas.mlx_ptr);
-	mlx_hook(canvas.win_ptr, 17, 0, ft_quit, &canvas.mlx_ptr);
-	//mlx_put_image_to_window(canvas.mlx_ptr, canvas.win_ptr, g_img.img, 0, 0);
-	//check if it is the right arrangement of mlx shit
-	mlx_loop(canvas.mlx_ptr);
+	display_img = g_img;
+	mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
+	mlx_hook(g_canvas.win_ptr, 2, 0, key_press, &g_canvas.mlx_ptr);
+	mlx_hook(g_canvas.win_ptr, 17, 0, ft_quit, &g_canvas.mlx_ptr);
+	mlx_loop(g_canvas.mlx_ptr);
 }
 
 int 			main()
@@ -226,20 +264,6 @@ int 			main()
 	tmp_cyl->color = (t_vector){1, 0, 0, 0};
 	tmp_cyl->next = NULL;
 	
-	//printf("%f", g_camera.pixel_size);	
-	//printf("%f", g_camera.pixel_size);	
-	//printf("%f", g_camera.pixel_size);	
-	//print_mat4(g_camera.view);
-	//t_mat4x4 invers;
-	//inverse_4x4(&invers, &(g_camera.view));
-	//invers = transpose(invers);
-	//world.sphere->orig = mat_vec_multi(invers, world.sphere->orig);
-	//print_vector(world.sphere->orig);
-	//g_light->orig = mat_vec_multi(invers, g_light->orig);	
-	//print_mat4(g_camera.view);
 	render(world);
-	//print_mat4(g_camera.view);
-	//t_ray ray = ray_for_pixel(100, 50);
-	//print_vector(ray.dir);
 	return (0);
 }
