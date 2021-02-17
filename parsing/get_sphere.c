@@ -30,7 +30,8 @@ int	get_spheres(t_sphere **sphere, char **params)
 	if (tmp->rad < 0)
 		return (ft_exit("ERROR\n sphere raduis must be positive"));
 	params++;
-	get_color(*params, &(tmp->color));
+	if (get_color(*params, &(tmp->color)) == false)
+		return (-1);
 	if (i == 0)
 		(*sphere) = tmp;
 	else

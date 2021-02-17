@@ -17,27 +17,38 @@
 //vergule must be  max to
 // only numbers are allowed after .
 
+int	check_negative(char *line, int i, int *negative)
+{
+	if (line[i] == '-')
+	{
+		if (line[i + 1] == '\0')
+			return (-1);
+		(*negative)++;
+	}
+	if (*negative > 1)
+		return (-1);
+	return (0);
+}
 
 int	helper(char *line, int *i, int *digit, int *negative, int *point)
 {
-	if (ft_isdigit(line[*i]) == 1 || line[*i] == '.' || line[*i] == '-')
+	if (line[*i] == '.')
 	{
-		if (line[*i] == '.')
+		*point += 1;
+		if (line[*i + 1] != '\0')
 		{
-			*point += 1;
-			if (line[*i + 1] == '\0')
-			{
-				if (ft_isdigit(line[*i + 1]) == 0)
-					return (0);
-			}
-			else
+			if (ft_isdigit(line[*i + 1]) == 1)
 				return (0);
+			else
+				return (-1);
 		}
-		*digit += (ft_isdigit(line[*i]) == 1) ? 1 : 0;
-		if (*negative > 1)
-			return (0);
+		else
+			return (-1);
 	}
-	return (-1);
+	else if (check_negative(line, *i, negative) == -1)
+		return (-1);
+	*digit += (ft_isdigit(line[*i]) == 1) ? 1 : 0;
+	return (0);
 }
 
 int	is_float(char *line)
@@ -51,17 +62,18 @@ int	is_float(char *line)
 	i = 0;
 	point = 0;
 	negative = 0;
-	while (line[i] != '\0' && line[i] != ',' && (point == 0 || point == 1))
+	while (line[i] != '\0' && line[i] != ',')
 	{
 		if (ft_isdigit(line[i]) == 1 || line[i] == '.' || line[i] == '-')
 		{
-			helper(line, &i, &digit, &negative, &point);
+			if (helper(line, &i, &digit, &negative, &point) == -1)
+				return (-1);
 			i++;
 		}
 		else
-			return (0);	
+			return (-1);
 	}
-	if (point > 1 || digit == 0 || negative > 1)
-		return (0);
+	if ((point > 1) || (digit == 0))
+		return (-1);
 	return (i);
 }	

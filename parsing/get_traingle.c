@@ -30,7 +30,8 @@ void get_triangles(t_triangle **trinagle, char **params)
 	params++;
 	tmp->p3 = get_vector(*params);
 	params++;
-	get_color(*params, &(tmp->color));
+	if (get_color(*params, &(tmp->color)) == false)
+		return (-1);
 	tmp->normal = (t_vector){0, 0, 0, 0};
 	if (i == 0)
 		*trinagle = tmp;

@@ -76,7 +76,6 @@ bool	is_rgb(t_vector rgb)
 	if (valid == false)
 	{	
 		printf("ERROR\ninvalid RGB\nvalue must be an int in range [0,255]\n");
-		g_nb_error = -1;
 	}
 	return (valid);
 }
@@ -89,7 +88,6 @@ bool	get_color(char *line, t_vector *color)
 	if (is_color(line) == false)
 	{
 		printf("ERROR\ninvalid RGB\nparam must containe three elements\n");
-		g_nb_error = -1;
 		return (false);
 	}
 	tmp = atoi(line);

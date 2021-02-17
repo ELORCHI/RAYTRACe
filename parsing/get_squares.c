@@ -32,7 +32,8 @@ int get_squares(t_square **square, char **params)
 	if (tmp->side < 0)
 		return (ft_exit("ERROR\n square side must be positive"));
 	params++;
-	get_color(*params ,&(tmp->color));
+	if (get_color(*params ,&(tmp->color)) == false)
+		return (-1);
 	if (i == 0)
 		(*square)= tmp;
 	else

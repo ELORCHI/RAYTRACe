@@ -16,8 +16,11 @@ int get_scalar(char *line, float *scalar)
 {
 	int i;
 
+	i = 0;
+	if (count_comas(line) == -1)
+		return (-1);
 	i = is_float(line);
-	if (i == 0)
+	if (i == -1)
 	{
 		printf("ERROR\ninvalide scalar\n");
 		return (-1);

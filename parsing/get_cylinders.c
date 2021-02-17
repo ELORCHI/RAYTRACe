@@ -27,7 +27,8 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	params++;
 	tmp->normal = get_vector(*params);
 	params++;
-	get_color(*params, &(tmp->color));
+	if (get_color(*params, &(tmp->color)) == false);
+		return (-1);
 	params++;
 	if (get_scalar(*params, &(tmp->raduis)) == -1)
 		return (-1);
@@ -49,7 +50,6 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	}
 	if (g_nb_error = -1)
 		return(-1);
-	g_nb_error = 0;
 	i++;
 	return (0);
 }

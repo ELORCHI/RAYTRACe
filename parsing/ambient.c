@@ -27,30 +27,31 @@ int	get_ambient(char **line)
 		amb = 1;
 	g_is_amb = 1;
 	if (line[1] == NULL || line[2] == NULL)
-		printf("ERROR\n in ambient: few arguments");
+		return (ft_exit("ERROR\n in ambient: few arguments"));
 	if (get_scalar(line[1], &(g_embient.ratio)) == -1)
 		return (-1);
-	if (g_embient.ratio < 0)
+	if (g_embient.ratio < 0 || g_embient.ratio > 1)
 	{
-		printf("ERROR\nambient: ambient ratio must be positive\n");
+		printf("ERROR\nambient: ratio must be positive less or equal to 1\n");
 		return (-1);
 	}
-	get_color(line[2], &(g_embient.color));
+	if (get_color(line[2], &(g_embient.color)) == false)
+		return (-1);
 	return (0);
 }
 
-int main ()
-{
-	char *line1 = ft_strdup("A 2.22, 255,255,255,");
-	char *line2 = ft_strdup("A 2.2 255,255,255");
+// int main ()
+// {
+// 	char *line1 = ft_strdup(" A 0.1 255,255,255");
+// 	char *line2 = ft_strdup("A 2.2 255,255,255");
 
-	line1 = skip_tabs(&line1);
-	line2 = skip_tabs(&line2);
+// 	line1 = skip_tabs(&line1);
+// 	line2 = skip_tabs(&line2);
 
-	char **params1 = ft_split(line1, 32);
-	char **params2 = ft_split(line2, 32);
-	get_ambient(params1);
-	print_vector(g_embient.color);
-	printf("%f\n", g_embient.ratio);
-	// get_ambient(params2);
-}
+// 	char **params1 = ft_split(line1, 32);
+// 	char **params2 = ft_split(line2, 32);
+// 	get_ambient(params1);
+// 	print_vector(g_embient.color);
+// 	printf("%f\n", g_embient.ratio);
+// 	// get_ambient(params2);
+// }
