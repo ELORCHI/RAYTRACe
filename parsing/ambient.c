@@ -24,6 +24,7 @@ void	get_ambient(char **line)
 	}
 	if (amb == 0)
 		amb = 1;
+	g_is_amb = 1;
 	if (line[1] == NULL || line[2] == NULL)
 		printf("ERROR\n in ambient: few arguments");
 	get_scalar(line[1], &(g_embient.ratio));

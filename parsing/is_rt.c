@@ -30,3 +30,12 @@ int is_rt(char *line)
 	}
 	return (1);
 }
+
+void	is_save(char *line)
+{
+	if (ft_strncmp(line, "save", 4) != 0)
+	{
+		printf("ERROR\nInvalide saving argument");
+			exit(0);
+	}
+}

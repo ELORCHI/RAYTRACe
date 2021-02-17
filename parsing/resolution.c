@@ -67,5 +67,6 @@ void	get_resolution(char **line)
 			ft_exit("RESOLUTION ERROR\nonly numbers are allowed");
 		g_resolution.vsize = ft_atoi(*line);
 	}
+	g_is_resolution = 1;
 	return (check_resolution());
 }
