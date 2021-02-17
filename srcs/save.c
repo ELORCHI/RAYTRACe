@@ -38,6 +38,7 @@ void	bmp_initialize(t_bmp *bmp)
 void	create_bmp_file(void)
 {
 	t_bmp			bmp;
+	
 	int				i;
 	int				j;
 	int				*pixel;

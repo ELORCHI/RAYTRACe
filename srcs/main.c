@@ -24,47 +24,46 @@
 void	ft_init(t_sphere **sphere)
 {
 	*sphere = (t_sphere *)malloc(sizeof(t_sphere));
-	(*sphere)->orig = (t_vector){3, 0, 0,0};
-	(*sphere)->rad  = 1;
+	(*sphere)->orig = (t_vector){-2, 2, 0,0};
+	(*sphere)->rad  = 0.5;
 	(*sphere)->color = (t_vector){1, 0, 0, 0};
 	(*sphere)->next = (t_sphere *)malloc(sizeof(t_sphere));
 	
 	t_sphere *tmp = (*sphere)->next;
-	tmp->orig = (t_vector){4, 0, 0, 0};
+	tmp->orig = (t_vector){-4, 0, 0, 0};
 	tmp->rad = 1;
 	tmp->color = (t_vector){1, 1, 1, 0};
 	tmp->next = NULL;
 
 	g_light = (t_light *)malloc(sizeof(t_light));
-	g_light->orig = (t_vector){7, 12, 0, 1};
+	g_light->orig = (t_vector){0, 20, 0, 1};
 	g_light->color = (t_vector){1, 1, 1, 0};
-	g_light->ratio = 0.5;
+	g_light->ratio = 1;
 	g_light->next = (t_light *)malloc(sizeof(t_light));
 
 	t_light *tmp_light = g_light->next;
-	tmp_light->orig = (t_vector){-1, -5, 0, 1};
+	tmp_light->orig = (t_vector){0, 2, 0, 1};
 	tmp_light->color = (t_vector){0, 0, 0, 1};
-	tmp_light->ratio = 0.1;
+	tmp_light->ratio = 0.5;
 	tmp_light->next = NULL;
 
 	g_embient.color = (t_vector){1, 1, 1, 0};
 	g_embient.ratio = 0.1;
 
-	g_resolution.hsize = 500;
-	g_resolution.vsize = 500;
-	//g_resolution.fov = 90;
+	g_resolution.hsize = 1000;
+	g_resolution.vsize = 800;
 
 	g_all_cameras = (t_camera *)malloc(sizeof(t_camera));
 	g_all_cameras->orig = (t_vector){0, 15, 0, 1};
-	g_all_cameras->dir = (t_vector){0, 0, 0, 1};
+	g_all_cameras->dir = (t_vector){-2, 2, 0, 1};
 	g_all_cameras->fov = 90;
-	g_all_cameras->next = (t_camera *)malloc(sizeof(t_camera));
+	g_all_cameras->next = NULL;//(t_camera *)malloc(sizeof(t_camera));
 
-	t_camera *test = g_all_cameras->next;
-	test->orig =  (t_vector){0, 10, 0, 1};
-	test->dir =  (t_vector){0, 0, 0, 1};
-	test->fov = 90;
-	test->next = NULL;
+	// t_camera *test = g_all_cameras->next;
+	// test->orig =  (t_vector){0, , 0, 1};
+	// test->dir =  (t_vector){0, 0, 0, 1};
+	// test->fov = 90;
+	// test->next = NULL;
 }
 
 t_intersection	intersect_objects(t_world world, t_ray ray)
@@ -73,20 +72,21 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 	t_intersection	next_hit;
 
 	last.hit = FLT_MAX;
-	next_hit = ray_sqaures_intersection(world.square, ray);
-	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-			last = next_hit;
-	next_hit = ray_triangles_intersections(ray, world.triangle);
-	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-		last = next_hit;
+	// next_hit = ray_sqaures_intersection(world.square, ray);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	// 		last = next_hit;
+	// next_hit = ray_triangles_intersections(ray, world.triangle);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	// 	last = next_hit;
 	next_hit = ray_sphere_intersection(ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
 		last = next_hit;
-	next_hit = ray_plans_intersection(world.plan, ray);
+	// next_hit = ray_plans_intersection(world.plan, ray);
+	// if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	//  	last = next_hit;
+	next_hit = ray_cylinders_intersection(world.cylinder, ray);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
 		last = next_hit;
-	// next_hit = ray_cylinders_intersection(world.cylinder, ray);
-	// 	last = next_hit;
 	if (last.hit == FLT_MAX)
 		last.hit = -1;
 	return (last);
@@ -137,7 +137,7 @@ void			next_image(t_data **tmp_img)
 		(*tmp_img)->head = g_img;
 }
 
-void			render(t_world world)
+int			render(t_world world)
 {
 	t_ray	    	ray;
 	t_intersection  intersection;
@@ -150,7 +150,7 @@ void			render(t_world world)
 	tmp = g_all_cameras;
 	
 	t_data	*tmp_img;
-	
+	g_save = 0;
 	g_img = (t_data *)malloc(sizeof(t_data));
 	g_img->next = NULL;
 	tmp_img = g_img;
@@ -187,10 +187,16 @@ void			render(t_world world)
 		tmp = tmp->next;
 	}
 	display_img = g_img;
-	mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
-	mlx_hook(g_canvas.win_ptr, 2, 0, key_press, &g_canvas.mlx_ptr);
-	mlx_hook(g_canvas.win_ptr, 17, 0, ft_quit, &g_canvas.mlx_ptr);
+	if (g_save == 1)
+	{
+		create_bmp_file();
+		return (0);
+	}
+		mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
+		mlx_hook(g_canvas.win_ptr, 2, 0, key_press, &g_canvas.mlx_ptr);
+		mlx_hook(g_canvas.win_ptr, 17, 0, ft_quit, &g_canvas.mlx_ptr);
 	mlx_loop(g_canvas.mlx_ptr);
+	return (0);
 }
 
 int 			main()
@@ -249,11 +255,12 @@ int 			main()
 
 	/////cylinder/////
 	world.cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-	world.cylinder->normal = (t_vector){3, 5, 0, 0};
-	world.cylinder->height = 4;
+	world.cylinder->normal = (t_vector){0.5, 0.5, 0, 0};
+	world.cylinder->normal = normaliz(world.cylinder->normal);
+	world.cylinder->height = 2;
 	world.cylinder->raduis = 1;
-	world.cylinder->point = (t_vector){0, 0, 0, 0};
-	world.cylinder->color = (t_vector){1, 1, 1, 0};
+	world.cylinder->point = (t_vector){0, 2, 0, 0};
+	world.cylinder->color = (t_vector){0.5, 0.5, 0, 0};
 	world.cylinder->next = (t_cylinder *)malloc(sizeof(t_cylinder));
 
 	t_cylinder *tmp_cyl = world.cylinder->next;

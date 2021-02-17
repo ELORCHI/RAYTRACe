@@ -12,12 +12,14 @@
 
 #include "libft.h"
 
-int	retur(unsigned long j, int sin)
+int	retur(unsigned long j, int sin, int nb_char)
 {
-	if (j > 2147483647 && sin == 1)
-		return (-1);
-	if (j > 2147483648 && sin == -1)
-		return (0);
+	if (nb_char > 8)
+	{
+		if (sin == -1)
+			return (-21474836);
+		return (21474836);
+	}
 	return (j * sin);
 }
 
@@ -25,6 +27,7 @@ int	ft_atoi(const char *str)
 {
 	int				i;
 	int				sin;
+	int				counter;
 	unsigned long	j;
 
 	i = 0;
@@ -42,6 +45,8 @@ int	ft_atoi(const char *str)
 	{
 		j = j * 10 + (str[i] - '0');
 		i++;
+		if (i >= 8)
+			return (retur(j, sin, i));
 	}
-	return (retur(j, sin));
+	return (retur(j, sin, i));
 }

@@ -29,9 +29,11 @@
 int 		ft_int_size(int i);
 int			is_float(char *line);
 int			get_scalar(char *line, float *scalar);
-int			nb_zeros(char *line, int nb ,int index);
-int			get_resolution(char **line);
+int			nb_zeros(char *line, int nb, int index);
 int			ft_exit(char *error_message);
+int			get_resolution(char **line);
+bool		is_number(char *line);
+int			check_resolution(void);
 bool    	get_color(char *line, t_vector *color);
 bool 		count_params(char **line, int params_number);
 float		ft_atof(char *line);
@@ -53,7 +55,8 @@ int			get_plans(t_plan **plan, char **params);
 int			get_spheres(t_sphere **sphere, char **params);
 int 		count_comas(char *line);
 
-int			g_is_amb;
-int			g_is_resolution;
-int			g_nb_error;
+int				g_is_amb;
+int				g_is_resolution;
+int				g_nb_error;
+
 #endif

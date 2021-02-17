@@ -21,10 +21,6 @@
 # include "camera.h"
 # include "triangle.h"
 # include "cylinder.h"
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include "unistd.h"
 
 typedef struct s_world
 {
@@ -34,6 +30,12 @@ typedef struct s_world
 	t_cylinder	*cylinder;
 	t_square	*square;
 }				t_world;
+
+# include "../parsing/parsing.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "unistd.h"
 
 typedef struct	s_bmp
 {
@@ -51,5 +53,6 @@ typedef struct	s_bmp
 
 t_intersection	intersect_world(t_world world, t_ray ray);
 t_intersection	intersect_objects(t_world world, t_ray ray);
-void			render(t_world world);
+void			create_bmp_file(void);
+int				render(t_world world);
 #endif

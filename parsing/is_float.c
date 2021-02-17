@@ -17,6 +17,12 @@
 //vergule must be  max to
 // only numbers are allowed after .
 
+int	ft_exit(char *error_message)
+{
+	printf("%s", error_message);
+	return (-1);
+}
+
 int	check_negative(char *line, int i, int *negative)
 {
 	if (line[i] == '-')

@@ -20,6 +20,14 @@
 # define EPSILON 0.0001
 
 
+typedef struct	s_resolution
+{
+	int 	hsize;
+	int 	vsize;
+}				t_resolution;
+
+t_resolution	g_resolution;
+
 typedef struct	s_vector
 {
 	float x;

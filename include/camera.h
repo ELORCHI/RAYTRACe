@@ -15,12 +15,6 @@
 
 # include "rt.h"
 
-typedef struct	s_resolution
-{
-	int 	hsize;
-	int 	vsize;
-}				t_resolution;
-
 typedef struct 	s_camera
 {
 	float		half_height;
@@ -38,7 +32,6 @@ typedef struct 	s_camera
 void			set_camera_view(t_vector from, t_vector to);
 void			camera(void);
 int				nb_cameras;
-t_resolution	g_resolution;
 t_camera 		*g_camera;
 t_camera		*g_all_cameras;
 #endif

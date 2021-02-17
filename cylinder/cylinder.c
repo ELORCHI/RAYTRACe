@@ -81,14 +81,14 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 	tmp_cyl = cylinder;
 	while (tmp_cyl != NULL)
 	{
-		if (if_hit(tmp_cyl, ray))// an error were here i was checking always the first cylinder
+		if (if_hit(tmp_cyl, ray))
 		{
 			finit = which_finit(tmp_cyl, ray);//also here
 			if (finit > 0 && g_intersection[0] < inter.hit)
 			{
 				inter.hit = g_intersection[0];
 				inter.point = position(ray, inter.hit);
-				inter.normal = normal_at_cylinder(tmp_cyl, inter.point);// aand here
+				inter.normal = normal_at_cylinder(tmp_cyl, inter.point);
 				inter.color = tmp_cyl->color;
 			}
 		}

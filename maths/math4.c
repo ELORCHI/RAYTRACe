@@ -47,6 +47,8 @@ bool	solve_quadratic(float a, float b, float c)
 	float min;
 	float max;
 
+	g_intersection[0] = -1;
+	g_intersection[1] = -1;
 	discr = (b * b) + (- 4 * a * c);
 	if (discr < 0)
 		return (false);
@@ -65,6 +67,10 @@ bool	solve_quadratic(float a, float b, float c)
 		g_intersection[1] = max;
 	}
 	else
+	{
+		g_intersection[0] = -1;
+		g_intersection[1] = -1;
 		return(false);
+	}
 	return (true);
 }
