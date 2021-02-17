@@ -1,6 +1,14 @@
 #include "include/world.h"
 #include "parsing/parsing.h"
 
+void	check_mandatory(void)
+{
+	if (g_is_amb == 0)
+		ft_exit("ERROR\nambient light is missing");
+	if (g_is_resolution == 0)
+		ft_exit("ERROR\nresolution is missing");
+}
+
 void	set_object(t_world **world, char **line, int last)
 {
 	char **params;
@@ -27,7 +35,6 @@ void	set_object(t_world **world, char **line, int last)
 		get_squares(&((*world)->square), params);
 	else
 		ft_exit("ERROR\n invalide object");
-	//teset if resolution on ambient are missing
 	free(*line);
 }
 
@@ -41,6 +48,7 @@ void	free_world(t_world **world)
 	free_globals();
 }
 
+//set up errno
 void	set_world(char *arg)
 {
 	int 	fd;
@@ -53,11 +61,12 @@ void	set_world(char *arg)
 	while ((i = get_next_line(fd, &line)) || i == 0)
 	{
 		set_object(&world, &line, i);
-		free(line);
 		if (i == 0)
 			break;
 	}
-	render(*world);
+	check_mandatory();
+	//check if there is no errors before rendrig
+		render(*world);
 	free_world(&world);
 }
 
@@ -65,13 +74,13 @@ int 	main(int argc, char *argv[])
 {
 	if (argc == 1)
 	{
-		save = 0;
+		g_save = 0;
 		set_world(argv[1]);
 	}
 	else if (argc == 2)
 	{
 		is_rt(argv[1]);
-		save = 1;
+		g_save = 1;
 		set_world(argv[1]);
 	}
 	else
