@@ -32,7 +32,7 @@ int is_rt(char *line)
 
 int	is_save(char *line)
 {
-	if (ft_strncmp(line, "save", 4) != 0)
+	if (ft_strncmp(line, "--save", 6) != 0)
 	{
 		printf("ERROR\nInvalide saving argument");
 		return (-1);

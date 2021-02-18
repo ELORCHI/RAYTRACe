@@ -12,12 +12,11 @@
 
 #include "parsing.h"
 
-void get_triangles(t_triangle **trinagle, char **params)
+int get_triangles(t_triangle **trinagle, char **params)
 {
 	t_triangle 	*tmp;
 	t_triangle 	*pars;
 	static int 	i = 0;
-	int 		result;
 
 	if (count_params(params, 5) == false)
 		return (-1);
@@ -43,7 +42,7 @@ void get_triangles(t_triangle **trinagle, char **params)
 		pars->next = tmp;
 	}
 	i++;
-	if (g_nb_error = -1)
+	if (g_nb_error == -1)
 		return (-1);
 	return (0);
 }

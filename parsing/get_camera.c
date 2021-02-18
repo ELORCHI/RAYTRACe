@@ -33,8 +33,8 @@ int	get_camera(char **params)
 	t_camera 	*tmp;
 	static int 	i = 0;
 
-	if (count_params(params, 4) == false);
-		retun (-1);
+	if (count_params(params, 4) == false)
+		return (-1);
 	tmp = (t_camera *)malloc(sizeof(t_camera));
 	tmp->next = NULL;
 	params++;

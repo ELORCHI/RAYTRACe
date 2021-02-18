@@ -27,7 +27,7 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	params++;
 	tmp->normal = get_vector(*params);
 	params++;
-	if (get_color(*params, &(tmp->color)) == false);
+	if (get_color(*params, &(tmp->color)) == false)
 		return (-1);
 	params++;
 	if (get_scalar(*params, &(tmp->raduis)) == -1)
@@ -35,7 +35,7 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	if (tmp->raduis < 0)
 		return (ft_exit("ERROR\ncylinder's diamertre must be positive"));
 	params++;
-	if (get_scalar(*params, &(tmp->height)) == -1);
+	if (get_scalar(*params, &(tmp->height)) == -1)
 		return (-1);
 	if (tmp->height < 0)
 		return (ft_exit("ERROT\ncylinder's hight must be positve"));
@@ -48,7 +48,7 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 			pars = pars->next;
 		pars->next = tmp;
 	}
-	if (g_nb_error = -1)
+	if (g_nb_error == -1)
 		return(-1);
 	i++;
 	return (0);

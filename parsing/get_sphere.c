@@ -18,14 +18,14 @@ int	get_spheres(t_sphere **sphere, char **params)
 	t_sphere 	*pars;
 	static int	i = 0;
 	
-	if (count_params(params, 4) == false);
+	if (count_params(params, 4) == false)
 		return (-1);
 	tmp = (t_sphere *)malloc(sizeof(t_sphere));
 	tmp->next = NULL;
 	params++;
 	tmp->orig = get_vector(*params);
 	params++;
-	if (get_scalar(*params, &(tmp->rad)));
+	if (get_scalar(*params, &(tmp->rad)))
 		return (-1);
 	if (tmp->rad < 0)
 		return (ft_exit("ERROR\n sphere raduis must be positive"));
@@ -42,7 +42,7 @@ int	get_spheres(t_sphere **sphere, char **params)
 		pars->next = tmp;
 	}
 	i = 1;
-	if (g_nb_error = -1)
+	if (g_nb_error == -1)
 		return (-1);
 	return (0);
 }

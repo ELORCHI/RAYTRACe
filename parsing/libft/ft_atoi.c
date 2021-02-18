@@ -27,7 +27,6 @@ int	ft_atoi(const char *str)
 {
 	int				i;
 	int				sin;
-	int				counter;
 	unsigned long	j;
 
 	i = 0;

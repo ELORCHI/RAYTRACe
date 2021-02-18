@@ -38,7 +38,7 @@ char	*ft_sub(char const *s, int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	if (start > ft_strlen(s) || len == 0)
+	if (start > (int)ft_strlen(s) || len == 0)
 		return (0);
 	i = 0;
 	index = start;

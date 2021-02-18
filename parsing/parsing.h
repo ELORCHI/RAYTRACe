@@ -54,9 +54,11 @@ int			get_squares(t_square **square, char **params);
 int			get_plans(t_plan **plan, char **params);
 int			get_spheres(t_sphere **sphere, char **params);
 int 		count_comas(char *line);
+int			is_save(char *line);
 
-int				g_is_amb;
-int				g_is_resolution;
-int				g_nb_error;
+int			g_is_amb;
+int			g_is_resolution;
+int			g_error;
+int			g_nb_error;
 
 #endif

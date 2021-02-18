@@ -27,7 +27,7 @@ int get_squares(t_square **square, char **params)
 	params++;
 	tmp->normal = get_vector(*params);
 	params++;
-	if (get_scalar(*params, &(tmp->side)) == -1);
+	if (get_scalar(*params, &(tmp->side)) == -1)
 		return (-1);
 	if (tmp->side < 0)
 		return (ft_exit("ERROR\n square side must be positive"));
@@ -44,7 +44,7 @@ int get_squares(t_square **square, char **params)
 		pars->next = tmp;
 	}
 	i = 1;
-	if (g_nb_error = -1)
+	if (g_nb_error == -1)
 		return (-1);
 	return (0);
 }
