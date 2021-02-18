@@ -5,11 +5,14 @@ void	free_spheres(t_sphere **sphere)
 {
 	t_sphere *tmp_sphere;
 
-	while (*sphere != NULL)
+	if (g_sphere == 1)
 	{
-		tmp_sphere = *sphere;
-		*sphere = (*sphere)->next;
-		free(tmp_sphere);
+		while (*sphere)
+		{
+			tmp_sphere = *sphere;
+			*sphere = (*sphere)->next;
+			free(tmp_sphere);
+		}
 	}
 }
 
@@ -32,11 +35,14 @@ void	free_triangles(t_triangle **tr)
 {
 	t_triangle *tmp_tr;
 
-	while (*tr)
+	if (g_tr == 1)
 	{
-		tmp_tr = *tr;
-		*tr = (*tr)->next;
-		free(tmp_tr);
+		while (*tr)
+		{
+			tmp_tr = *tr;
+			*tr = (*tr)->next;
+			free(tmp_tr);
+		}
 	}
 }
 
@@ -44,11 +50,14 @@ void	free_cylinders(t_cylinder **cylinder)
 {
 	t_cylinder *tmp_cy;
 
-	while (*cylinder)
+	if (g_cyl == 1)
 	{
-		tmp_cy = *cylinder;
-		*cylinder = (*cylinder)->next;
-		free(tmp_cy);
+		while (*cylinder)
+		{
+			tmp_cy = *cylinder;
+			*cylinder = (*cylinder)->next;
+			free(tmp_cy);
+		}
 	}
 }
 
@@ -56,11 +65,14 @@ void	free_squares(t_square **square)
 {
 	t_square *tmp_sq;
 
-	while (*square)
+	if (g_sq == 1)
 	{
-		tmp_sq = *square;
-		*square = (*square)->next;
-		free(tmp_sq);
+		while (*square)
+		{
+			tmp_sq = *square;
+			*square = (*square)->next;
+			free(tmp_sq);
+		}
 	}
 }
 
@@ -68,10 +80,13 @@ void	free_planes(t_plan **plan)
 {
 	t_plan *tmp_plan;
 
-	while (*plan)
+	if (g_plan == 1)
 	{
-		tmp_plan = *plan;
-		*plan = (*plan)->next;
-		free(tmp_plan);
+		while (*plan)
+		{
+			tmp_plan = *plan;
+			*plan = (*plan)->next;
+			free(tmp_plan);
+		}
 	}
 }

@@ -28,6 +28,7 @@ int get_plans(t_plan **plan, char **params)
 	if (count_params(params, 4) == false)
 		return (-1);
 	tmp = (t_plan *)malloc(sizeof(t_plan));
+	g_plan = 1;
 	tmp->next = NULL;
 	params++;
 	tmp->point = get_vector(*params);

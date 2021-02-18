@@ -21,19 +21,19 @@ int	get_resolution(char **line)
 	if (reso == 0)
 		reso = 1;
 	else
-		return (ft_exit("resolutio ERROR\none resolution is allowed"));
+		return (ft_exit("ERROR\none resolution is allowed"));
 	line++;
 	if (*line != NULL)
 	{
 		if (!is_number(*line))
-			return (ft_exit("RESOLUTION ERROR\nonly numbers are allowed"));
+			return (ft_exit("ERROR\nonly numbers are allowed"));
 		g_resolution.hsize = ft_atoi(*line);
 	}
 	line++;
 	if (*line != NULL)
 	{		
 		if (!is_number(*line))
-			return	(ft_exit("RESOLUTION ERROR\nonly numbers are allowed"));
+			return	(ft_exit("ERROR\nonly numbers are allowed"));
 		g_resolution.vsize = ft_atoi(*line);
 	}
 	g_is_resolution = 1;
@@ -52,7 +52,7 @@ int	check_resolution(void)
 {
 	if (g_resolution.hsize <= 0 || g_resolution.vsize <= 0)
 	{
-		return (ft_exit("ERROR IN RESOLUTION\nresolution must be strictly positive"));
+		return (ft_exit("ERROR\nresolution must be strictly positive"));
 	}
 	screen_resolution();
 	return (0);

@@ -22,6 +22,7 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	count_params(params, 6);
 	params++;
 	tmp = (t_cylinder*)malloc(sizeof(t_cylinder));
+	g_cyl = 1;
 	tmp->next = NULL;
 	tmp->point = get_vector(*params);
 	params++;

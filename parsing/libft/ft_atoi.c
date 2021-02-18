@@ -14,7 +14,7 @@
 
 int	retur(unsigned long j, int sin, int nb_char)
 {
-	if (nb_char > 8)
+	if (nb_char >= 8 && j > 21474836)
 	{
 		if (sin == -1)
 			return (-21474836);
@@ -44,8 +44,16 @@ int	ft_atoi(const char *str)
 	{
 		j = j * 10 + (str[i] - '0');
 		i++;
-		if (i >= 8)
+		if (i >= 8 && j > 21474836)
 			return (retur(j, sin, i));
 	}
 	return (retur(j, sin, i));
+}
+
+int main()
+{
+	char *test = "5123697400023145698710";
+
+	int i = ft_atoi(test);
+	printf("%i", i);
 }

@@ -60,5 +60,11 @@ int			g_is_amb;
 int			g_is_resolution;
 int			g_error;
 int			g_nb_error;
-
+int			g_sphere;
+int			g_tr;
+int			g_cyl;
+int			g_li;
+int			g_sq;
+int			g_plan;
+int			g_ca;
 #endif

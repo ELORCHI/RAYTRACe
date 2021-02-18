@@ -1,5 +1,5 @@
 
+	bmp file										== finished			==
 	create world from rt_scene						== not tested		==
 	free and exit problem							== not tested		==
-	bmp file										== not tested yet	==
 	makefile										== not finished yet ==

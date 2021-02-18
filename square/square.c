@@ -138,6 +138,7 @@ t_intersection	ray_sqaures_intersection(t_square *square, t_ray ray)
 	inter.hit = FLT_MAX;
 	while (square != NULL)
 	{
+		square->normal = normaliz(square->normal);
 		*plan = plan_sqaure(square);
 		plan->next = NULL;
 		inter_plan = ray_plans_intersection(plan, ray);

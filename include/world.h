@@ -22,6 +22,7 @@
 # include "triangle.h"
 # include "cylinder.h"
 
+
 typedef struct s_world
 {
 	t_sphere	*sphere;
@@ -51,8 +52,11 @@ typedef struct	s_bmp
 	int			pos;
 }				t_bmp;
 
+int				g_free;
+
 t_intersection	intersect_world(t_world world, t_ray ray);
 t_intersection	intersect_objects(t_world world, t_ray ray);
-void			create_bmp_file(void);
-int				render(t_world world);
+void			free_world(t_world *world);
+int				create_bmp_file(void);
+int				render(t_world **world);
 #endif

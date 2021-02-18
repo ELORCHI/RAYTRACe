@@ -21,6 +21,7 @@ int get_squares(t_square **square, char **params)
 	if (count_params(params, 5) == false )
 		return (-1);
 	tmp = (t_square *)malloc(sizeof(t_square));
+	g_plan = 1;
 	tmp->next = NULL;
 	params++;
 	tmp->center = get_vector(*params);

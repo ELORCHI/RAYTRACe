@@ -17,6 +17,7 @@ int	get_light(char **params)
 
 	count_params(params, 4);
 	tmp = (t_light *)malloc(sizeof(t_light));
+	g_li = 1;
 	ft_init_light(tmp);
 	params++;
 	tmp->orig = get_vector(*params);

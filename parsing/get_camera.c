@@ -36,6 +36,7 @@ int	get_camera(char **params)
 	if (count_params(params, 4) == false)
 		return (-1);
 	tmp = (t_camera *)malloc(sizeof(t_camera));
+	g_ca = 1;
 	tmp->next = NULL;
 	params++;
 	tmp->orig = get_vector(*params);

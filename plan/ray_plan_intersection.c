@@ -45,12 +45,13 @@ t_intersection	ray_plans_intersection(t_plan *plan, t_ray ray)
 	t_vector		origin_point;
 	t_intersection 	inter;
 	t_plan			*tmp_plan;
-	
+
 	tmp_plan = plan;
 	inter.hit = FLT_MAX;
 
 	while (tmp_plan != NULL)
 	{
+		tmp_plan->normal = normaliz(tmp_plan->normal);
 		denom = dot_product(ray.dir, tmp_plan->normal);
 		if (fabsf(denom) > EPSILON)
 		{

@@ -36,4 +36,5 @@ typedef struct 	s_vertex
 }				t_vertex;
 
 t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle);
+t_vector		normal_tr(t_triangle tr);
 #endif

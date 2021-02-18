@@ -21,6 +21,7 @@ int get_triangles(t_triangle **trinagle, char **params)
 	if (count_params(params, 5) == false)
 		return (-1);
 	tmp = (t_triangle *)malloc(sizeof(t_triangle));
+	g_tr = 1;
 	tmp->next = NULL;
 	params++;
 	tmp->p1 = get_vector(*params);

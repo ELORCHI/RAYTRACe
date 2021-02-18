@@ -2,7 +2,19 @@
 #include "../include/ray.h"
 #include "../include/plan.h"
 
-void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
+t_vector	normal_tr(t_triangle tr)
+{
+	t_vector vec1;
+	t_vector vec2;
+	t_vector normal;
+
+	vec1 = point_vector(tr.p1, tr.p2);
+	vec2 = point_vector(tr.p1, tr.p3);
+	normal = normaliz(cross_product(vec1, vec2));
+	return (normal);
+}
+
+void		check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 {
 	static float 	near = FLT_MAX;
 	static int		i = 0;
@@ -12,7 +24,7 @@ void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 	{
 		inter->point = position(ray, inter->hit);
 		inter->color = tr->color;
-		inter->normal = tr->normal;
+		inter->normal = normal_tr(*tr);
 		near = inter->hit;
 	}
 	if (i == 1)
@@ -21,7 +33,7 @@ void	check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 		i = 1;
 }
 
-t_vertex	helper(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
+t_vertex	help(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
 {
 	t_vertex vertex;
 
@@ -60,7 +72,7 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 	{
 		while (1)
 		{
-			vertex = helper(tmp_tr, &cross, &dot, ray);
+			vertex = help(tmp_tr, &cross, &dot, ray);
 			if (dot > -EPSILON && dot < EPSILON)
 				break;
 			dot = 1.0 / dot;

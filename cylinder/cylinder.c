@@ -81,9 +81,10 @@ t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 	tmp_cyl = cylinder;
 	while (tmp_cyl != NULL)
 	{
+		tmp_cyl->normal = normaliz(tmp_cyl->normal);
 		if (if_hit(tmp_cyl, ray))
 		{
-			finit = which_finit(tmp_cyl, ray);//also here
+			finit = which_finit(tmp_cyl, ray);
 			if (finit > 0 && g_intersection[0] < inter.hit)
 			{
 				inter.hit = g_intersection[0];
