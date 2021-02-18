@@ -35,7 +35,12 @@ void	bmp_initialize(t_bmp *bmp)
 	ft_memcpy(bmp->header + 34, &bmp->imagesize, 4);
 }
 
-void	create_bmp_file(void)
+void	free_images()
+{
+	//free_imgaes;
+}
+
+int		create_bmp_file(void)
 {
 	t_bmp			bmp;
 	
@@ -60,4 +65,6 @@ void	create_bmp_file(void)
 		j--;
 	}
 	close(bmp.fd);
+	free_images();
+	return (0);
 }
