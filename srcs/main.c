@@ -116,11 +116,11 @@ int				key_press(int keycode)
 		exit(0);
 	if (keycode == 123)
 	{
-		if (display_img->next == NULL)
-			display_img = g_img;
+		if (g_display_img->next == NULL)
+			g_display_img = g_img;
 		else
-			display_img = display_img->next;
-		mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
+			g_display_img = g_display_img->next;
+		mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, g_display_img->img, 0, 0);
 	}
 	return (0);
 }
@@ -199,10 +199,11 @@ int			render(t_world **world)
 			next_image(&tmp_img);
 		tmp = tmp->next;
 	}
-	display_img = g_img;
+	g_display_img = g_img;
 	if (g_save == 1)
 		return (create_bmp_file());
-	mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, display_img->img, 0, 0);
+	if (g_all_cameras != NULL)
+		mlx_put_image_to_window(g_canvas.mlx_ptr, g_canvas.win_ptr, g_display_img->img, 0, 0);
 	mlx_hook(g_canvas.win_ptr, 2, 0, key_press, &g_canvas.mlx_ptr);
 	mlx_hook(g_canvas.win_ptr, 17, 0, ft_quit, &g_canvas.mlx_ptr);
 	mlx_loop(g_canvas.mlx_ptr);
