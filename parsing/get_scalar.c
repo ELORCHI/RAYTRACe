@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int get_scalar(char *line, float *scalar)
+int	get_scalar(char *line, float *scalar)
 {
 	int i;
 
@@ -28,4 +28,3 @@ int get_scalar(char *line, float *scalar)
 	*scalar = atof(line);
 	return (i);
 }
-

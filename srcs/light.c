@@ -42,10 +42,8 @@ t_vector	defuse(t_intersection inter, t_ray ray, t_world world)
 	float		dot;
 
 	t_intersection test = inter;
-
 	defuse_ = (t_vector){0, 0, 0, 0};
 	tmp_light = g_light;
-
 	dot = dot3(inter.normal, ray.dir);
 	if (dot >= 0)
 		inter.normal =  multp_vectors(inter.normal, -1);

@@ -19,7 +19,7 @@ bool	check_color_elements(int point)
 	return (true);
 }
 
-int		nb_zeros(char *line, int nb ,int index)
+int		nb_zeros(char *line, int nb, int index)
 {
 	int zeros;
 
@@ -36,14 +36,14 @@ int		nb_zeros(char *line, int nb ,int index)
 
 bool	is_color(char *line)
 {
-	int i = 0;
+	int i;
 	int point;
 
 	point = 0;
 	i = -1;
 	while (line[++i] != '\0')
 	{
-		if ((ft_isdigit(line[i]) == 1) || line[i] == ',' )
+		if ((ft_isdigit(line[i]) == 1) || line[i] == ',')
 		{
 			if (line[i] == ',')
 			{
@@ -90,8 +90,8 @@ void	norm_color(t_vector *color)
 
 bool	get_color(char *line, t_vector *color)
 {
-	int			tmp;
-	int 		int_len;
+	int tmp;
+	int	int_len;
 
 	if (is_color(line) == false)
 	{
@@ -106,13 +106,10 @@ bool	get_color(char *line, t_vector *color)
 	color->y = tmp;
 	tmp = ft_atoi(line + int_len + 1);
 	color->z = tmp;
-	color->w = 0;	
+	color->w = 0;
 	if (is_rgb(*color) == true)
 	{
-		print_vector(*color);
 		norm_color(color);
-		printf("=after=\n");
-		print_vector(*color);
 		return (true);
 	}
 	else

@@ -59,4 +59,7 @@ t_intersection	intersect_objects(t_world world, t_ray ray);
 void			free_world(t_world *world);
 int				create_bmp_file(void);
 int				render(t_world **world);
+void			check_mandatory(void);
+void 			init_world(t_world *world);
+void			ft_free(char **to_free);
 #endif

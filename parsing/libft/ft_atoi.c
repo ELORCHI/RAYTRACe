@@ -49,11 +49,3 @@ int	ft_atoi(const char *str)
 	}
 	return (retur(j, sin, i));
 }
-
-int main()
-{
-	char *test = "5123697400023145698710";
-
-	int i = ft_atoi(test);
-	printf("%i", i);
-}

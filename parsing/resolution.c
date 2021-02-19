@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int	get_resolution(char **line)
+int		get_resolution(char **line)
 {
 	static int reso = 0;
 
@@ -21,19 +21,19 @@ int	get_resolution(char **line)
 	if (reso == 0)
 		reso = 1;
 	else
-		return (ft_exit("ERROR\none resolution is allowed"));
+		return (ft_exit("ERROR\none resolution is allowed\n"));
 	line++;
 	if (*line != NULL)
 	{
 		if (!is_number(*line))
-			return (ft_exit("ERROR\nonly numbers are allowed"));
+			return (ft_exit("ERROR\nonly numbers are allowed\n"));
 		g_resolution.hsize = ft_atoi(*line);
 	}
 	line++;
 	if (*line != NULL)
-	{		
+	{
 		if (!is_number(*line))
-			return	(ft_exit("ERROR\nonly numbers are allowed"));
+			return (ft_exit("ERROR\nonly numbers are allowed\n"));
 		g_resolution.vsize = ft_atoi(*line);
 	}
 	g_is_resolution = 1;
@@ -48,7 +48,7 @@ void	screen_resolution(void)
 		g_resolution.vsize = 1400;
 }
 
-int	check_resolution(void)
+int		check_resolution(void)
 {
 	if (g_resolution.hsize <= 0 || g_resolution.vsize <= 0)
 	{

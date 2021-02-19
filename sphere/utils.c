@@ -13,53 +13,11 @@
 #include "../include/sphere.h"
 #include "../include/rt.h"
 #include "../include/camera.h"
-/*void		sphere_transform(t_sphere *sphere)
-{
-
-}*/
-
-/*t_vector	normal_at(t_sphere sphere, t_vector world_point)
-{
-	t_vector object_point;
-	t_vector object_normal;
-	t_vector world_normal;
-	t_mat4x4 inverse;
-
-	inverse = identity_mat();
-	//inverse_4x4(&inverse, &(sphere.trans));
-	object_point = mat_vec_multi(inverse, world_point);
-	object_normal = point_vector(sphere.orig, object_point);
-	world_normal = mat_vec_multi(transpose(inverse), object_normal);
-	world_normal.w = 0;
-	world_normal = normaliz(world_normal);
-	return (world_normal);
-}*/
 
 t_vector	normal_at(t_sphere sphere, t_vector hit_point)
 {
 	t_vector normal;
 
-	normal = normaliz(point_vector(sphere.orig,  hit_point));
-	//normal = mat_vec_multi(g_camera.view, normal);
+	normal = normaliz(point_vector(sphere.orig, hit_point));
 	return (normal);
 }
-
-t_sphere	*next_sphere(t_sphere *sphere)
-{
-	t_sphere *next;
-	next = NULL;
-	if (sphere->next != NULL)
-		next = sphere->next;
-	return (next);
-}
-
-t_sphere 	*add_sphere(t_sphere *first)
-{
-	t_sphere *new;
-
-	new = (t_sphere *)malloc(sizeof(t_sphere));
-	first->next = new;
-	//new->trans = identity_mat();
-	return (new);
-}
-

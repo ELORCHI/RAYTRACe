@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tr.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 10:01:19 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 10:01:21 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/triangle.h"
 #include "../include/ray.h"
 #include "../include/plan.h"
 
-t_vector	normal_tr(t_triangle tr)
+t_vector		normal_tr(t_triangle tr)
 {
 	t_vector vec1;
 	t_vector vec2;
@@ -14,9 +26,9 @@ t_vector	normal_tr(t_triangle tr)
 	return (normal);
 }
 
-void		check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
+void			check(t_intersection *inter, t_ray ray, t_triangle *tr)
 {
-	static float 	near = FLT_MAX;
+	static float	near = FLT_MAX;
 	static int		i = 0;
 
 	near = FLT_MAX;
@@ -33,7 +45,7 @@ void		check(t_vertex vertex, t_intersection *inter, t_ray ray, t_triangle *tr)
 		i = 1;
 }
 
-t_vertex	help(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
+t_vertex		help(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
 {
 	t_vertex vertex;
 
@@ -44,25 +56,23 @@ t_vertex	help(t_triangle *tr, t_vector *cross, float *dot, t_ray ray)
 	return (vertex);
 }
 
-int				for_normintte(t_vertex *vertex, t_vector *cross, t_ray ray, float *dot)
+int				for_norm(t_vertex *ver, t_vector *cross, t_ray ray, float *dot)
 {
-
-	vertex->u = (*dot) * dot_product(vertex->ray_to_tr, *cross);
-	if (vertex->u < 0.0 || vertex->u > 1.0)
-				return 0;
-	*cross = cross_product(vertex->edge1, vertex->ray_to_tr);
-	vertex->v = (*dot) * dot_product(ray.dir, *cross);
-	if (vertex->v < 0.0 || (vertex->v + vertex->u > 1.0))
+	ver->u = (*dot) * dot_product(ver->ray_to_tr, *cross);
+	if (ver->u < 0.0 || ver->u > 1.0)
+		return (0);
+	*cross = cross_product(ver->edge1, ver->ray_to_tr);
+	ver->v = (*dot) * dot_product(ray.dir, *cross);
+	if (ver->v < 0.0 || (ver->v + ver->u > 1.0))
 		return (0);
 	return (1);
 }
 
-
 t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 {
-	t_vertex	 	vertex;
-	t_vector	 	cross;
-	t_intersection 	inter;
+	t_vertex		vertex;
+	t_vector		cross;
+	t_intersection	inter;
 	t_triangle		*tmp_tr;
 	float			dot;
 
@@ -74,14 +84,14 @@ t_intersection	ray_triangles_intersections(t_ray ray, t_triangle *triangle)
 		{
 			vertex = help(tmp_tr, &cross, &dot, ray);
 			if (dot > -EPSILON && dot < EPSILON)
-				break;
+				break ;
 			dot = 1.0 / dot;
 			vertex.ray_to_tr = point_vector(tmp_tr->p1, ray.orig);
-			if (for_normintte(&vertex, &cross, ray, &dot) == 0)
-				break;
+			if (for_norm(&vertex, &cross, ray, &dot) == 0)
+				break ;
 			inter.hit = dot * dot_product(cross, vertex.edge2);
-			check(vertex, &inter, ray, tmp_tr);
-			break;
+			check(&inter, ray, tmp_tr);
+			break ;
 		}
 		tmp_tr = tmp_tr->next;
 	}

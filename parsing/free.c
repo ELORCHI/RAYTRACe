@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 10:25:12 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 10:25:15 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
-// not tested yet
 void	free_spheres(t_sphere **sphere)
 {
 	t_sphere *tmp_sphere;
@@ -15,21 +26,6 @@ void	free_spheres(t_sphere **sphere)
 		}
 	}
 }
-
-//this  is not working
-// void	free_objects(void **object)
-// {
-// 	void *tmp_object;
-// 	void *tmp_next;
-
-// 	while (*object)
-// 	{
-// 		tmp_object = *object;
-// 		tmp_next = (void *)(*object)->((void *)next)
-// 		*object = tmp_next;
-// 		free(tmp_object);
-// 	}
-// }
 
 void	free_triangles(t_triangle **tr)
 {
