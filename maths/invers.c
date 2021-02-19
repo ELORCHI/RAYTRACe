@@ -12,6 +12,7 @@
 
 #include "../include/rt.h"
 #include <stdio.h>
+
 float	determinant_2x2(t_mat2x2 *mat2)
 {
 	float deter;
@@ -23,8 +24,8 @@ float	determinant_2x2(t_mat2x2 *mat2)
 float	determinant_3x3(t_mat3x3 *mat3, int colomn)
 {
 	int			i;
-	float 		deter;
-	float 		cofactor;
+	float		deter;
+	float		cofactor;
 
 	deter = 0;
 	cofactor = 0;
@@ -33,7 +34,7 @@ float	determinant_3x3(t_mat3x3 *mat3, int colomn)
 		colomn--;
 	while (i < 3)
 	{
-		cofactor = cofactor_3x3(mat3, colomn,i);
+		cofactor = cofactor_3x3(mat3, colomn, i);
 		deter += cofactor;
 		i++;
 	}
@@ -42,7 +43,7 @@ float	determinant_3x3(t_mat3x3 *mat3, int colomn)
 
 float	determinant_4x4(t_mat4x4 *mat4, int colomn)
 {
-	int 		i;
+	int			i;
 	float		deter;
 	float		cofactor;
 
@@ -60,10 +61,10 @@ float	determinant_4x4(t_mat4x4 *mat4, int colomn)
 
 bool	inverse_4x4(t_mat4x4 *inverse, t_mat4x4 *mat)
 {
-	float 		deter;
+	float		deter;
 	int			i;
 	int			row;
-	t_vector 	*vec;
+	t_vector	*vec;
 
 	i = 0;
 	row = 0;
@@ -81,6 +82,6 @@ bool	inverse_4x4(t_mat4x4 *inverse, t_mat4x4 *mat)
 		vec->w = cofactor_4x4(mat, i, ++row, 0) * deter;
 		i++;
 	}
-	*inverse = transpose(*inverse); 
+	*inverse = transpose(*inverse);
 	return (true);
 }

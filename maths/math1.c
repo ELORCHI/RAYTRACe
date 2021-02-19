@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 18:41:12 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 18:41:15 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-float		floatcmp(float a, float b)
+float	floatcmp(float a, float b)
 {
 	if (fabs(a - b) >= EPSILON)
 		return (b);

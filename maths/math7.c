@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math7.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 19:00:49 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 19:00:50 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -21,8 +33,7 @@ t_mat3x3	mat3_creat(t_vec3 v1, t_vec3 v2, t_vec3 v3)
 	return (mat);
 }
 
-
-float			element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
+float		element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
 {
 	float		element;
 	static int	i = 0;
@@ -30,8 +41,7 @@ float			element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
 
 	element = 0.1123;
 	vec = ((t_vector *)mat + colomn);
-	if (i != 0)
-		row += i;
+	row += (i != 0) ? i : 0;
 	if (row == skip)
 	{
 		i++;
@@ -45,27 +55,24 @@ float			element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
 		element = vec->z;
 	else if (row == 3)
 		element = vec->w;
-	if (row == 3)
-		i = 0;
+	i = (row == 3) ? 0 : i;
 	return (element);
 }
 
 t_mat3x3	sub_mat4x4(t_mat4x4 *mat4, int colomn, int row)
 {
-	int 		i;
+	int			i;
 	int			help;
 	int			j;
 	t_mat3x3	sub;
 	t_vec3		vec;
-	int t = row;
 
 	i = 0;
 	help = 0;
 	while (i <= 3)
 	{
-	    j = -1;
-	    if (i == colomn && i < 3)
-		    i++;
+		j = -1;
+		i = (i == colomn && i < 3) ? i++ : i;
 		vec.x = element_4x4(mat4, i, ++j, row);
 		vec.y = element_4x4(mat4, i, ++j, row);
 		vec.z = element_4x4(mat4, i, ++j, row);
@@ -92,7 +99,7 @@ float		element_3x3(t_mat3x3 *mat, int colomn, int row, int row2)
 		colomn--;
 	vec = ((t_vec3 *)mat + colomn);
 	if (i != 0)
-		row +=i; 
+		row += i;
 	if (row == row2)
 	{
 		i++;

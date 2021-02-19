@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math9.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 19:12:12 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 19:12:15 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -53,7 +65,7 @@ void		scale_mat4(t_mat4x4 *mat, float scalar)
 
 float		minor_3x3(t_mat3x3 *mat3, int colomn, int row)
 {
-	float 		minor;
+	float		minor;
 	t_mat2x2	mat2;
 
 	minor = element_3x3(mat3, colomn, row, 110);

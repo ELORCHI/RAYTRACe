@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math5.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 18:56:30 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 18:56:33 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-t_vector vec4_creat(float a, float b, float c, float d)
+t_vector	vec4_creat(float a, float b, float c, float d)
 {
 	t_vector vec;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math4.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/19 18:47:44 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/19 18:47:48 by eel-orch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/rt.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -25,21 +37,13 @@ t_vector	div_vectors(t_vector vec, float scalar)
 	return (multp_vectors(vec, scalar));
 }
 
-float	*mini_sort(float *tab)
+void		fill_for_morm_shit(float x1, float x2)
 {
-	float tmp;
-
-	tmp = tab[0];
-	if (floatcmp(tab[0], tab[1]) > 0)
-	{
-		tab[0] = tab[1];
-		tab[1] = tmp;
-		return (tab);
-	}
-	return (tab);
+	g_intersection[0] = x1;
+	g_intersection[1] = x2;
 }
 
-bool	solve_quadratic(float a, float b, float c)
+bool		solve_quadratic(float a, float b, float c)
 {
 	float discr;
 	float x;
@@ -47,30 +51,22 @@ bool	solve_quadratic(float a, float b, float c)
 	float min;
 	float max;
 
-	g_intersection[0] = -1;
-	g_intersection[1] = -1;
-	discr = (b * b) + (- 4 * a * c);
+	fill_for_morm_shit(-1, -1);
+	discr = (b * b) + (-4 * a * c);
 	if (discr < 0)
 		return (false);
-	x = 0.5 * (- b - sqrt(discr)) / a;
-	y = 0.5 * (- b + sqrt(discr)) / a;
+	x = 0.5 * (-b - sqrt(discr)) / a;
+	y = 0.5 * (-b + sqrt(discr)) / a;
 	min = fminf(x, y);
 	max = fmaxf(x, y);
 	if (min >= 0)
-	{
-		g_intersection[0] = min;
-		g_intersection[1] = max;	
-	}
+		fill_for_morm_shit(min, max);
 	else if (max >= 0)
-	{
-		g_intersection[0] = max;
-		g_intersection[1] = max;
-	}
+		fill_for_morm_shit(max, max);
 	else
 	{
-		g_intersection[0] = -1;
-		g_intersection[1] = -1;
-		return(false);
+		fill_for_morm_shit(-1, -1);
+		return (false);
 	}
 	return (true);
 }
