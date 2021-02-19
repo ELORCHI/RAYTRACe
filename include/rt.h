@@ -118,7 +118,7 @@ float 		g_intersection[2];
 
 t_mlx		g_canvas;
 t_data		*g_img;
-t_data		*display_img;
+t_data		*g_display_img;
 int			g_save;
 
 int			create_trgb(t_vector color);

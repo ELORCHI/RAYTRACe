@@ -27,7 +27,7 @@ void	check_mandatory(void)
 	}
 }
 
-void 	init_world(t_world *world)
+void	init_world(t_world *world)
 {
 	world->sphere = NULL;
 	world->plan = NULL;
@@ -47,4 +47,23 @@ void	ft_free(char **to_free)
 		i++;
 	}
 	free(to_free);
+}
+
+void	noghmizete(t_world **world)
+{
+	if (g_error == 1)
+		free_world(*world);
+	else
+		render(world);
+}
+
+void	free_world(t_world *world)
+{
+	free_spheres(&(world->sphere));
+	free_planes(&(world->plan));
+	free_cylinders(&(world->cylinder));
+	free_squares(&(world->square));
+	free_triangles(&(world->triangle));
+	free_globals();
+	free(world);
 }

@@ -62,4 +62,6 @@ int				render(t_world **world);
 void			check_mandatory(void);
 void 			init_world(t_world *world);
 void			ft_free(char **to_free);
+void			free_world(t_world *world);
+void			noghmizete(t_world **world);
 #endif
