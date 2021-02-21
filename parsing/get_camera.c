@@ -15,22 +15,25 @@
 void	add_cameras(t_camera **tmp)
 {
 	t_camera *pars;
-	t_camera *prev;
 
 	pars = g_all_cameras;
 	while (pars->next != NULL)
-	{
-		prev = pars;
 		pars = pars->next;
-	}
-	(*tmp)->previous = prev;
 	pars->next = *tmp;
 }
 
-int	get_camera(char **params)
+int		result_camera(void)
 {
-	t_camera 	*tmp;
-	static int 	i = 0;
+	if( g_nb_error == -1)
+		return (-1);
+	g_nb_error = 0;
+	return (0);
+}
+
+int		get_camera(char **params)
+{
+	t_camera	*tmp;
+	static int	i = 0;
 
 	if (count_params(params, 4) == false)
 		return (-1);
@@ -49,15 +52,9 @@ int	get_camera(char **params)
 	if (tmp->fov < 0 || tmp->fov > 180)
 		return (ft_exit("ERROR\n FOV must be positive less tha 180 degres"));
 	if (i == 0)
-	{
 		g_all_cameras = tmp;
-		g_all_cameras->previous = NULL;
-	}
 	else
 		add_cameras(&tmp);
 	i++;
-	if (g_nb_error == -1)
-		return (-1);
-	g_nb_error = 0;
-	return (0);
+	return (result_camera());
 }
