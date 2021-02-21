@@ -12,12 +12,12 @@
 
 #include "../include/rt.h"
 
-t_vector 	normaliz_color(t_vector color)
+t_vector	normaliz_color(t_vector color)
 {
 	t_vector new;
 
 	new.x = fminf(color.x, 1);
-	new.y =	fminf(color.y, 1);
+	new.y = fminf(color.y, 1);
 	new.z = fminf(color.z, 1);
 	new.w = 0;
 	return (new);
@@ -35,21 +35,26 @@ t_vector	add_colors(t_vector color1, t_vector color2)
 
 int			create_trgb(t_vector color)
 {
-	int r = floorf(color.x * 255);
-	int g = floorf(color.y * 255);
-	int b = floorf(color.z * 255);
-	return((r << 16) | (g << 8) | b);
+	int r;
+	int g;
+	int b;
+
+	r = floorf(color.x * 255);
+	g = floorf(color.y * 255);
+	b = floorf(color.z * 255);
+	return ((r << 16) | (g << 8) | b);
 }
 
 void		my_mlx_pixel_put(t_mlx canvas, int color, t_data **img)
 {
 	char *dst;
 
-	dst = (*img)->addr + (canvas.y * (*img)->line_length + canvas.x *((*img)->bits_per_pixel / 8));
+	dst = (*img)->addr +
+	(canvas.y * (*img)->line_length + canvas.x * ((*img)->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
-void	ft_draw(t_mlx canvas, t_vector color, int is_black, t_data **img)
+void		ft_draw(t_mlx canvas, t_vector color, int is_black, t_data **img)
 {
 	int int_color;
 

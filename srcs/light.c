@@ -25,7 +25,7 @@ t_vector	embient(t_vector inter_color)
 	return (embient_color);
 }
 
-float	dot3(t_vector vec1, t_vector vec2)
+float		dot3(t_vector vec1, t_vector vec2)
 {
 	float dot;
 
@@ -35,18 +35,17 @@ float	dot3(t_vector vec1, t_vector vec2)
 
 t_vector	defuse(t_intersection inter, t_ray ray, t_world world)
 {
-	t_vector 	light_dir;
+	t_vector	light_dir;
 	t_vector	defuse_;
 	t_vector	tmp_shade;
 	t_light		*tmp_light;
 	float		dot;
 
-	t_intersection test = inter;
 	defuse_ = (t_vector){0, 0, 0, 0};
 	tmp_light = g_light;
 	dot = dot3(inter.normal, ray.dir);
 	if (dot >= 0)
-		inter.normal =  multp_vectors(inter.normal, -1);
+		inter.normal = multp_vectors(inter.normal, -1);
 	while (tmp_light != NULL)
 	{
 		is_shadow(world, &inter, tmp_light);

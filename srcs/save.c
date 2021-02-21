@@ -15,6 +15,7 @@
 void	bmp_initialize(t_bmp *bmp)
 {
 	int i;
+
 	i = 0;
 	bmp->bitcount = 32;
 	bmp->imagesize = g_resolution.hsize * g_resolution.vsize * 4;
@@ -35,18 +36,25 @@ void	bmp_initialize(t_bmp *bmp)
 	ft_memcpy(bmp->header + 34, &bmp->imagesize, 4);
 }
 
-void	free_images()
+void	free_images(void)
 {
-	//free_imgaes;
+	t_data *tmp;
+
+	while (g_img != NULL)
+	{
+		tmp = g_img;
+		g_img = g_img->next;
+		free(tmp);
+	}
 }
 
 int		create_bmp_file(void)
 {
 	t_bmp			bmp;
-	
 	int				i;
 	int				j;
 	int				*pixel;
+
 	i = 0;
 	bmp_initialize(&bmp);
 	j = g_resolution.vsize - 1;

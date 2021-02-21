@@ -12,23 +12,24 @@
 
 #include "../include/camera.h"
 
-void	camera()
+void	camera(void)
 {
 	float half_view;
 	float aspect;
 
-	g_camera->fov *= (M_PI / 180); 
+	g_camera->fov *= (M_PI / 180);
 	half_view = tan(g_camera->fov / 2);
 	aspect = (float)g_resolution.hsize / (float)g_resolution.vsize;
 	if (aspect >= 1.0f)
 	{
 		g_camera->half_width = half_view;
-		g_camera->half_height = (half_view / aspect);		
+		g_camera->half_height = (half_view / aspect);
 	}
 	else
 	{
-		g_camera->half_width  = half_view * aspect;
+		g_camera->half_width = half_view * aspect;
 		g_camera->half_height = half_view;
 	}
-	g_camera->pixel_size = (g_camera->half_width * 2) / (float)(g_resolution.hsize);
+	g_camera->pixel_size =
+	(g_camera->half_width * 2) / (float)(g_resolution.hsize);
 }

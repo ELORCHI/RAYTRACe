@@ -18,35 +18,48 @@
 t_vector	adjust_intersection(t_intersection inter)
 {
 	t_vector result;
+
 	result = add_vectors(multp_vectors(inter.normal, 0.01), inter.point);
 	result.w = 0;
 	return (result);
 }
 
-void	is_shadow(t_world world, t_intersection *intersection, t_light *light)
+void		is_shadow(t_world world, t_intersection *inter, t_light *light)
 {
 	t_vector		hit_light;
 	t_vector		hit_shadow;
 	t_intersection	shadow;
 	float			distance;
-	float			dis_to_shadow;
 	t_ray			ray;
 
-	intersection->point = adjust_intersection(*intersection);
-	hit_light = point_vector(intersection->point, light->orig);
+	inter->point = adjust_intersection(*inter);
+	hit_light = point_vector(inter->point, light->orig);
 	distance = magnitude(hit_light);
 	ray.dir = normaliz(hit_light);
-	ray.orig = intersection->point;
+	ray.orig = inter->point;
 	shadow = intersect_world(world, ray);
 	if (shadow.hit == -1)
-		intersection->is_shadow = false;
+		inter->is_shadow = false;
 	else
 	{
-		hit_shadow = point_vector(intersection->point, shadow.point);
-		dis_to_shadow = magnitude(hit_shadow);
-		if ((distance - dis_to_shadow) >= 0)
-			intersection->is_shadow = true;
+		hit_shadow = point_vector(inter->point, shadow.point);
+		if ((distance - (magnitude(hit_shadow))) >= 0)
+			inter->is_shadow = true;
 		else
-			intersection->is_shadow = false;
+			inter->is_shadow = false;
 	}
+}
+
+int			ft_quit(int keycode)
+{
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+void		next_image(t_data **tmp_img)
+{
+	(*tmp_img)->next = (t_data *)malloc(sizeof(t_data));
+	*tmp_img = (*tmp_img)->next;
+	(*tmp_img)->next = NULL;
+	(*tmp_img)->head = g_img;
 }
