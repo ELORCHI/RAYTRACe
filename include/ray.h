@@ -17,11 +17,11 @@
 
 typedef struct	s_ray
 {
-	t_vector    orig;
-	t_vector    dir;
+	t_vector	orig;
+	t_vector	dir;
 }				t_ray;
 
-typedef struct	s_intersection
+typedef	struct	s_intersection
 {
 	float		hit;
 	bool		is_shadow;
@@ -30,7 +30,7 @@ typedef struct	s_intersection
 	t_vector	color;
 }				t_intersection;
 
-t_vector	position(t_ray ray, float speed);
-bool		ray_dot_normal(t_vector ray_dir, t_vector *normal);
-t_ray		ray_for_pixel(int x, int y);
+t_vector		position(t_ray ray, float speed);
+bool			ray_dot_normal(t_vector ray_dir, t_vector *normal);
+t_ray			ray_for_pixel(int x, int y);
 #endif

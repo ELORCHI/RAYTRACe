@@ -18,12 +18,12 @@
 
 typedef struct	s_cylinder
 {
-	t_vector 				point;
-	t_vector 				normal;
-	t_vector 				color;
-	float 					height;
+	t_vector				point;
+	t_vector				normal;
+	t_vector				color;
+	float					height;
 	float					raduis;
-	struct	s_cylinder 		*next;
+	struct s_cylinder		*next;
 }				t_cylinder;
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray);
 
