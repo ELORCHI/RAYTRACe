@@ -12,6 +12,7 @@
 
 #include "../include/ray.h"
 #include "../include/camera.h"
+
 t_vector	position(t_ray ray, float speed)
 {
 	t_vector position;
@@ -34,11 +35,10 @@ bool		ray_dot_normal(t_vector ray_dir, t_vector *normal)
 t_vector	ft_pixel(t_vector pixel)
 {
 	static t_mat4x4	inverse;
-	static int 		i = 0;
+	static int		i = 0;
 	t_vector		result;
-	t_mat4x4		matt;
 
-	if (i == nb_cameras)
+	if (i == g_nb_cameras)
 	{
 		inverse_4x4(&inverse, &(g_camera->view));
 		i++;
@@ -49,9 +49,9 @@ t_vector	ft_pixel(t_vector pixel)
 
 t_ray		ray_for_pixel(int x, int y)
 {
-	float 		py;
-	float 		px;
-	t_vector	pixel;	
+	float		py;
+	float		px;
+	t_vector	pixel;
 	t_ray		ray;
 
 	px = (x + 0.5) * g_camera->pixel_size;
