@@ -16,10 +16,12 @@ int			count_comas(char *line)
 {
 	int i;
 	int nb_comas;
+	int test;
 
 	nb_comas = 0;
-	i = 0;
-	while (line[i] != '\0')
+	i = -1;
+	test = 0;
+	while (line[++i] != '\0')
 	{
 		if (line[i] == ',')
 		{
@@ -30,10 +32,11 @@ int			count_comas(char *line)
 				return (ft_exit("ERROR\ninvalide vector or scalar"));
 			else if (ft_isdigit(line[i - 1]) == 0)
 				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
+			if (line[i + 1] == '-')
+				test++;
 			else if (line[i + 1] == '\0' || ft_isdigit(line[i + 1]) == 0)
 				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
 		}
-		i++;
 	}
 	return (0);
 }
