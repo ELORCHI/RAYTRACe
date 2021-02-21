@@ -12,18 +12,34 @@
 
 #include "parsing.h"
 
-void init_plans(t_plan *plan)
+void	init_plans(t_plan *plan)
 {
 	plan->point = (t_vector){0, 0, 0, 0};
 	plan->color = (t_vector){0, 0, 0, 0};
 	plan->normal = (t_vector){0, 0, 0, 0};
 }
 
-int get_plans(t_plan **plan, char **params)
+void	add_plan(t_plan **plan, t_plan *tmp, int *i)
 {
-	t_plan 		*tmp;
+	t_plan *pars;
+
+	if (*i == 0)
+		*plan = tmp;
+	else
+	{
+		pars = *plan;
+		while (pars->next != NULL)
+			pars = pars->next;
+		pars->next = tmp;
+	}
+	(*i)++;
+}
+
+int		get_plans(t_plan **plan, char **params)
+{
+	t_plan		*tmp;
 	t_plan		*pars;
-	static int 	i = 0;
+	static int	i = 0;
 
 	if (count_params(params, 4) == false)
 		return (-1);
@@ -39,48 +55,8 @@ int get_plans(t_plan **plan, char **params)
 	params++;
 	if (get_color(*params, &(tmp->color)) == false)
 		return (-1);
-	if (i == 0)
-		*plan = tmp;
-	else
-	{
-		pars = *plan;
-		while (pars->next != NULL)
-			pars = pars->next;
-		pars->next = tmp;
-	}
-	i++;
+	add_plan(plan, tmp, &i);
 	if (g_nb_error == -1)
 		return (-1);
 	return (0);
 }
-
-// int main ()
-// {
-// 	char *line1 = ft_strdup("pl 10,10,10 0,1.0,0 255,0,225");
-// 	char *line2 = ft_strdup("pl 0,0,0 0,1.0,-0.2 255,255,225");
-
-// 	line1 = skip_tabs(&line1);
-// 	line2 = skip_tabs(&line2);
-
-// 	char **params1 = ft_split(line1, 32);
-// 	char **params2 = ft_split(line2, 32);
-
-// 	t_plan *plan;
-// 	get_plans(&plan, params1);
-// 	get_plans(&plan, params2);
-// 	while (plan != NULL)
-// 	{
-// 		print_vector(plan->point);
-// 		print_vector(plan->normal);
-// 		print_vector(plan->color);
-// 		plan = plan->next;
-// 		printf("======NEXT=====\n");
-// 	}
-// }
-
-// int main()
-// {
-// 	char *line = "10.10";
-// 	int i = is_float(line);
-// 	if (i == -1)
-// 		printf("ok");

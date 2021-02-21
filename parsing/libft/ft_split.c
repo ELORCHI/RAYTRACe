@@ -79,11 +79,9 @@ char		**ft_split(char const *s, char c)
 	return (allo(ptr, s, nbwords, c));
 }
 
-#include <stdio.h>
-
 char		*skip_tabs(char **line)
 {
-	char 	*new;
+	char	*new;
 	char	*tmp;
 	int		index;
 	int		len;

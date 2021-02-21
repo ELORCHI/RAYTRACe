@@ -26,7 +26,7 @@ int	ft_strcmp(const char *first, const char *second)
 	return (0);
 }
 
-int is_rt(char *line)
+int	is_rt(char *line)
 {
 	int len;
 
@@ -41,7 +41,7 @@ int is_rt(char *line)
 	{
 		printf("ERROR\nInvalide scene argument");
 		exit(0);
-		return(-1);
+		return (-1);
 	}
 	return (1);
 }

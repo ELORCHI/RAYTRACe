@@ -39,19 +39,3 @@ int	get_ambient(char **line)
 		return (-1);
 	return (0);
 }
-
-// int main ()
-// {
-// 	char *line1 = ft_strdup(" A 0.1 255,255,255");
-// 	char *line2 = ft_strdup("A 2.2 255,255,255");
-
-// 	line1 = skip_tabs(&line1);
-// 	line2 = skip_tabs(&line2);
-
-// 	char **params1 = ft_split(line1, 32);
-// 	char **params2 = ft_split(line2, 32);
-// 	get_ambient(params1);
-// 	print_vector(g_embient.color);
-// 	printf("%f\n", g_embient.ratio);
-// 	// get_ambient(params2);
-// }

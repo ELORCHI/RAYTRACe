@@ -12,13 +12,6 @@
 
 #include "parsing.h"
 
-bool	check_color_elements(int point)
-{
-	if (point != 2)
-		return (false);
-	return (true);
-}
-
 int		nb_zeros(char *line, int nb, int index)
 {
 	int zeros;
@@ -52,7 +45,8 @@ bool	is_color(char *line)
 				point++;
 				if (point > 2)
 					return (false);
-				if ((ft_isdigit(line[i - 1]) == 0) || (ft_isdigit(line[i + 1]) == 0))
+				if ((ft_isdigit(line[i - 1]) == 0) ||
+				(ft_isdigit(line[i + 1]) == 0))
 					return (false);
 			}
 		}

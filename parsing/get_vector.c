@@ -12,11 +12,10 @@
 
 #include "parsing.h"
 
-int count_comas(char *line)
+int			count_comas(char *line)
 {
 	int i;
 	int nb_comas;
-	int test = 0;
 
 	nb_comas = 0;
 	i = 0;
@@ -31,8 +30,6 @@ int count_comas(char *line)
 				return (ft_exit("ERROR\ninvalide vector or scalar"));
 			else if (ft_isdigit(line[i - 1]) == 0)
 				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
-			if (line[i + 1] == '-')
-				test++;
 			else if (line[i + 1] == '\0' || ft_isdigit(line[i + 1]) == 0)
 				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
 		}
@@ -40,12 +37,13 @@ int count_comas(char *line)
 	}
 	return (0);
 }
-t_vector get_vector(char *line)
+
+t_vector	get_vector(char *line)
 {
-	int 		index;
+	int			index;
 	int			tmp;
 	t_vector	vec;
-	
+
 	if (count_comas(line) == -1)
 		g_nb_error = -1;
 	index = 0;

@@ -15,8 +15,8 @@
 float	to_float(int int_part, char *decimal, int negative)
 {
 	int		decimal_part;
-	int 	decimal_len;
-	int 	tmp;
+	int		decimal_len;
+	int		tmp;
 	float	number;
 	int		i;
 
@@ -39,8 +39,8 @@ float	to_float(int int_part, char *decimal, int negative)
 
 float	ft_atof(char *line)
 {
-	int 	int_part;
-	int 	int_len;
+	int		int_part;
+	int		int_len;
 	int		negative;
 	float	number;
 	int		i;
@@ -59,5 +59,5 @@ float	ft_atof(char *line)
 	int_len += ft_int_size(int_part);
 	int_len += (i > 1) ? --i : 0;
 	number = to_float(int_part, line + int_len + 1, negative);
-	return(number); 
+	return (number);
 }

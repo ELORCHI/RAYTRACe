@@ -12,11 +12,6 @@
 
 #include "parsing.h"
 
-// needs change
-// no negative sign after point
-//vergule must be  max to
-// only numbers are allowed after .
-
 int	ft_exit(char *error_message)
 {
 	printf("%s", error_message);
@@ -36,7 +31,7 @@ int	check_negative(char *line, int i, int *negative)
 	return (0);
 }
 
-int	helper(char *line, int *i, int *digit, int *negative, int *point)
+int	helper(char *line, int *i, int *point)
 {
 	if (line[*i] == '.')
 	{
@@ -51,9 +46,6 @@ int	helper(char *line, int *i, int *digit, int *negative, int *point)
 		else
 			return (-1);
 	}
-	else if (check_negative(line, *i, negative) == -1)
-		return (-1);
-	*digit += (ft_isdigit(line[*i]) == 1) ? 1 : 0;
 	return (0);
 }
 
@@ -72,9 +64,11 @@ int	is_float(char *line)
 	{
 		if (ft_isdigit(line[i]) == 1 || line[i] == '.' || line[i] == '-')
 		{
-			if (helper(line, &i, &digit, &negative, &point) == -1)
+			if (helper(line, &i, &digit) == -1)
 				return (-1);
-			i++;
+			else if (check_negative(line, i, &negative) == -1)
+				return (-1);
+			digit += (ft_isdigit(line[i++]) == 1) ? 1 : 0;
 		}
 		else
 			return (-1);
@@ -82,4 +76,4 @@ int	is_float(char *line)
 	if ((point > 1) || (digit == 0))
 		return (-1);
 	return (i);
-}	
+}

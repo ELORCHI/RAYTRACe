@@ -27,3 +27,10 @@ bool	check_normal(t_vector normal)
 		printf("ERROR\nnormal vector elements must be in range [-1, 1]\n");
 	return (result);
 }
+
+bool	check_color_elements(int point)
+{
+	if (point != 2)
+		return (false);
+	return (true);
+}

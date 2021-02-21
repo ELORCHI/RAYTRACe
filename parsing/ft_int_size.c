@@ -12,9 +12,9 @@
 
 #include "parsing.h"
 
-int ft_int_size(int i)
+int	ft_int_size(int i)
 {
-	int 	size;
+	int	size;
 
 	size = 0;
 	if (i <= 0)

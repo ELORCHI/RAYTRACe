@@ -24,7 +24,7 @@ void	add_cameras(t_camera **tmp)
 
 int		result_camera(void)
 {
-	if( g_nb_error == -1)
+	if (g_nb_error == -1)
 		return (-1);
 	g_nb_error = 0;
 	return (0);

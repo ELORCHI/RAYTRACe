@@ -12,12 +12,10 @@
 
 #include "parsing.h"
 
-//free camera
-//not tested yet
-void	free_globals()
+void	free_globals(void)
 {
-	t_light *tmp;
-	t_camera *free_cam;
+	t_light		*tmp;
+	t_camera	*free_cam;
 
 	while (g_light != NULL)
 	{

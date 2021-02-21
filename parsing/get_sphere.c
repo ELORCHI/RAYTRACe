@@ -29,6 +29,7 @@ int		neturn(void)
 	else
 		return (0);
 }
+
 int		get_spheres(t_sphere **sphere, char **params)
 {
 	t_sphere	*tmp;
