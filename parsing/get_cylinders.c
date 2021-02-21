@@ -27,6 +27,8 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	tmp->point = get_vector(*params);
 	params++;
 	tmp->normal = get_vector(*params);
+	if (check_normal(tmp->normal) == false)
+		return (-1);
 	params++;
 	if (get_color(*params, &(tmp->color)) == false)
 		return (-1);

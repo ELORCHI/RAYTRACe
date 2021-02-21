@@ -55,6 +55,7 @@ int			get_plans(t_plan **plan, char **params);
 int			get_spheres(t_sphere **sphere, char **params);
 int 		count_comas(char *line);
 int			is_save(char *line);
+bool		check_normal(t_vector normal);
 
 int			g_is_amb;
 int			g_is_resolution;

@@ -12,7 +12,6 @@
 
 #include "parsing.h"
 
-// camera previous is not tested
 void	add_cameras(t_camera **tmp)
 {
 	t_camera *pars;
@@ -42,6 +41,8 @@ int	get_camera(char **params)
 	tmp->orig = get_vector(*params);
 	params++;
 	tmp->dir = get_vector(*params);
+	if ((check_normal(tmp->dir)) == false)
+		return (-1);
 	params++;
 	if (get_scalar(*params, &(tmp->fov)) == -1)
 		return (-1);
@@ -60,33 +61,3 @@ int	get_camera(char **params)
 	g_nb_error = 0;
 	return (0);
 }
-
-// int main()
-// {
-// 	char *line1 = ft_strdup("c -50,0,20 0,0,0 70");
-// 	char *line2 = ft_strdup("c 80,0,20 0,1,0 10");
-// 	char *line3 = ft_strdup("c 55,0,20 21,1,0 180");
-
-// 	line1 = skip_tabs(&line1);
-// 	line2 = skip_tabs(&line2);
-// 	line3 = skip_tabs(&line3);
-
-// 	char **params1 = ft_split(line1, 32);
-// 	char **params2 = ft_split(line2, 32);
-// 	char **params3 = ft_split(line3, 32);
-	
-// 	get_camera(params1);
-// 	get_camera(params2);
-// 	get_camera(params3);
-	
-// 	int i = 0;
-// 	while (g_all_cameras != NULL)
-// 	{
-// 		printf("%d\n", i);
-// 		print_vector(g_all_cameras->orig);
-// 		print_vector(g_all_cameras->dir);
-// 		printf("FOV = %f", g_all_cameras->fov);
-// 		g_all_cameras = g_all_cameras->next;
-// 	}
-// 	return (0);
-// }

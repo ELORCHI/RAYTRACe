@@ -27,6 +27,8 @@ int get_squares(t_square **square, char **params)
 	tmp->center = get_vector(*params);
 	params++;
 	tmp->normal = get_vector(*params);
+	if (check_normal(tmp->normal) == false)
+		return (-1);
 	params++;
 	if (get_scalar(*params, &(tmp->side)) == -1)
 		return (-1);
