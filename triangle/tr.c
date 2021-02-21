@@ -36,7 +36,7 @@ void			check(t_intersection *inter, t_ray ray, t_triangle *tr)
 	{
 		inter->point = position(ray, inter->hit);
 		inter->color = tr->color;
-		inter->normal = normal_tr(*tr);
+		inter->normal = (t_vector){0, 1, 0, 0};//normal_tr(*tr);
 		near = inter->hit;
 	}
 	if (i == 1)
