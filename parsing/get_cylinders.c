@@ -12,14 +12,47 @@
 
 #include "parsing.h"
 
-//need to fix cylinder (diametre and raduis problem)
-int get_cylinders(t_cylinder **cylinder, char **params)
+void	add_cylinders(t_cylinder **cylinder, t_cylinder **tmp, int *i)
 {
-	t_cylinder *tmp;
 	t_cylinder *pars;
-	static int i = 0;
 
-	count_params(params, 6);
+	if (*i == 0)
+		*cylinder = *tmp;
+	else
+	{
+		pars = *cylinder;
+		while (pars->next != NULL)
+			pars = pars->next;
+		pars->next = *tmp;
+	}
+	(*i)++;
+}
+
+int		result_culinder(void)
+{
+	if (g_nb_error == -1)
+		return (-1);
+	return (0);
+}
+
+int		check_cylinder(t_cylinder **cy, t_cylinder **tmp, char *params, int *i)
+{
+	if (get_scalar(params, &((*tmp)->height)) == -1)
+		return (-1);
+	if ((*tmp)->height < 0)
+		return (ft_exit("ERROT\ncylinder's hight must be positve"));
+	add_cylinders(cy, tmp, i);
+	return (result_culinder());
+}
+
+int		get_cylinders(t_cylinder **cylinder, char **params)
+{
+	t_cylinder	*tmp;
+	t_cylinder	*pars;
+	static int	i = 0;
+
+	if (count_params(params, 6) == false)
+		return (-1);
 	params++;
 	tmp = (t_cylinder*)malloc(sizeof(t_cylinder));
 	g_cyl = 1;
@@ -38,48 +71,5 @@ int get_cylinders(t_cylinder **cylinder, char **params)
 	if (tmp->raduis < 0)
 		return (ft_exit("ERROR\ncylinder's diamertre must be positive"));
 	params++;
-	if (get_scalar(*params, &(tmp->height)) == -1)
-		return (-1);
-	if (tmp->height < 0)
-		return (ft_exit("ERROT\ncylinder's hight must be positve"));
-	if (i == 0)
-		*cylinder = tmp;
-	else
-	{
-		pars = *cylinder;
-		while (pars->next != NULL)
-			pars = pars->next;
-		pars->next = tmp;
-	}
-	if (g_nb_error == -1)
-		return(-1);
-	i++;
-	return (0);
+	return (check_cylinder(cylinder, &tmp, *params, &i));
 }
-
-// int main()
-// {
-// 	char *line1 = ft_strdup("cy -50.0,-50,-50 -50,-50,0 10,0,255 14.2 21.42");
-// 	char *line2 = ft_strdup("cy 10.0,0.0,20.6 0,0,1.0 0,0,0 12.2 20");
-
-// 	line1 = skip_tabs(&line1);
-// 	line2 = skip_tabs(&line2);
-
-// 	char **params1 = ft_split(line1, 32);
-// 	char **params2 = ft_split(line2, 32);
-
-// 	t_cylinder *cylinder;
-// 	get_cylinders(&cylinder, params1);
-// 	get_cylinders(&cylinder, params2);
-// 	int i = 0;
-// 	while (cylinder != NULL)
-// 	{
-// 		printf("%d\n", i);
-// 		print_vector(cylinder->point);
-// 		print_vector(cylinder->normal);
-// 		print_vector(cylinder->color);
-// 		printf("cylinder->raduis == %f\ncylinder->height == %f\n",cylinder->raduis, cylinder->height);
-// 		cylinder = cylinder->next;
-// 	}
-// 	return (0);
-// }
