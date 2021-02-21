@@ -16,7 +16,7 @@ void	add_tr(t_triangle **tr, t_triangle *tmp, int *i)
 {
 	t_triangle *pars;
 
-	if (i == 0)
+	if (*i == 0)
 		*tr = tmp;
 	else
 	{

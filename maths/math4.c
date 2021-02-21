@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/rt.h"
-#include <stdlib.h>
-#include <stdio.h>
+
 
 t_vector	add_vectors(t_vector vec1, t_vector vec2)
 {
@@ -51,7 +50,9 @@ bool		solve_quadratic(float a, float b, float c)
 	float min;
 	float max;
 
-	fill_for_morm_shit(-1, -1);
+	// fill_for_morm_shit(-1, -1);
+	g_intersection[0] = -1;
+	g_intersection[1] = -1;
 	discr = (b * b) + (-4 * a * c);
 	if (discr < 0)
 		return (false);
@@ -60,12 +61,21 @@ bool		solve_quadratic(float a, float b, float c)
 	min = fminf(x, y);
 	max = fmaxf(x, y);
 	if (min >= 0)
-		fill_for_morm_shit(min, max);
+	{
+		g_intersection[0] = min;
+		g_intersection[1] = max;	
+			// fill_for_morm_shit(min, max);
+	}
 	else if (max >= 0)
-		fill_for_morm_shit(max, max);
+	{
+		g_intersection[0] = max;
+		g_intersection[1] = max;
+	}	// fill_for_morm_shit(max, max);
 	else
 	{
-		fill_for_morm_shit(-1, -1);
+		g_intersection[0] = -1;
+		g_intersection[1] = -1;
+		//fill_for_morm_shit(-1, -1);
 		return (false);
 	}
 	return (true);

@@ -32,7 +32,10 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 		last = next_hit;
 	next_hit = ray_triangles_intersections(ray, world.triangle);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
+	{
+		tt = 1;
 		last = next_hit;
+	}
 	next_hit = ray_sphere_intersection(ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
 		last = next_hit;

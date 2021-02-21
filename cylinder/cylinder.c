@@ -18,29 +18,32 @@
 
 bool			if_hit(t_cylinder *cylinder, t_ray ray)
 {
-	float 			a;
+	float			a;
 	float			b;
 	float			c;
 	float			ray_dot_normal;
-	t_vector		X;
-	
+	t_vector		x;
+
 	ray_dot_normal = dot_product(ray.dir, cylinder->normal);
-	X = point_vector(cylinder->point, ray.orig);
+	x = point_vector(cylinder->point, ray.orig);
 	a = 1 - ray_dot_normal * ray_dot_normal;
-	b = 2 * (dot_product(ray.dir, X) - ray_dot_normal * dot_product(X, cylinder->normal));
-	c = dot_product(X, X) - dot_product(X, cylinder->normal) * dot_product(X, cylinder->normal) - cylinder->raduis * cylinder->raduis;
+	b = 2 * (dot_product(ray.dir, x) - ray_dot_normal *
+	dot_product(x, cylinder->normal));
+	c = dot_product(x, x) - dot_product(x, cylinder->normal) *
+	dot_product(x, cylinder->normal) - cylinder->raduis * cylinder->raduis;
 	return (solve_quadratic(a, b, c));
 }
 
 t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
 {
-	t_vector 	normal_at_inter;
-	t_vector 	vec;
+	t_vector	normal_at_inter;
+	t_vector	vec;
 	float		dot;
 
 	vec = point_vector(cylinder->point, inter_point);
 	dot = dot_product(cylinder->normal, vec);
-	normal_at_inter = subb_vectors(vec, multp_vectors(cylinder->normal, -1 * dot));
+	normal_at_inter =
+	subb_vectors(vec, multp_vectors(cylinder->normal, -1 * dot));
 	normal_at_inter = normaliz(normal_at_inter);
 	return (normal_at_inter);
 }
@@ -51,14 +54,16 @@ float			which_finit(t_cylinder *cylinder, t_ray ray)
 	float tmp;
 
 	finit = -1;
-	tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[0] + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
+	tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[0] +
+	dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
 	if (tmp >= 0 && tmp <= cylinder->height)
 		finit = tmp;
 	else
 	{
-		tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[1] + dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
+		tmp = dot_product(ray.dir, cylinder->normal) * g_intersection[1] +
+		dot_product(point_vector(cylinder->point, ray.orig), cylinder->normal);
 		if (tmp >= 0 && tmp <= cylinder->height)
-		{	
+		{
 			finit = tmp;
 			g_intersection[0] = g_intersection[1];
 		}
@@ -66,14 +71,9 @@ float			which_finit(t_cylinder *cylinder, t_ray ray)
 	return (finit);
 }
 
-// it might be a problem in the cylinder because it did not show well at the bottom
-// check the normal and all
-// line 83 i also removed the coparison to checkk if the intersection is near than the prevoious one 
-	// after shosing the right finit
-
 t_intersection	ray_cylinders_intersection(t_cylinder *cylinder, t_ray ray)
 {
-    t_intersection 	inter;
+	t_intersection	inter;
 	t_cylinder		*tmp_cyl;
 	float			finit;
 

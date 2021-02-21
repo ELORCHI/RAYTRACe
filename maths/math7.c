@@ -41,7 +41,9 @@ float		element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
 
 	element = 0.1123;
 	vec = ((t_vector *)mat + colomn);
-	row += (i != 0) ? i : 0;
+	//row += (i != 0) ? i : 0;
+	if (i != 0)
+		row += i;
 	if (row == skip)
 	{
 		i++;
@@ -55,7 +57,9 @@ float		element_4x4(t_mat4x4 *mat, int colomn, int row, int skip)
 		element = vec->z;
 	else if (row == 3)
 		element = vec->w;
-	i = (row == 3) ? 0 : i;
+	//i = (row == 3) ? 0 : i;
+	if (row == 3)
+		i = 0;
 	return (element);
 }
 
@@ -72,7 +76,9 @@ t_mat3x3	sub_mat4x4(t_mat4x4 *mat4, int colomn, int row)
 	while (i <= 3)
 	{
 		j = -1;
-		i = (i == colomn && i < 3) ? i++ : i;
+		//i = (i == colomn && i < 3) ? i++ : i;
+		if (i == colomn && i < 3)
+		    i++;
 		vec.x = element_4x4(mat4, i, ++j, row);
 		vec.y = element_4x4(mat4, i, ++j, row);
 		vec.z = element_4x4(mat4, i, ++j, row);
