@@ -64,5 +64,4 @@ void		init_image(void)
 	g_img = (t_data *)malloc(sizeof(t_data));
 	g_img->next = NULL;
 	g_nb_cameras = -1;
-	g_save = 0;
 }

@@ -13,9 +13,11 @@
 #include "include/world.h"
 #include "parsing/parsing.h"
 
-void	check_mandatory(void)
+void	check_mandatory(i)
 {
-	if (g_is_amb == 0)
+	if (i == -1)
+		ft_exit("ERROR \nInvalid scene file");
+	else if (g_is_amb == 0)
 	{
 		ft_exit("ERROR\nambient light is missing");
 		g_error = 1;

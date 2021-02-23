@@ -73,7 +73,7 @@ void	set_world(char *arg)
 	while ((i = get_next_line(fd, &line)) || i == 0)
 	{
 		g_error = 0;
-		if (set_object(&world, &line) == -1)
+		if (i == -1 || set_object(&world, &line) == -1)
 		{
 			g_error = 1;
 			break ;
@@ -81,14 +81,14 @@ void	set_world(char *arg)
 		if (i == 0)
 			break ;
 	}
-	check_mandatory();
+	check_mandatory(i);
 	noghmizete(&world);
 }
 
 int		main(int argc, char *argv[])
 {
 	if (argc == 1)
-		return (ft_exit("ERROR\n few arguments"));
+		return (ft_exit("ERROR\nfew arguments"));
 	else if (argc == 2)
 	{
 		is_rt(argv[1]);

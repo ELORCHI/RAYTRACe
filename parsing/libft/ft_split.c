@@ -90,15 +90,18 @@ char		*skip_tabs(char **line)
 	len = ft_strlen(*line);
 	new = (char *)malloc(sizeof(char) * (len + 1));
 	index = 0;
-	while (tmp[index] != '\0')
+	if (line != NULL)
 	{
-		if (tmp[index] == 9)
-			new[index] = 32;
-		else
-			new[index] = tmp[index];
-		index++;
+		while (tmp[index] != '\0')
+		{
+			if (tmp[index] == 9)
+				new[index] = 32;
+			else
+				new[index] = tmp[index];
+			index++;
+		}
+		new[index] = '\0';
 	}
-	new[index] = '\0';
 	free(*line);
 	return (new);
 }
