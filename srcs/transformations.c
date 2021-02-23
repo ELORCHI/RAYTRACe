@@ -35,7 +35,6 @@ t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 
 void		set_camera_view(t_vector vec1, t_vector vec2)
 {
-	float		dot;
 	t_vector	forward;
 	t_vector	up;
 	t_vector	test;

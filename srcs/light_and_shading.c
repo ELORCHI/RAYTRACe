@@ -50,7 +50,11 @@ bool			check_intersection(t_intersection intersection)
 int				key_press(int keycode)
 {
 	if (keycode == 53)
+	{
+		free_globals();
+		free_images();
 		exit(0);
+	}
 	if (keycode == 123)
 	{
 		if (g_display_img->next == NULL)

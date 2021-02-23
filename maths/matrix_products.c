@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math6.c                                            :+:      :+:    :+:   */
+/*   matrix_products.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 19:00:25 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/19 19:00:28 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/23 09:26:37 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/23 09:26:52 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,6 @@ t_vector	mat_vec_multi(t_mat4x4 mat, t_vector vec)
 	result.z = dot_product(mat.c3, vec);
 	result.w = dot_product(mat.c4, vec);
 	return (result);
-}
-
-t_mat4x4	mat_creat(t_vector v1, t_vector v2, t_vector v3, t_vector v4)
-{
-	t_mat4x4 new_mat;
-
-	new_mat.c1 = v1;
-	new_mat.c2 = v2;
-	new_mat.c3 = v3;
-	new_mat.c4 = v4;
-	return (new_mat);
 }
 
 t_mat4x4	mat_multp(t_mat4x4 a, t_mat4x4 b)
@@ -69,12 +58,4 @@ t_mat4x4	transpose(t_mat4x4 mat)
 	result.c3 = vec4_creat(mat.c1.z, mat.c2.z, mat.c3.z, mat.c4.z);
 	result.c4 = vec4_creat(mat.c1.w, mat.c2.w, mat.c3.w, mat.c4.w);
 	return (result);
-}
-
-bool		mat_cmp(t_mat4x4 first, t_mat4x4 second)
-{
-	if (vect_cmp(first.c1, second.c1) && vect_cmp(first.c2, second.c2)
-			&& vect_cmp(first.c3, second.c3) && vect_cmp(first.c4, second.c4))
-		return (true);
-	return (false);
 }

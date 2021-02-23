@@ -38,7 +38,6 @@ int		result_sq(void)
 int		get_squares(t_square **square, char **params)
 {
 	t_square	*tmp;
-	t_square	*pars;
 	static int	i = 0;
 
 	if (count_params(params, 5) == false)

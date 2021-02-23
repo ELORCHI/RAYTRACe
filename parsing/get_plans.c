@@ -38,7 +38,6 @@ void	add_plan(t_plan **plan, t_plan *tmp, int *i)
 int		get_plans(t_plan **plan, char **params)
 {
 	t_plan		*tmp;
-	t_plan		*pars;
 	static int	i = 0;
 
 	if (count_params(params, 4) == false)

@@ -31,7 +31,6 @@ void	add_tr(t_triangle **tr, t_triangle *tmp, int *i)
 int		get_triangles(t_triangle **trinagle, char **params)
 {
 	t_triangle	*tmp;
-	t_triangle	*pars;
 	static int	i = 0;
 
 	if (count_params(params, 5) == false)

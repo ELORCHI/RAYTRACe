@@ -13,7 +13,7 @@
 #include "include/world.h"
 #include "parsing/parsing.h"
 
-void	check_mandatory(i)
+void	check_mandatory(int i)
 {
 	if (i == -1)
 		ft_exit("ERROR \nInvalid scene file");
@@ -66,6 +66,5 @@ void	free_world(t_world *world)
 	free_cylinders(&(world->cylinder));
 	free_squares(&(world->square));
 	free_triangles(&(world->triangle));
-	free_globals();
 	free(world);
 }

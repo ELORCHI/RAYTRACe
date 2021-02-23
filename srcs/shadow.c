@@ -52,6 +52,7 @@ void		is_shadow(t_world world, t_intersection *inter, t_light *light)
 
 int			ft_quit(int keycode)
 {
+	keycode = 0;
 	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -48,7 +48,6 @@ int		check_cylinder(t_cylinder **cy, t_cylinder **tmp, char *params, int *i)
 int		get_cylinders(t_cylinder **cylinder, char **params)
 {
 	t_cylinder	*tmp;
-	t_cylinder	*pars;
 	static int	i = 0;
 
 	if (count_params(params, 6) == false)

@@ -19,9 +19,9 @@
 t_vector	embient(t_vector inter_color)
 {
 	t_vector embient_color;
-	t_vector color;
 
 	embient_color = multp_vectors(g_embient.color, g_embient.ratio);
+	inter_color = (t_vector){0, 0, 0, 0};
 	return (embient_color);
 }
 
@@ -44,7 +44,7 @@ t_vector	defuse(t_intersection inter, t_ray ray, t_world world)
 	defuse_ = (t_vector){0, 0, 0, 0};
 	tmp_light = g_light;
 	dot = dot3(inter.normal, ray.dir);
-	if (dot >= 0 && tt == 1)
+	if (dot >= 0)
 		inter.normal = multp_vectors(inter.normal, -1);
 	while (tmp_light != NULL)
 	{

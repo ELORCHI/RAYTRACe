@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math3.c                                            :+:      :+:    :+:   */
+/*   products.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 18:46:08 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/19 18:46:12 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/23 09:20:32 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/23 09:20:40 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,4 @@ t_vector	cross_product(t_vector vec1, t_vector vec2)
 	result.z = vec1.x * vec2.y - vec1.y * vec2.x;
 	result.w = 0;
 	return (result);
-}
-
-t_vector	*vector_init(t_vector *vec)
-{
-	vec->x = 0;
-	vec->y = 0;
-	vec->z = 0;
-	vec->w = 0;
-	return (vec);
-}
-
-t_vector	point_vector(t_vector from, t_vector to)
-{
-	t_vector vec;
-
-	vec.x = to.x - from.x;
-	vec.y = to.y - from.y;
-	vec.z = to.z - from.z;
-	vec.w = 0;
-	return (vec);
-}
-
-t_vector	multp_vectors(t_vector vec, float scalar)
-{
-	vec.x = vec.x * scalar;
-	vec.y = vec.y * scalar;
-	vec.z = vec.z * scalar;
-	vec.w = 0;
-	return (vec);
 }

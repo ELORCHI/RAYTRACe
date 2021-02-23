@@ -153,7 +153,6 @@ t_vector		multp_vectors(t_vector vec, float scalar);
 t_vector		normaliz(t_vector vec);
 t_vector		add_vectors(t_vector vec1, t_vector vec2);
 t_vector		color_multp(t_vector color1, t_vector color2);
-t_vector		*vector_init(t_vector *vec);
 t_vector		normaliz_color(t_vector color);
 t_mat4x4		look_at();
 t_mat4x4		identity_mat(void);

@@ -1,17 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math4.c                                            :+:      :+:    :+:   */
+/*   vectors.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 18:47:44 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/19 18:47:48 by eel-orch         ###   ########.fr       */
+/*   Created: 2021/02/23 09:21:35 by eel-orch          #+#    #+#             */
+/*   Updated: 2021/02/23 09:21:37 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/rt.h"
+#include <stdlib.h>
+#include <stdio.h>
 
+t_vector	point_vector(t_vector from, t_vector to)
+{
+	t_vector vec;
+
+	vec.x = to.x - from.x;
+	vec.y = to.y - from.y;
+	vec.z = to.z - from.z;
+	vec.w = 0;
+	return (vec);
+}
+
+t_vector	multp_vectors(t_vector vec, float scalar)
+{
+	vec.x = vec.x * scalar;
+	vec.y = vec.y * scalar;
+	vec.z = vec.z * scalar;
+	vec.w = 0;
+	return (vec);
+}
 
 t_vector	add_vectors(t_vector vec1, t_vector vec2)
 {
@@ -34,49 +55,4 @@ t_vector	div_vectors(t_vector vec, float scalar)
 {
 	scalar = 1 / scalar;
 	return (multp_vectors(vec, scalar));
-}
-
-void		fill_for_morm_shit(float x1, float x2)
-{
-	g_intersection[0] = x1;
-	g_intersection[1] = x2;
-}
-
-bool		solve_quadratic(float a, float b, float c)
-{
-	float discr;
-	float x;
-	float y;
-	float min;
-	float max;
-
-	// fill_for_morm_shit(-1, -1);
-	g_intersection[0] = -1;
-	g_intersection[1] = -1;
-	discr = (b * b) + (-4 * a * c);
-	if (discr < 0)
-		return (false);
-	x = 0.5 * (-b - sqrt(discr)) / a;
-	y = 0.5 * (-b + sqrt(discr)) / a;
-	min = fminf(x, y);
-	max = fmaxf(x, y);
-	if (min >= 0)
-	{
-		g_intersection[0] = min;
-		g_intersection[1] = max;	
-			// fill_for_morm_shit(min, max);
-	}
-	else if (max >= 0)
-	{
-		g_intersection[0] = max;
-		g_intersection[1] = max;
-	}	// fill_for_morm_shit(max, max);
-	else
-	{
-		g_intersection[0] = -1;
-		g_intersection[1] = -1;
-		//fill_for_morm_shit(-1, -1);
-		return (false);
-	}
-	return (true);
 }

@@ -39,7 +39,6 @@ void	add_light(t_light *tmp, int *i)
 int		get_light(char **params)
 {
 	t_light		*tmp;
-	t_light		*pars;
 	static int	i = 0;
 
 	if (count_params(params, 4) == false)

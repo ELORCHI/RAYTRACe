@@ -33,7 +33,6 @@ int		neturn(void)
 int		get_spheres(t_sphere **sphere, char **params)
 {
 	t_sphere	*tmp;
-	t_sphere	*pars;
 	static int	i = 0;
 
 	if (count_params(params, 4) == false)

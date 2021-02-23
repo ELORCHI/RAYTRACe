@@ -74,7 +74,7 @@ t_intersection	intersect_objects(t_world world, t_ray ray);
 void			free_world(t_world *world);
 int				create_bmp_file(void);
 int				render(t_world **world);
-void			check_mandatory(int);
+void			check_mandatory(int i);
 void			init_world(t_world *world);
 void			ft_free(char **to_free);
 void			free_world(t_world *world);
@@ -90,4 +90,5 @@ void			is_shadow(t_world world,
 t_vector		light(t_intersection inter, t_ray ray, t_world world);
 t_vector		embient(t_vector inter_color);
 t_vector		hit_to_light(t_vector hit, t_vector light);
+void			free_images(void);
 #endif

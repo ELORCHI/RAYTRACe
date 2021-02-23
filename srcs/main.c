@@ -32,10 +32,7 @@ t_intersection	intersect_objects(t_world world, t_ray ray)
 		last = next_hit;
 	next_hit = ray_triangles_intersections(ray, world.triangle);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
-	{
-		tt = 1;
 		last = next_hit;
-	}
 	next_hit = ray_sphere_intersection(ray, world.sphere);
 	if (next_hit.hit != -1 && next_hit.hit < last.hit)
 		last = next_hit;
@@ -56,6 +53,7 @@ void			norm_shit2(t_world world, t_data *tmp_img)
 	t_vector		color;
 	t_intersection	intersection;
 
+	color = (t_vector){0, 0, 0, 0};
 	ray = ray_for_pixel(g_canvas.x, g_canvas.y);
 	intersection = intersect_world(world, ray);
 	if (check_intersection(intersection) == true)
@@ -69,10 +67,6 @@ void			norm_shit2(t_world world, t_data *tmp_img)
 
 void			norm_shit(t_world world, t_data *tmp_img)
 {
-	t_vector		color;
-	t_ray			ray;
-	t_intersection	intersection;
-
 	tmp_img->img = mlx_new_image(g_canvas.mlx_ptr,
 	g_resolution.hsize, g_resolution.vsize);
 	tmp_img->addr = mlx_get_data_addr(tmp_img->img, &(tmp_img->bits_per_pixel),
@@ -120,6 +114,7 @@ int				render(t_world **world)
 		tmp = tmp->next;
 	}
 	g_display_img = g_img;
+	free_world(*world);
 	if (g_save == 1)
 		return (create_bmp_file());
 	if (g_all_cameras != NULL)
