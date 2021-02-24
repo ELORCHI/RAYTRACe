@@ -6,7 +6,7 @@
 /*   By: eel-orch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 12:08:53 by eel-orch          #+#    #+#             */
-/*   Updated: 2021/02/01 12:09:16 by eel-orch         ###   ########.fr       */
+/*   Updated: 2021/02/24 09:25:44 by eel-orch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	return (solve_quadratic(a, b, c));
 }
 
-t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
+/*t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
 {
 	t_vector	normal_at_inter;
 	t_vector	vec;
@@ -44,6 +44,21 @@ t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
 	dot = dot_product(cylinder->normal, vec);
 	normal_at_inter =
 	subb_vectors(vec, multp_vectors(cylinder->normal, -1 * dot));
+	normal_at_inter = normaliz(normal_at_inter);
+	return (normal_at_inter);
+}*/
+
+t_vector		normal_at_cylinder(t_cylinder *cylinder, t_vector inter_point)
+{
+	t_vector	normal_at_inter;
+	t_vector	vec;
+	float		dot;
+
+	vec = point_vector(cylinder->point, inter_point);
+	dot = dot_product(cylinder->normal, vec);
+	normal_at_inter = subb_vectors(inter_point, add_vectors(cylinder->point, multp_vectors(cylinder->normal, dot)));
+	//normal_at_inter =
+	//subb_vectors(cylinder->point, multp_vectors(cylinder->normal, -1 * dot));
 	normal_at_inter = normaliz(normal_at_inter);
 	return (normal_at_inter);
 }
