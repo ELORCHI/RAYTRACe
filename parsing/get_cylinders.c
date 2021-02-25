@@ -37,7 +37,7 @@ int		result_culinder(void)
 
 int		check_cylinder(t_cylinder **cy, t_cylinder **tmp, char *params, int *i)
 {
-	if (get_scalar_v(params, &((*tmp)->height)) == -1)
+	if (get_scalar(params, &((*tmp)->height)) == -1)
 		return (-1);
 	if ((*tmp)->height < 0)
 		return (ft_exit("ERROT\ncylinder's hight must be positve"));
@@ -65,7 +65,7 @@ int		get_cylinders(t_cylinder **cylinder, char **params)
 	if (get_color(*params, &(tmp->color)) == false)
 		return (-1);
 	params++;
-	if (get_scalar_v(*params, &(tmp->raduis)) == -1)
+	if (get_scalar(*params, &(tmp->raduis)) == -1)
 		return (-1);
 	if (tmp->raduis < 0)
 		return (ft_exit("ERROR\ncylinder's diamertre must be positive"));

@@ -28,7 +28,7 @@ int	get_ambient(char **line)
 	g_is_amb = 1;
 	if (line[1] == NULL || line[2] == NULL)
 		return (ft_exit("ERROR\n in ambient: few arguments"));
-	if (get_scalar_v(line[1], &(g_embient.ratio)) == -1)
+	if (get_scalar(line[1], &(g_embient.ratio)) == -1)
 		return (-1);
 	if (g_embient.ratio < 0 || g_embient.ratio > 1)
 	{

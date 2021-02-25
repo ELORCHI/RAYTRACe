@@ -43,7 +43,7 @@ int		get_spheres(t_sphere **sphere, char **params)
 	params++;
 	tmp->orig = get_vector(*params);
 	params++;
-	if (get_scalar_v(*params, &(tmp->rad)) == -1)
+	if (get_scalar(*params, &(tmp->rad)) == -1)
 		return (-1);
 	if (tmp->rad < 0)
 		return (ft_exit("ERROR\n sphere raduis must be positive"));

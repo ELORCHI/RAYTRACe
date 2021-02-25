@@ -87,3 +87,15 @@ int	is_scalar(char *line)
 		return (-1);
 	return (i);
 }
+
+int get_scalar(char *line, float *scalar)
+{
+	int i;
+
+	i = is_scalar(line);
+	if (i == -1)
+		printf("ERROR\n invalide scalar");
+	else
+		*scalar = ft_atof(line);
+	return (i);
+}
