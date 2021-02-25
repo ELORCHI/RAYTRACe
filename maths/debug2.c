@@ -21,3 +21,10 @@ float		floatcmp(float a, float b)
 	else
 		return (a);
 }
+
+void print_vector(t_vector vec2)
+{
+	printf("=============================\n");
+	printf("==========4DVECTOR===========\n");
+	printf("%f\n%f\n%f\n%f\n", vec2.x ,vec2.y, vec2.z, vec2.w);
+}
