@@ -27,15 +27,15 @@ int			count_comas(char *line)
 		{
 			nb_comas++;
 			if (nb_comas > 2)
-				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
+				return (-1);
 			if (i == 0)
-				return (ft_exit("ERROR\ninvalide vector or scalar"));
+				return (-1);
 			else if (ft_isdigit(line[i - 1]) == 0)
-				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
+				return (-1);
 			if (line[i + 1] == '-')
 				test++;
 			else if (line[i + 1] == '\0' || ft_isdigit(line[i + 1]) == 0)
-				return (ft_exit("ERROR\ninvalide vector or scalar\n"));
+				return (-1);
 		}
 	}
 	return (0);
@@ -62,6 +62,8 @@ t_vector	get_vector(char *line)
 	index += get_scalar_v(line + index + 2, &(vec.z));
 	if (index <= tmp)
 		g_nb_error = -1;
+	if (g_nb_error == -1)
+		printf("ERROR\ninvalide vector\n");
 	vec.w = 0;
 	return (vec);
 }
