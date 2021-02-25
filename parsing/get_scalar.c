@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int	get_scalar(char *line, float *scalar)
+int	get_scalar_v(char *line, float *scalar)
 {
 	int i;
 

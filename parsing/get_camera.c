@@ -47,7 +47,7 @@ int		get_camera(char **params)
 	if ((check_normal(tmp->dir)) == false)
 		return (-1);
 	params++;
-	if (get_scalar(*params, &(tmp->fov)) == -1)
+	if (get_scalar_v(*params, &(tmp->fov)) == -1)
 		return (-1);
 	if (tmp->fov < 0 || tmp->fov > 180)
 		return (ft_exit("ERROR\n FOV must be positive less tha 180 degres"));

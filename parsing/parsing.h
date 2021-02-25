@@ -28,7 +28,7 @@
 
 int			ft_int_size(int i);
 int			is_float(char *line);
-int			get_scalar(char *line, float *scalar);
+int			get_scalar_v(char *line, float *scalar);
 int			nb_zeros(char *line, int nb, int index);
 int			ft_exit(char *error_message);
 int			get_resolution(char **line);

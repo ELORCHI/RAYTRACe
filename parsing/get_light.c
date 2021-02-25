@@ -49,7 +49,7 @@ int		get_light(char **params)
 	params++;
 	tmp->orig = get_vector(*params);
 	params++;
-	if (get_scalar(*params, &(tmp->ratio)) == -1)
+	if (get_scalar_v(*params, &(tmp->ratio)) == -1)
 		return (-1);
 	if (tmp->ratio < 0 || tmp->ratio > 1)
 		return (ft_exit("ERROR\n light ratio must be in range [0,1]"));

@@ -52,7 +52,7 @@ int		get_squares(t_square **square, char **params)
 	if (check_normal(tmp->normal) == false)
 		return (-1);
 	params++;
-	if (get_scalar(*params, &(tmp->side)) == -1)
+	if (get_scalar_v(*params, &(tmp->side)) == -1)
 		return (-1);
 	if (tmp->side < 0)
 		return (ft_exit("ERROR\n square side must be positive"));
