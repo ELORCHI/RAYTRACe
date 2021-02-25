@@ -69,6 +69,7 @@ int		get_cylinders(t_cylinder **cylinder, char **params)
 		return (-1);
 	if (tmp->raduis < 0)
 		return (ft_exit("ERROR\ncylinder's diamertre must be positive"));
+	tmp->raduis = tmp->raduis / 2;
 	params++;
 	return (check_cylinder(cylinder, &tmp, *params, &i));
 }
