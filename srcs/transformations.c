@@ -23,7 +23,7 @@ t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 	t_vector true_up;
 	t_mat4x4 view_matr;
 
-	forward = g_camera->dir;
+	forward = normaliz(g_camera->dir);
 	left = normaliz(cross_product(forward, normaliz(up)));
 	true_up = cross_product(left, forward);
 	forward = multp_vectors(forward, -1);
