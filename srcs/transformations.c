@@ -23,7 +23,7 @@ t_mat4x4	view_transform(t_vector from, t_vector to, t_vector up)
 	t_vector true_up;
 	t_mat4x4 view_matr;
 
-	forward = normaliz(point_vector(from, to));
+	forward = g_camera->dir;
 	left = normaliz(cross_product(forward, normaliz(up)));
 	true_up = cross_product(left, forward);
 	forward = multp_vectors(forward, -1);
@@ -42,8 +42,7 @@ void		set_camera_view(t_vector vec1, t_vector vec2)
 	vec1 = (t_vector){0, 0, 0, 0};
 	vec2 = (t_vector){0, 0, 0, 0};
 	up = (t_vector){0, 1, 0, 0};
-	g_camera->dir = multp_vectors(g_camera->dir, 2);
-	forward = point_vector(g_camera->orig, g_camera->dir);
+	forward = normaliz(g_camera->dir);
 	test = cross_product(normaliz(forward), up);
 	if (test.x == 0 && test.y == 0 && test.z == 0)
 	{
