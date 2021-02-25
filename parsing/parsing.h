@@ -58,6 +58,7 @@ int			is_save(char *line);
 bool		check_normal(t_vector normal);
 bool		check_color_elements(int point);
 int 		get_scalar(char *line, float *scalar);
+int			ft_strcmp(const char *first, const char *second);
 
 int			g_is_amb;
 int			g_is_resolution;

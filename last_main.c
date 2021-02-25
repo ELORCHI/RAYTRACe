@@ -18,12 +18,12 @@ int		set_object2(t_world **world, char **line, char **params)
 	int result;
 
 	result = 0;
-	if (ft_strncmp(*params, "sq", 2) == 0)
+	if (ft_strcmp(*params, "sq") == 0)
 		result = get_squares(&((*world)->square), params);
-	else if (ft_strncmp(*params, "sp", 2) == 0)
+	else if (ft_strcmp(*params, "sp") == 0)
 		result = get_spheres(&(*world)->sphere, params);
 	else
-		result = ft_exit("ERROR\n invalide object");
+		result = ft_exit("ERROR\ninvalide object\n");
 	free(*line);
 	ft_free(params);
 	return (result);
@@ -39,19 +39,19 @@ int		set_object(t_world **world, char **line)
 	params = ft_split(*line, 32);
 	if (*params == NULL)
 		result = 0;
-	else if (ft_strncmp(*params, "A", 1) == 0)
+	else if (ft_strcmp(*params, "A") == 0)
 		result = get_ambient(params);
-	else if (ft_strncmp(*params, "R", 1) == 0)
+	else if (ft_strcmp(*params, "R") == 0)
 		result = get_resolution(params);
-	else if (ft_strncmp(*params, "pl", 2) == 0)
+	else if (ft_strcmp(*params, "pl") == 0)
 		result = get_plans(&((*world)->plan), params);
-	else if (ft_strncmp(*params, "cy", 2) == 0)
+	else if (ft_strcmp(*params, "cy") == 0)
 		result = get_cylinders(&((*world)->cylinder), params);
-	else if (ft_strncmp(*params, "c", 1) == 0)
+	else if (ft_strcmp(*params, "c") == 0)
 		result = get_camera(params);
-	else if (ft_strncmp(*params, "l", 1) == 0)
+	else if (ft_strcmp(*params, "l") == 0)
 		result = get_light(params);
-	else if (ft_strncmp(*params, "tr", 2) == 0)
+	else if (ft_strcmp(*params, "tr") == 0)
 		result = get_triangles(&((*world)->triangle), params);
 	else
 		result = set_object2(world, line, params);
