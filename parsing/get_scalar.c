@@ -22,9 +22,68 @@ int	get_scalar_v(char *line, float *scalar)
 	i = is_float(line);
 	if (i == -1)
 	{
-		printf("ERROR\ninvalide scalar\n");
 		return (-1);
 	}
 	*scalar = atof(line);
+	return (i);
+}
+
+int	check_neg(char *line, int i, int *negative)
+{
+	if (line[i] == '-')
+	{
+		if (line[i + 1] == '\0')
+			return (-1);
+		(*negative)++;
+	}
+	if (*negative > 1)
+		return (-1);
+	return (0);
+}
+
+int	hel(char *line, int *i, int *point)
+{
+	if (line[*i] == '.')
+	{
+		*point += 1;
+		if (line[*i + 1] != '\0')
+		{
+			if (ft_isdigit(line[*i + 1]) == 1)
+				return (0);
+			else
+				return (-1);
+		}
+		else
+			return (-1);
+	}
+	return (0);
+}
+
+int	is_scalar(char *line)
+{
+	int i;
+	int point;
+	int digit;
+	int negative;
+
+	digit = 0;
+	i = 0;
+	point = 0;
+	negative = 0;
+	while (line[i] != '\0')
+	{
+		if (ft_isdigit(line[i]) == 1 || line[i] == '.' || line[i] == '-')
+		{
+			if (hel(line, &i, &digit) == -1)
+				return (-1);
+			else if (check_neg(line, i, &negative) == -1)
+				return (-1);
+			digit += (ft_isdigit(line[i++]) == 1) ? 1 : 0;
+		}
+		else
+			return (-1);
+	}
+	if ((point > 1) || (digit == 0))
+		return (-1);
 	return (i);
 }
