@@ -81,27 +81,18 @@ char		**ft_split(char const *s, char c)
 
 char		*skip_tabs(char **line)
 {
-	char	*new;
-	char	*tmp;
 	int		index;
-	int		len;
 
-	tmp = *line;
-	len = ft_strlen(*line);
-	new = (char *)malloc(sizeof(char) * (len + 1));
-	index = 0;
-	if (line != NULL)
+	if (*line != NULL)
 	{
-		while (tmp[index] != '\0')
+		while ((*line)[index] != '\0')
 		{
-			if (tmp[index] == 9)
-				new[index] = 32;
+			if ((*line)[index] == 9)
+				(*line)[index] = 32;
 			else
-				new[index] = tmp[index];
+				(*line)[index] = (*line)[index];
 			index++;
 		}
-		new[index] = '\0';
 	}
-	free(*line);
-	return (new);
+	return (*line);
 }

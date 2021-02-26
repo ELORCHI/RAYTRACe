@@ -86,18 +86,3 @@ void	free_planes(t_plan **plan)
 		}
 	}
 }
-
-
-void	*my_malloc(size_t n)
-{
-	void *ptr;
-
-	ptr = malloc(n);
-	list_push_back(ptr, list);
-	return (ptr);
-}
-
-void 	list_push_back()
-{
-
-}

@@ -24,19 +24,19 @@ int		set_object2(t_world **world, char **line, char **params)
 		result = get_spheres(&(*world)->sphere, params);
 	else
 		result = ft_exit("ERROR\ninvalide object\n");
-	free(*line);
-	ft_free(params);
 	return (result);
 }
 
 int		set_object(t_world **world, char **line)
 {
 	char	**params;
+	char 	**orig;
 	int		result;
 
 	result = 0;
 	*line = skip_tabs(line);
 	params = ft_split(*line, 32);
+	orig = params;
 	if (*params == NULL)
 		result = 0;
 	else if (ft_strcmp(*params, "A") == 0)
@@ -55,6 +55,8 @@ int		set_object(t_world **world, char **line)
 		result = get_triangles(&((*world)->triangle), params);
 	else
 		result = set_object2(world, line, params);
+	ft_free(orig);
+	free(*line);
 	return (result);
 }
 
