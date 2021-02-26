@@ -104,6 +104,7 @@ int		main(int argc, char *argv[])
 	}
 	else
 		return (ft_exit("ERROR\ntoo much arguments"));
+	free_images();
 	exit(EXIT_SUCCESS);
 	return (0);
 }
