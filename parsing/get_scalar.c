@@ -88,7 +88,7 @@ int	is_scalar(char *line)
 	return (i);
 }
 
-int get_scalar(char *line, float *scalar)
+int	get_scalar(char *line, float *scalar)
 {
 	int i;
 

@@ -69,12 +69,8 @@ void			norm_shit(t_world world, t_data *tmp_img)
 {
 	tmp_img->img = mlx_new_image(g_canvas.mlx_ptr,
 	g_resolution.hsize, g_resolution.vsize);
-	tmp_img->addr = mlx_get_data_addr(tmp_img->img, &(tmp_img->bits_per_pixel),
-	&(tmp_img->line_length), &(tmp_img->endian));
 	tmp_img->addr = mlx_get_data_addr(tmp_img->img,
 	&(tmp_img->bits_per_pixel), &(tmp_img->line_length), &(tmp_img->endian));
-	tmp_img->addr = mlx_get_data_addr(tmp_img->img, &(tmp_img->bits_per_pixel),
-	&(tmp_img->line_length), &(tmp_img->endian));
 	g_canvas.y = 0;
 	while (g_canvas.y < g_resolution.vsize)
 	{
