@@ -77,5 +77,6 @@ t_intersection	ray_sqaures_intersection(t_square *square, t_ray ray)
 	}
 	if (inter.hit == FLT_MAX)
 		inter.hit = -1;
+	free(plan);
 	return (inter);
 }

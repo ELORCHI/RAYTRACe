@@ -22,6 +22,10 @@ int		set_object2(t_world **world, char **line, char **params)
 		result = get_squares(&((*world)->square), params);
 	else if (ft_strcmp(*params, "sp") == 0)
 		result = get_spheres(&(*world)->sphere, params);
+	else if (ft_strcmp(*params, "l") == 0)
+		result = get_light(params);
+	else if (ft_strcmp(*params, "tr") == 0)
+		result = get_triangles(&((*world)->triangle), params);
 	else
 		result = ft_exit("ERROR\ninvalide object\n");
 	return (result);
@@ -30,7 +34,7 @@ int		set_object2(t_world **world, char **line, char **params)
 int		set_object(t_world **world, char **line)
 {
 	char	**params;
-	char 	**orig;
+	char	**orig;
 	int		result;
 
 	result = 0;
@@ -49,10 +53,6 @@ int		set_object(t_world **world, char **line)
 		result = get_cylinders(&((*world)->cylinder), params);
 	else if (ft_strcmp(*params, "c") == 0)
 		result = get_camera(params);
-	else if (ft_strcmp(*params, "l") == 0)
-		result = get_light(params);
-	else if (ft_strcmp(*params, "tr") == 0)
-		result = get_triangles(&((*world)->triangle), params);
 	else
 		result = set_object2(world, line, params);
 	ft_free(orig);

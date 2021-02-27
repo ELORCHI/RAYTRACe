@@ -28,14 +28,6 @@
 # include <fcntl.h>
 # include "unistd.h"
 
-
-typedef struct	s_mem
-{
-	void			*mem;
-	struct s_mem	*next;
-}				t_mem;
-
-
 typedef	struct	s_world
 {
 	t_sphere	*sphere;
