@@ -26,8 +26,15 @@ int		set_object2(t_world **world, char **line, char **params)
 		result = get_light(params);
 	else if (ft_strcmp(*params, "tr") == 0)
 		result = get_triangles(&((*world)->triangle), params);
-	else
+	else{
+		unsigned int i = 0;
+		while (params[i])
+		{
+			printf("params[%d] = %s\n", i, params[i]);
+			i++;
+		}
 		result = ft_exit("ERROR\ninvalide object\n");
+	}
 	return (result);
 }
 

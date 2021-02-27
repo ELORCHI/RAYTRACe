@@ -83,6 +83,7 @@ char		*skip_tabs(char **line)
 {
 	int		index;
 
+	index = 0;
 	if (*line != NULL)
 	{
 		while ((*line)[index] != '\0')

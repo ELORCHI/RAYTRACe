@@ -31,7 +31,7 @@ bool			if_hit(t_cylinder *cylinder, t_ray ray)
 	dot_product(x, cylinder->normal));
 	c = dot_product(x, x) - dot_product(x, cylinder->normal) *
 	dot_product(x, cylinder->normal) -
-	(cylinder->raduis / 2.0) * (cylinder->raduis / 2.0);
+	(cylinder->raduis) * (cylinder->raduis);
 	return (solve_quadratic(a, b, c));
 }
 
